@@ -144,17 +144,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -332,7 +332,7 @@
       "name": "Append or update row in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -357,7 +357,7 @@
       "webhookId": "a135be79-50eb-4f2e-b16b-8756ab3182df",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -415,7 +415,7 @@
       "webhookId": "a66ae80e-2fb7-470d-9abf-0eb134294c41",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -574,17 +574,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -791,7 +791,7 @@
       "name": "Update status to ineligible",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -801,17 +801,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1007,7 +1007,7 @@
       "executeOnce": false,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -1017,17 +1017,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -1227,7 +1227,7 @@
       "executeOnce": false,
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -1252,7 +1252,7 @@
       "parameters": {
         "sendTo": "={{ $('Calculate interest for ⁠> 500k to 1 million').item.json.email }}",
         "subject": "=Your loan request was approved!",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n\n    body {\n      background-color: #f0ede8;\n      font-family: 'DM Sans', sans-serif;\n      padding: 40px 16px;\n      color: #1a1a1a;\n    }\n\n    .wrapper {\n      max-width: 580px;\n      margin: 0 auto;\n      background: #ffffff;\n      border-radius: 4px;\n      overflow: hidden;\n      box-shadow: 0 4px 24px rgba(0,0,0,0.08);\n    }\n\n    /* Header */\n    .header {\n      background: #1a2e22;\n      padding: 40px 48px 36px;\n      position: relative;\n      overflow: hidden;\n    }\n\n    .header::before {\n      content: '';\n      position: absolute;\n      top: -40px; right: -40px;\n      width: 200px; height: 200px;\n      border-radius: 50%;\n      background: rgba(255,255,255,0.04);\n    }\n\n    .brand {\n      font-size: 13px;\n      font-weight: 600;\n      letter-spacing: 0.15em;\n      text-transform: uppercase;\n      color: #8dbe9a;\n      margin-bottom: 20px;\n    }\n\n    .header h1 {\n      font-family: 'DM Serif Display', serif;\n      font-size: 32px;\n      color: #ffffff;\n      line-height: 1.2;\n      font-weight: 400;\n    }\n\n    .header h1 span { color: #8dbe9a; }\n\n    /* Body */\n    .body { padding: 44px 48px; }\n\n    .greeting {\n      font-size: 16px;\n      color: #555;\n      margin-bottom: 16px;\n      line-height: 1.6;\n    }\n\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n\n    .message {\n      font-size: 15px;\n      line-height: 1.75;\n      color: #444;\n      margin-bottom: 32px;\n    }\n\n    /* Offer breakdown table */\n    .section-label {\n      font-size: 11px;\n      font-weight: 600;\n      letter-spacing: 0.12em;\n      text-transform: uppercase;\n      color: #999;\n      margin-bottom: 16px;\n    }\n\n    .offer-table {\n      width: 100%;\n      border-collapse: collapse;\n      margin-bottom: 36px;\n    }\n\n    .offer-table tr {\n      border-bottom: 1px solid #f0f0f0;\n    }\n\n    .offer-table tr:last-child { border-bottom: none; }\n\n    .offer-table td {\n      padding: 14px 0;\n      font-size: 14px;\n    }\n\n    .offer-table td:first-child {\n      color: #888;\n      width: 55%;\n    }\n\n    .offer-table td:last-child {\n      color: #1a2e22;\n      font-weight: 600;\n      text-align: right;\n    }\n\n    .offer-table .highlight td {\n      background: #f6f9f6;\n      padding: 16px 16px;\n      border-radius: 6px;\n      border-bottom: none;\n    }\n\n    .offer-table .highlight td:first-child {\n      color: #1a2e22;\n      font-weight: 600;\n      border-radius: 6px 0 0 6px;\n    }\n\n    .offer-table .highlight td:last-child {\n      font-size: 18px;\n      color: #1a2e22;\n      border-radius: 0 6px 6px 0;\n    }\n\n    .divider {\n      border: none;\n      border-top: 1px solid #ebebeb;\n      margin: 32px 0;\n    }\n\n    /* CTA Buttons */\n    .cta-label {\n      font-size: 11px;\n      font-weight: 600;\n      letter-spacing: 0.12em;\n      text-transform: uppercase;\n      color: #999;\n      margin-bottom: 16px;\n      text-align: center;\n    }\n\n    .cta-wrap {\n      display: flex;\n      gap: 12px;\n      margin-bottom: 20px;\n    }\n\n    .btn {\n      display: block;\n      width: 100%;\n      padding: 16px;\n      border-radius: 4px;\n      text-align: center;\n      font-size: 15px;\n      font-weight: 600;\n      text-decoration: none;\n      font-family: 'DM Sans', sans-serif;\n    }\n\n    .btn-accept {\n      background: #1a2e22;\n      color: #ffffff;\n    }\n\n    .btn-decline {\n      background: #f6f6f6;\n      color: #666;\n      border: 1px solid #e0e0e0;\n    }\n\n    .cta-note {\n      font-size: 12px;\n      color: #aaa;\n      text-align: center;\n      line-height: 1.6;\n      margin-bottom: 32px;\n    }\n\n    .closing {\n      font-size: 14px;\n      color: #666;\n      line-height: 1.7;\n    }\n\n    .closing strong {\n      display: block;\n      color: #1a2e22;\n      font-size: 15px;\n      margin-top: 20px;\n      font-weight: 600;\n    }\n\n    /* Footer */\n    .footer {\n      background: #f6f9f6;\n      padding: 24px 48px;\n      border-top: 1px solid #e8ede8;\n    }\n\n    .footer p {\n      font-size: 12px;\n      color: #999;\n      line-height: 1.6;\n      text-align: center;\n    }\n\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    /* Mobile */\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n\n    <div class=\"header\">\n      <div class=\"brand\">LoanDesk &mdash; Loan Offer</div>\n      <h1>You've been <span>approved</span><br>for a loan offer.</h1>\n    </div>\n\n    <div class=\"body\">\n\n      <p class=\"greeting\">Hello <strong>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.name }}</strong>,</p>\n\n      <p class=\"message\">\n        Great news — you meet our eligibility criteria. Based on the information you provided, we have prepared a personalised loan offer for you. Please review the details below and let us know your decision.\n      </p>\n\n      <div class=\"section-label\">Your Loan Offer Breakdown</div>\n\n      <table class=\"offer-table\">\n        <tr>\n          <td>Loan Amount Requested</td>\n          <td>₦{{ $('Calculate interest for ⁠> 500k to 1 million').item.json['loan amount requested'] }}</td>\n        </tr>\n        <tr>\n          <td>Interest Rate</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.interest_rate_percent }} per month</td>\n        </tr>\n        <tr>\n          <td>Loan Term</td>\n          <td>{{ $json.loan_term_months }} months</td>\n        </tr>\n        <tr>\n          <td>Total Interest</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.applicant_id }}</td>\n        </tr>\n        <tr class=\"highlight\">\n          <td>Total Amount Payable</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.total_payable }}</td>\n        </tr>\n        <tr>\n          <td>Monthly Repayment</td>\n          <td>{{ $json.monthly_repayment }}</td>\n        </tr>\n        <tr>\n          <td>Reference</td>\n          <td>{{ $json.applicant_id }}</td>\n        </tr>\n      </table>\n\n      <hr class=\"divider\" />\n\n      <div class=\"cta-label\">Respond to this offer</div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n\n      <p class=\"cta-note\">\n        This offer expires in <strong>48 hours</strong>. Simply click your preferred button above — no login required.<br>\n        Once you respond, we will send you a confirmation email immediately.\n      </p>\n\n      <hr class=\"divider\" />\n\n      <div class=\"closing\">\n        If you have any questions about this offer before deciding, kindly contact support.\n        <strong>The LoanDesk Team</strong>\n      </div>\n\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        This offer was generated based on your loan application to LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n\n  </div>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n\n    body {\n      background-color: #f0ede8;\n      font-family: 'DM Sans', sans-serif;\n      padding: 40px 16px;\n      color: #1a1a1a;\n    }\n\n    .wrapper {\n      max-width: 580px;\n      margin: 0 auto;\n      background: #ffffff;\n      border-radius: 4px;\n      overflow: hidden;\n      box-shadow: 0 4px 24px rgba(0,0,0,0.08);\n    }\n\n    /* Header */\n    .header {\n      background: #1a2e22;\n      padding: 40px 48px 36px;\n      position: relative;\n      overflow: hidden;\n    }\n\n    .header::before {\n      content: '';\n      position: absolute;\n      top: -40px; right: -40px;\n      width: 200px; height: 200px;\n      border-radius: 50%;\n      background: rgba(255,255,255,0.04);\n    }\n\n    .brand {\n      font-size: 13px;\n      font-weight: 600;\n      letter-spacing: 0.15em;\n      text-transform: uppercase;\n      color: #8dbe9a;\n      margin-bottom: 20px;\n    }\n\n    .header h1 {\n      font-family: 'DM Serif Display', serif;\n      font-size: 32px;\n      color: #ffffff;\n      line-height: 1.2;\n      font-weight: 400;\n    }\n\n    .header h1 span { color: #8dbe9a; }\n\n    /* Body */\n    .body { padding: 44px 48px; }\n\n    .greeting {\n      font-size: 16px;\n      color: #555;\n      margin-bottom: 16px;\n      line-height: 1.6;\n    }\n\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n\n    .message {\n      font-size: 15px;\n      line-height: 1.75;\n      color: #444;\n      margin-bottom: 32px;\n    }\n\n    /* Offer breakdown table */\n    .section-label {\n      font-size: 11px;\n      font-weight: 600;\n      letter-spacing: 0.12em;\n      text-transform: uppercase;\n      color: #999;\n      margin-bottom: 16px;\n    }\n\n    .offer-table {\n      width: 100%;\n      border-collapse: collapse;\n      margin-bottom: 36px;\n    }\n\n    .offer-table tr {\n      border-bottom: 1px solid #f0f0f0;\n    }\n\n    .offer-table tr:last-child { border-bottom: none; }\n\n    .offer-table td {\n      padding: 14px 0;\n      font-size: 14px;\n    }\n\n    .offer-table td:first-child {\n      color: #888;\n      width: 55%;\n    }\n\n    .offer-table td:last-child {\n      color: #1a2e22;\n      font-weight: 600;\n      text-align: right;\n    }\n\n    .offer-table .highlight td {\n      background: #f6f9f6;\n      padding: 16px 16px;\n      border-radius: 6px;\n      border-bottom: none;\n    }\n\n    .offer-table .highlight td:first-child {\n      color: #1a2e22;\n      font-weight: 600;\n      border-radius: 6px 0 0 6px;\n    }\n\n    .offer-table .highlight td:last-child {\n      font-size: 18px;\n      color: #1a2e22;\n      border-radius: 0 6px 6px 0;\n    }\n\n    .divider {\n      border: none;\n      border-top: 1px solid #ebebeb;\n      margin: 32px 0;\n    }\n\n    /* CTA Buttons */\n    .cta-label {\n      font-size: 11px;\n      font-weight: 600;\n      letter-spacing: 0.12em;\n      text-transform: uppercase;\n      color: #999;\n      margin-bottom: 16px;\n      text-align: center;\n    }\n\n    .cta-wrap {\n      display: flex;\n      gap: 12px;\n      margin-bottom: 20px;\n    }\n\n    .btn {\n      display: block;\n      width: 100%;\n      padding: 16px;\n      border-radius: 4px;\n      text-align: center;\n      font-size: 15px;\n      font-weight: 600;\n      text-decoration: none;\n      font-family: 'DM Sans', sans-serif;\n    }\n\n    .btn-accept {\n      background: #1a2e22;\n      color: #ffffff;\n    }\n\n    .btn-decline {\n      background: #f6f6f6;\n      color: #666;\n      border: 1px solid #e0e0e0;\n    }\n\n    .cta-note {\n      font-size: 12px;\n      color: #aaa;\n      text-align: center;\n      line-height: 1.6;\n      margin-bottom: 32px;\n    }\n\n    .closing {\n      font-size: 14px;\n      color: #666;\n      line-height: 1.7;\n    }\n\n    .closing strong {\n      display: block;\n      color: #1a2e22;\n      font-size: 15px;\n      margin-top: 20px;\n      font-weight: 600;\n    }\n\n    /* Footer */\n    .footer {\n      background: #f6f9f6;\n      padding: 24px 48px;\n      border-top: 1px solid #e8ede8;\n    }\n\n    .footer p {\n      font-size: 12px;\n      color: #999;\n      line-height: 1.6;\n      text-align: center;\n    }\n\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    /* Mobile */\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n\n    <div class=\"header\">\n      <div class=\"brand\">LoanDesk &mdash; Loan Offer</div>\n      <h1>You've been <span>approved</span><br>for a loan offer.</h1>\n    </div>\n\n    <div class=\"body\">\n\n      <p class=\"greeting\">Hello <strong>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.name }}</strong>,</p>\n\n      <p class=\"message\">\n        Great news — you meet our eligibility criteria. Based on the information you provided, we have prepared a personalised loan offer for you. Please review the details below and let us know your decision.\n      </p>\n\n      <div class=\"section-label\">Your Loan Offer Breakdown</div>\n\n      <table class=\"offer-table\">\n        <tr>\n          <td>Loan Amount Requested</td>\n          <td>₦{{ $('Calculate interest for ⁠> 500k to 1 million').item.json['loan amount requested'] }}</td>\n        </tr>\n        <tr>\n          <td>Interest Rate</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.interest_rate_percent }} per month</td>\n        </tr>\n        <tr>\n          <td>Loan Term</td>\n          <td>{{ $json.loan_term_months }} months</td>\n        </tr>\n        <tr>\n          <td>Total Interest</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.applicant_id }}</td>\n        </tr>\n        <tr class=\"highlight\">\n          <td>Total Amount Payable</td>\n          <td>{{ $('Calculate interest for ⁠> 500k to 1 million').item.json.total_payable }}</td>\n        </tr>\n        <tr>\n          <td>Monthly Repayment</td>\n          <td>{{ $json.monthly_repayment }}</td>\n        </tr>\n        <tr>\n          <td>Reference</td>\n          <td>{{ $json.applicant_id }}</td>\n        </tr>\n      </table>\n\n      <hr class=\"divider\" />\n\n      <div class=\"cta-label\">Respond to this offer</div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n\n      <p class=\"cta-note\">\n        This offer expires in <strong>48 hours</strong>. Simply click your preferred button above — no login required.<br>\n        Once you respond, we will send you a confirmation email immediately.\n      </p>\n\n      <hr class=\"divider\" />\n\n      <div class=\"closing\">\n        If you have any questions about this offer before deciding, kindly contact support.\n        <strong>The LoanDesk Team</strong>\n      </div>\n\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        This offer was generated based on your loan application to LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n\n  </div>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -1265,10 +1265,10 @@
       ],
       "id": "b727ea5b-595b-46ad-97b7-3489a94dda31",
       "name": "Send loan offer email",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -1290,10 +1290,10 @@
       ],
       "id": "73dfb6d3-a5e8-4114-8107-c2ae42baefec",
       "name": "Send offer email",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -1334,17 +1334,17 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "options": {}
       },
@@ -1358,7 +1358,7 @@
       "name": "Get row(s) in sheet",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -1475,7 +1475,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "Your loan offer is still waiting for you.",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -1488,10 +1488,10 @@
       ],
       "id": "2ca6e83b-bba7-4669-b380-067752c99a8a",
       "name": "Follow up with >500 to 1mil",
-      "webhookId": "bd86808d-2b0c-4643-9589-dc50585a7c08",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -1531,7 +1531,7 @@
     },
     {
       "parameters": {
-        "path": "3471b67b-6d7c-468b-969f-cda298647372",
+        "path": "YOUR_WEBHOOK_ID",
         "responseMode": "responseNode",
         "options": {}
       },
@@ -1543,7 +1543,7 @@
       ],
       "id": "2916b928-fa06-447a-a6e1-a1a7042a9078",
       "name": "Get loan offer response",
-      "webhookId": "3471b67b-6d7c-468b-969f-cda298647372"
+      "webhookId": "YOUR_WEBHOOK_ID"
     },
     {
       "parameters": {
@@ -1716,10 +1716,10 @@
       ],
       "id": "3d9d3eb2-2638-4c62-9194-b2dcc820eb7b",
       "name": "Send accepted acknowledment email",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -1728,17 +1728,17 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "filtersUI": {
           "values": [
@@ -1760,7 +1760,7 @@
       "name": "Find applicant",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -1769,17 +1769,17 @@
       "parameters": {
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "filtersUI": {
           "values": [
@@ -1801,7 +1801,7 @@
       "name": "Find applicant1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -1823,10 +1823,10 @@
       ],
       "id": "cf6ddde0-001d-4e7e-94b2-cf6440210f4c",
       "name": "Send declined acknowledment email",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -1836,17 +1836,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2034,7 +2034,7 @@
       "name": "update follow up count to 1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -2044,17 +2044,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2231,7 +2231,7 @@
       "name": "update response status to accepted",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -2241,17 +2241,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2428,7 +2428,7 @@
       "name": "updated offer response status to declined",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -2438,17 +2438,17 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2645,7 +2645,7 @@
       "name": "update follow up count to 2 and end",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -2654,7 +2654,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "Your loan offer is still waiting for you.",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -2667,10 +2667,10 @@
       ],
       "id": "c2bce5b9-ab5a-4794-9856-3b7da80e7cd5",
       "name": "send follow up again",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -2773,7 +2773,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "Your loan offer is still waiting for you.",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -2786,10 +2786,10 @@
       ],
       "id": "59356ca7-68e1-493f-84f4-936cb107569b",
       "name": "Follow up with >500 to 1mil1",
-      "webhookId": "bd86808d-2b0c-4643-9589-dc50585a7c08",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -2799,17 +2799,17 @@
         "operation": "appendOrUpdate",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -2997,7 +2997,7 @@
       "name": "update follow up count to ",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -3007,17 +3007,17 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "value": "YOUR_SHEET_ID_HERE",
           "mode": "list",
           "cachedResultName": "n8n_practice",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit?usp=drivesdk"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
-          "value": 792244757,
+          "value": "YOUR_SHEET_TAB_ID",
           "mode": "list",
           "cachedResultName": "Loan eligibility",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=792244757"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit#gid=792244757"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -3214,7 +3214,7 @@
       "name": "update follow up count to 2 and end1",
       "credentials": {
         "googleSheetsOAuth2Api": {
-          "id": "lIw5P1TYttCwiNK1",
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
           "name": "Google Sheets account 2"
         }
       }
@@ -3223,7 +3223,7 @@
       "parameters": {
         "sendTo": "={{ $json.email }}",
         "subject": "Your loan offer is still waiting for you.",
-        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Your Loan Offer is Still Open</title>\n  <style>\n    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&display=swap');\n    * { margin: 0; padding: 0; box-sizing: border-box; }\n    body { background-color: #f0ede8; font-family: 'DM Sans', sans-serif; padding: 40px 16px; color: #1a1a1a; }\n    .wrapper { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 4px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }\n\n    .header { background: #1a2e22; padding: 40px 48px 36px; position: relative; overflow: hidden; }\n    .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.04); }\n    .brand { font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: #8dbe9a; margin-bottom: 20px; }\n\n    /* Nudge badge */\n    .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,200,100,0.12); border: 1px solid rgba(255,200,100,0.25); border-radius: 20px; padding: 6px 14px; margin-bottom: 20px; }\n    .badge span { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #f5c842; }\n\n    .header h1 { font-family: 'DM Serif Display', serif; font-size: 30px; color: #ffffff; line-height: 1.2; font-weight: 400; }\n    .header h1 span { color: #8dbe9a; }\n\n    .body { padding: 44px 48px; }\n    .greeting { font-size: 16px; color: #555; margin-bottom: 16px; line-height: 1.6; }\n    .greeting strong { color: #1a2e22; font-weight: 600; }\n    .message { font-size: 15px; line-height: 1.75; color: #444; margin-bottom: 32px; }\n\n    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; }\n\n    /* Offer recap */\n    .offer-recap { background: #f6f9f6; border-radius: 6px; padding: 24px; margin-bottom: 32px; }\n    .offer-recap table { width: 100%; border-collapse: collapse; }\n    .offer-recap table tr { border-bottom: 1px solid #eaf0ea; }\n    .offer-recap table tr:last-child { border-bottom: none; }\n    .offer-recap table td { padding: 12px 0; font-size: 14px; }\n    .offer-recap table td:first-child { color: #888; width: 55%; }\n    .offer-recap table td:last-child { color: #1a2e22; font-weight: 600; text-align: right; }\n\n    /* Expiry warning */\n    .expiry-warn { background: #fffbf0; border: 1px solid #f5c842; border-radius: 6px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }\n    .expiry-warn .icon { font-size: 18px; margin-top: 1px; }\n    .expiry-warn p { font-size: 14px; color: #7a6200; line-height: 1.6; }\n    .expiry-warn p strong { color: #5a4800; }\n\n    /* CTA */\n    .cta-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 16px; text-align: center; }\n    .cta-wrap { display: flex; gap: 12px; margin-bottom: 12px; }\n    .btn { display: block; width: 100%; padding: 16px; border-radius: 4px; text-align: center; font-size: 15px; font-weight: 600; text-decoration: none; font-family: 'DM Sans', sans-serif; }\n    .btn-accept { background: #1a2e22; color: #ffffff; }\n    .btn-decline { background: #f6f6f6; color: #666; border: 1px solid #e0e0e0; }\n    .cta-note { font-size: 12px; color: #aaa; text-align: center; line-height: 1.6; margin-bottom: 32px; }\n\n    .divider { border: none; border-top: 1px solid #ebebeb; margin: 32px 0; }\n    .closing { font-size: 14px; color: #666; line-height: 1.7; }\n    .closing strong { display: block; color: #1a2e22; font-size: 15px; margin-top: 20px; font-weight: 600; }\n\n    .footer { background: #f6f9f6; padding: 24px 48px; border-top: 1px solid #e8ede8; }\n    .footer p { font-size: 12px; color: #999; line-height: 1.6; text-align: center; }\n    .footer a { color: #1a2e22; text-decoration: none; font-weight: 500; }\n\n    @media (max-width: 480px) {\n      .header, .body { padding: 32px 28px; }\n      .footer { padding: 20px 28px; }\n      .header h1 { font-size: 26px; }\n      .cta-wrap { flex-direction: column; }\n    }\n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <div class=\"header\">\n      <div class=\"badge\"><span>⏳ &nbsp;Reminder — Action Required</span></div>\n      <div class=\"brand\">LoanDesk &mdash; Follow-up</div>\n      <h1>Your loan offer is<br>still <span>waiting for you.</span></h1>\n    </div>\n\n    <div class=\"body\">\n      <p class=\"greeting\">Hello <strong>{{ $json.name }}</strong>,</p>\n      <p class=\"message\">\n        We noticed you haven't responded to the loan offer we sent you. We wanted to follow up to make sure you didn't miss it — your personalised offer is still active and ready for your decision.\n      </p>\n\n      <div class=\"section-label\">Your Offer Recap</div>\n      <div class=\"offer-recap\">\n        <table>\n          <tr><td>Loan Amount Requested</td><td>₦{{ $json['loan amount requested'] }}</td></tr>\n          <tr><td>Interest Rate</td><td>{{ $json['interest rate'] }} per month</td></tr>\n          <tr><td>Total Payable</td><td>{{ $json['total payable'] }}</td></tr>\n          <tr><td>Monthly Repayment</td><td>{{ $json.monthly_repayment }}</td></tr>\n          <tr><td>Reference</td><td>{{ $json.applicant_id }}</td></tr>\n        </table>\n      </div>\n\n      <div class=\"expiry-warn\">\n        <div class=\"icon\">⚠️</div>\n        <p>This offer will <strong>expire soon</strong>. Once it expires you will need to reapply. Please respond as soon as possible to secure your loan.</p>\n      </div>\n\n      <div class=\"cta-wrap\">\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=accept\"class=\"btn btn-accept\">✅ Accept Offer</a>\n\n        <a href=\"https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID?applicant_id={{ $json.applicant_id }}&response=decline\" class=\"btn btn-decline\">✕ Decline Offer</a>\n      </div>\n      <p class=\"cta-note\">No login required — simply click your choice above and we'll handle the rest.</p>\n\n      <hr class=\"divider\" />\n      <div class=\"closing\">\n        If you have any questions about the offer or need clarification before deciding, please reply to this email and our team will be happy to help.\n        <strong>The LoanDesk Team</strong>\n      </div>\n    </div>\n\n    <div class=\"footer\">\n      <p>\n        You are receiving this because you have a pending loan offer with LoanDesk.<br>\n        Ref: {{ $json.applicant_id }} &nbsp;|&nbsp; <a href=\"#\">Contact Support</a><br><br>\n        &copy; 2026 LoanDesk. All rights reserved.\n      </p>\n    </div>\n  </div>\n</body>\n</html>",
         "options": {
           "appendAttribution": false
         }
@@ -3236,10 +3236,10 @@
       ],
       "id": "4379a2cf-3430-498f-a7df-7fe38344cf40",
       "name": "send follow up again1",
-      "webhookId": "2978dffe-55a8-4790-be4b-18db0028ca62",
+      "webhookId": "YOUR_WEBHOOK_ID",
       "credentials": {
         "gmailOAuth2": {
-          "id": "f9IemYG08cuNaHQh",
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
           "name": "Gmail account"
         }
       }
@@ -3388,11 +3388,11 @@
     "On form submission": [
       {
         "json": {
-          "First Name": "Chibugo",
-          "Last name": "Ohanyiri",
-          "Email": "chibugom8@gmail.com",
-          "Phone number": 8142467784,
-          "Address": "No 18 Old Market Road, Owerri",
+          "First Name": "Test",
+          "Last name": "Applicant",
+          "Email": "your-email@example.com",
+          "Phone number": "00000000000",
+          "Address": "123 Sample Street, City",
           "Salary range": "⁠> 500k to 1 million",
           "How much do you need?": "600000",
           "Reason for loan": "feeding",
@@ -3423,13 +3423,13 @@
     "Preserve loan details": [
       {
         "json": {
-          "name": "Chibugo Ohanyiri",
-          "email": "chibugom8@gmail.com",
-          "phone": 8142467784,
+          "name": "Test Applicant",
+          "email": "your-email@example.com",
+          "phone": "00000000000",
           "salary": "⁠> 500k to 1 million",
           "loan request submitted at": "20 February 2026 at 05:08 pm",
           "loan amount requested": 600000,
-          "applicant_id": "APP-1771608546697"
+          "applicant_id": "APP-XXXXXXXXXXXX"
         },
         "pairedItem": {
           "item": 0
@@ -3439,7 +3439,7 @@
     "update info": [
       {
         "json": {
-          "applicant_id": "APP-1771608546697",
+          "applicant_id": "APP-XXXXXXXXXXXX",
           "interest rate": "8%",
           "total payable": "₦1,176,000.00",
           "loan_term_months": 12,
@@ -3457,43 +3457,15 @@
       {
         "json": {
           "headers": {
-            "host": "chibugo.app.n8n.cloud",
-            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
-            "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
-            "accept-encoding": "gzip, br",
-            "accept-language": "en-US,en;q=0.9",
-            "cdn-loop": "cloudflare; loops=1; subreqs=1",
-            "cf-connecting-ip": "102.90.102.210",
-            "cf-ew-via": "15",
-            "cf-ipcountry": "NG",
-            "cf-ray": "9d17332a86d9ef44-LHR",
-            "cf-visitor": "{\"scheme\":\"https\"}",
-            "cf-worker": "n8n.cloud",
-            "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX18JtRu5xEzkZPXylQ2BEOOrphrKtEJJVxg%3D; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX18WfbUiWES6%2FO8%2BJZYMGOMMKJData4dr%2F4%3D; _fbp=fb.1.1770903905511.944851843582095347; _ga=GA1.1.160300566.1770903911; _gcl_au=1.1.174499593.1770935627; _ga_0SC4FF2FH9=GS2.1.s1771007488$o3$g1$t1771007559$j49$l0$h0; ajs_anonymous_id=%224ce5f1cd-b453-4a0e-b4f7-fa6b1ffbb877%22; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX18%2FlnQTOyT9mkFBXxM9hrAI6q9EGPAV65FlanZpB4Gl%2BlQ%2BZYDvoxvzNostf885U0IMFq7O4ZEZcQ%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2FNfcueQWd0DsG%2BWy2bwOG8QTwTqjoQXgwROTv9fCNSEAu7YQc2BsI29W8RJ7%2BteKca8YF%2BQmO1XCA6wQ%2FhU3aRkskPr0O7z36ru1vxmfnQpGTiYHeKKF%2FVJNEuGEJrS%2Bb9epmLicAt5ueN%2FftmyWG3sH2qZWSYmrg%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19KOyYHQYtshcPBMRNouI%2F4VtwaLRGHcUJPG0EtcMiuFMQKzGpQEMsDfOEmN4yM%2F%2Bfkcrt5vD4%2B207l2x1fYlO6UoogVI%2FZcKxxBG1EvuGyVHa%2FqlvPYtF3inx8%2F7d8n%2FrOQhq%2FP5TKlyrQ7ElKFn0y33i8eOxIkI7zS4XY7tJ%2BGCSS50NqV2W0Sy1Blkvkr22zDjrkX8S1dA%3D%3D; n8n_anonymous_id=c53ebcc8-4368-41f9-84c9-339eac6e9dcd; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FDBhJTr1qcdC92QQI6FG4Nrqm1Mq%2FotWrHIXsYas54BwRI7ZGx%2Bpz399jE4ng67xOzDUjw0N8uDBxpveLsptPjqDo%2BIptTeHQm5ES7DkXgr1EY%2FhG3nX0wt6QRfoFKAEfcvq3M3lYyKA%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22%24device_id%22%3A%22019c53ff-7869-725a-8059-fec0f9ad649e%22%2C%22distinct_id%22%3A%22954321da3ba50c01de57d508f50b053dfd221928776f7b769640e5fef8c78c9b%2302c35583-e6fd-434d-b98e-0a377704a0aa%22%2C%22%24sesid%22%3A%5B1771686851837%2C%22019c8084-5172-7236-b911-9e4c1a83f848%22%2C1771682681202%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fchibugo.app.n8n.cloud%2Fhome%2Fworkflows%22%7D%7D",
-            "priority": "u=0, i",
-            "sec-ch-ua": "\"Not:A-Brand\";v=\"99\", \"Google Chrome\";v=\"145\", \"Chromium\";v=\"145\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "cross-site",
-            "sec-fetch-user": "?1",
-            "upgrade-insecure-requests": "1",
-            "x-forwarded-for": "102.90.102.210, 141.101.98.189",
-            "x-forwarded-host": "chibugo.app.n8n.cloud",
-            "x-forwarded-port": "443",
-            "x-forwarded-proto": "https",
-            "x-forwarded-server": "traefik-prod-users-gwc-18-7959cfc789-rqqrl",
-            "x-is-trusted": "yes",
-            "x-real-ip": "102.90.102.210"
+            "host": "your-n8n-instance.app.n8n.cloud"
           },
           "params": {},
           "query": {
-            "applicant_id": "APP-1771608546697",
+            "applicant_id": "APP-XXXXXXXXXXXX",
             "response": "accept"
           },
           "body": {},
-          "webhookUrl": "https://chibugo.app.n8n.cloud/webhook-test/3471b67b-6d7c-468b-969f-cda298647372",
+          "webhookUrl": "https://your-n8n-instance.app.n8n.cloud/webhook-test/YOUR_WEBHOOK_ID",
           "executionMode": "test"
         }
       }
@@ -3501,15 +3473,15 @@
     "Concatenate name and give applicant ID": [
       {
         "json": {
-          "Name": "Chibugo Ohanyiri",
+          "Name": "Test Applicant",
           "loan amount requested": 600000,
           "loan request submitted at": "20/02/2026, 17:08",
-          "email": "chibugom8@gmail.com",
-          "Phone number": 8142467784,
-          "Address": "No 18 Old Market Road, Owerri",
+          "email": "your-email@example.com",
+          "Phone number": "00000000000",
+          "Address": "123 Sample Street, City",
           "Salary range": "⁠> 500k to 1 million",
           "Reason for loan": "feeding",
-          "applicant id": "APP-1771693104782"
+          "applicant id": "APP-XXXXXXXXXXXX"
         },
         "pairedItem": {
           "item": 0
@@ -3957,11 +3929,11 @@
     "binaryMode": "separate",
     "availableInMCP": false
   },
-  "versionId": "2b3cd6cd-bfe0-4dd4-8615-e42aba449c66",
+  "versionId": "YOUR_VERSION_ID",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "954321da3ba50c01de57d508f50b053dfd221928776f7b769640e5fef8c78c9b"
+    "instanceId": "YOUR_INSTANCE_ID"
   },
-  "id": "BjouEQyPsP0cDKqb",
+  "id": "YOUR_WORKFLOW_ID",
   "tags": []
 }
