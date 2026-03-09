@@ -1,0 +1,2030 @@
+{
+  "name": "Recruiting agency",
+  "nodes": [
+    {
+      "parameters": {
+        "formId": "GbXnjZ81"
+      },
+      "type": "n8n-nodes-base.typeformTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1520,
+        -592
+      ],
+      "id": "0af2e97b-98bd-4e9e-a7c2-fd360cbf6741",
+      "name": "Typeform Trigger",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "typeformApi": {
+          "id": "YOUR_WORKFLOW_ID",
+          "name": "Typeform account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "app7QktZguHXRKISz",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRiCTtVK5tAeeft",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "filterByFormula": "={Email} = \"{{ $('Is email valid?').item.json.data.email }}\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -624,
+        -688
+      ],
+      "id": "e4b379ec-8682-4cd4-b866-47c76ee09aa2",
+      "name": "Search records",
+      "alwaysOutputData": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID_2",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "app7QktZguHXRKISz",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRiCTtVK5tAeeft",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/app7QktZguHXRKISz/tblRiCTtVK5tAeeft"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $('Edit Fields').item.json['First Name'] }}",
+            "Last Name": "={{ $('Edit Fields').item.json['Last Name'] }}",
+            "Phone Number": "={{ $('Edit Fields').item.json.Phone }}",
+            "Email": "={{ $('Edit Fields').item.json.Email }}",
+            "Role Applied for": "={{ $('Edit Fields').item.json['Position Applied For'] }}",
+            "Resume URL": "={{ $('Edit Fields').item.json['Drop a link to your resume'] }}",
+            "Stage": "New",
+            "Application Status": "pending"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Role Applied for",
+              "displayName": "Role Applied for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Resume URL",
+              "displayName": "Resume URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Application Status",
+              "displayName": "Application Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "pending",
+                  "value": "pending"
+                },
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Screen",
+                  "value": "Screen"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Offer",
+                  "value": "Offer"
+                },
+                {
+                  "name": "Hired",
+                  "value": "Hired"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -80,
+        -528
+      ],
+      "id": "2ffd8a62-8460-4d63-8bcd-482fe5de6c7d",
+      "name": "Create a record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID_2",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "cc8b8709-1bd4-46b2-8c9e-39c90a9f8b7d",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": true,
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -400,
+        -688
+      ],
+      "id": "2c3dcb87-33a8-44b8-b007-aa6be4983274",
+      "name": "Does candidate already exists? (by email)"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9a32c464-b1a2-49ff-8c01-1778bbb7c7e1",
+              "name": "First Name",
+              "value": "={{ $json['First Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "ec7a15e5-ef43-45c2-b43b-22929a36c312",
+              "name": "Last Name",
+              "value": "={{ $json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "8880543b-e9ad-448a-9170-d9527e313c15",
+              "name": "Email",
+              "value": "={{ $json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "f4f94387-10f9-47b4-a628-6d002779176e",
+              "name": "Phone",
+              "value": "={{ $json.Phone }}",
+              "type": "string"
+            },
+            {
+              "id": "035ab13a-534d-4abe-b61b-1ed6d294b66b",
+              "name": "Position Applied For",
+              "value": "={{ $json['Position Applied For'] }}",
+              "type": "string"
+            },
+            {
+              "id": "78b4b831-c3ca-4f06-9979-456493b2fdd2",
+              "name": "Drop a link to your resume",
+              "value": "={{ $json['Drop a link to your resume'] }}",
+              "type": "string"
+            },
+            {
+              "id": "cc9a2b2a-33ae-42a0-bc4a-fc71b7fac615",
+              "name": "LinkedIn url",
+              "value": "inkedin.com/in/your-username/",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1296,
+        -592
+      ],
+      "id": "5cb32f8a-ed7c-4232-bd60-d06826596fbc",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.fields['Resume URL'].replace('/edit?', '/export?format=pdf&') }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        320,
+        -688
+      ],
+      "id": "47410174-e5ab-470b-bfdf-70d245c0a6ad",
+      "name": "Download resume"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "7b08557c-ef0b-47f1-b103-2dec4ad35325",
+              "name": "candidate_record_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "except",
+        "excludeFields": "id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        0,
+        -784
+      ],
+      "id": "efcf1f18-da36-4cfc-9906-6f86415e7176",
+      "name": "Standardize candidate record id"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "06b532ba-fa68-4c35-ae89-6a3265f86c16",
+              "name": "candidate_record_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "except",
+        "excludeFields": "id",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        96,
+        -528
+      ],
+      "id": "9077f389-ae21-49d1-9fff-e9e8f194f411",
+      "name": "Standardize candidate record id1"
+    },
+    {
+      "parameters": {
+        "driveId": {
+          "__rl": true,
+          "value": "My Drive",
+          "mode": "list",
+          "cachedResultName": "My Drive",
+          "cachedResultUrl": "https://drive.google.com/drive/my-drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "14Yzo0Bwk1HmLbf6jRVqF5DiQ8seSjOH6",
+          "mode": "list",
+          "cachedResultName": "Candidate n8n",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/YOUR_DRIVE_ID"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        528,
+        -688
+      ],
+      "id": "b7e4b09b-03f4-47cd-b6e2-5683e65e5250",
+      "name": "Upload resume",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID_3",
+          "name": "Google Drive account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7QktZguHXRKISz",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRiCTtVK5tAeeft",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Download resume').item.json.candidate_record_id }}",
+            "Application Status": "completed",
+            "Resume URL": "={{ $json.webViewLink }}",
+            "Stage": "Screen"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Role Applied for",
+              "displayName": "Role Applied for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume URL",
+              "displayName": "Resume URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Application Status",
+              "displayName": "Application Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "pending",
+                  "value": "pending"
+                },
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Screen",
+                  "value": "Screen"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Offer",
+                  "value": "Offer"
+                },
+                {
+                  "name": "Hired",
+                  "value": "Hired"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Recruiter Name",
+              "displayName": "Recruiter Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Recruiter Email",
+              "displayName": "Recruiter Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        720,
+        -688
+      ],
+      "id": "41fcf3fe-b5ae-4031-b6ec-4248bd80cb16",
+      "name": "Update record status and resume",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID_2",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hunter.io/v2/email-verifier?email={{ $json.Email }}&api_key=5b7fb4c753d48bb31597486e7031813baaaa48d8",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {}
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -1072,
+        -592
+      ],
+      "id": "a63fdb2e-7e61-460e-95dc-290972d4971a",
+      "name": "Email deliverability/quality enrichment",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        -624,
+        -512
+      ],
+      "id": "a7c2cb8d-fb44-4089-91f2-d349626c6b78",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3e42b8bd-cf9a-4bd3-9e1d-583b33e0cdd5",
+              "leftValue": "={{ $json.data.status }}",
+              "rightValue": "valid",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -848,
+        -592
+      ],
+      "id": "37f64395-f9c1-48c6-a6f6-f23a421b14ee",
+      "name": "Is email valid?"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields['Recruiter Email'] }}",
+        "subject": "You have a new applicant!",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <title>Application Notification</title>\n</head>\n<body>\n    <p>Hi {{ $json.fields['Recruiter Name'] }},</p>\n    \n    <p>{{ $json.fields['Full Name'] }} has completed their application and is ready for screening. See details below:</p>\n    \n    <p><strong>Record ID:</strong> {{ $json.id }}</p>\n    \n    <p><strong>Applicant Details:</strong></p>\n    <ul>\n      \n        <li>Name: {{ $json.fields['Full Name'] }}</li>\n        <li>Phone Number: {{ $json.fields['Phone Number'] }}</li>\n        <li>Email: {{ $json.fields.Email }}</li>\n        <li>Role Applied for: {{ $json.fields['Role Applied for'] }}</li>\n        <li>Application Status: {{ $json.fields['Application Status'] }}</li>\n        <li>Stage: {{ $json.fields.Stage }}</li>\n    </ul>\n    \n    <p><strong>Resume:</strong> <a href=\"{{ $json.fields['Resume URL'] }}\">View Resume</a></p>\n    \n  \n    <p><strong>Created:</strong> {{ $json.createdTime }} </p>\n</body>\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        944,
+        -784
+      ],
+      "id": "61fe4415-41fb-4897-9f0e-57240db06398",
+      "name": "Notify recruiter",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID_1",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields.Email }}",
+        "subject": "We've received your application!",
+        "message": "=<!DOCTYPE html>\n<html>\n<head>\n    <title>Application Received</title>\n</head>\n<body>\n    <p>Hello {{ $json.fields['Full Name'] }},</p> \n    \n    <p>Thank you for applying for the <strong>{{ $json.fields['Role Applied for'] }}</strong> position!</p>\n    \n    <p>We've received your application and our team will review it carefully. If we decide to move forward with you, you'll hear from us within 2 business days.</p>\n    \n\n    <p>In the meantime, feel free to reach out if you have any questions.</p>\n    \n    <p>Best regards,<br>\n    The Recruitment Team</p>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        944,
+        -592
+      ],
+      "id": "6814ae29-b879-4e43-a826-e8907d30f855",
+      "name": "Inform applicant about their application status",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID_1",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Application intake",
+        "height": 320,
+        "width": 384
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1552,
+        -752
+      ],
+      "typeVersion": 1,
+      "id": "ba308d20-aec7-490a-875e-8f468dfad2e1",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Validate applicant's email\n",
+        "height": 560,
+        "width": 432,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1152,
+        -928
+      ],
+      "typeVersion": 1,
+      "id": "9d66f251-cbc9-4ec4-a26b-236b772da295",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Checks database if applicant already exists\n",
+        "height": 544,
+        "width": 496,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -704,
+        -912
+      ],
+      "typeVersion": 1,
+      "id": "b56dd2de-02bd-4c78-9900-7bd335ff8293",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# Creates a new record if applicant doesn't exist\n",
+        "height": 576,
+        "width": 624,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -192,
+        -944
+      ],
+      "typeVersion": 1,
+      "id": "460d7c59-acee-4346-9ab8-2779f6ebe2f4",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Upload resume and update  database",
+        "height": 352,
+        "width": 432,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        448,
+        -848
+      ],
+      "typeVersion": 1,
+      "id": "06654b3c-e4b0-4a31-bc14-22e32186ba92",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# Notify recruiter and applicant\n",
+        "height": 560,
+        "width": 368,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        896,
+        -944
+      ],
+      "typeVersion": 1,
+      "id": "9e31fb23-afc7-455e-bbc7-f0b568625f22",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json['Candidate email'] }}",
+        "subject": "Congratulations!",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Interview Invitation</title>\n</head>\n<body style=\"margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f4f4;\">\n    <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #f4f4f4; padding: 20px 0;\">\n        <tr>\n            <td align=\"center\">\n                <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);\">\n                    \n                    <!-- Header -->\n                   \n              \n                    \n                    <!-- Main Content -->\n                    <tr>\n                        <td style=\"padding: 40px 30px;\">\n                            <p style=\"margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #333333;\">\n                                Dear <strong>{{ $('Edit Fields1').item.json['candidate name'] }}</strong>,\n                            </p>\n                            \n                            <p style=\"margin: 0 0 20px; font-size: 16px; line-height: 1.6; color: #333333;\">\n                                We're thrilled to inform you that you've successfully passed the initial screening stage! 🚀\n                            </p>\n                            \n                            <p style=\"margin: 0 0 30px; font-size: 16px; line-height: 1.6; color: #333333;\">\n                                We were impressed by your application and would love to learn more about you. We've scheduled an interview to discuss your experience and explore how you might contribute to our team.\n                            </p>\n                            \n                            <!-- Interview Details Box -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #f8f9fa; border-left: 4px solid #667eea; border-radius: 4px; margin-bottom: 30px;\">\n                                <tr>\n                                    <td style=\"padding: 25px;\">\n                                        <h2 style=\"margin: 0 0 20px; color: #667eea; font-size: 20px; font-weight: 600;\">📅 Interview Details</h2>\n                                        \n                                        <table width=\"100%\" cellpadding=\"8\" cellspacing=\"0\">\n                                            <tr>\n                                                <td style=\"font-size: 14px; color: #666666; padding-bottom: 12px;\">\n                                                    <strong style=\"color: #333333;\">📆 Date:</strong>\n                                                </td>\n                                                <td style=\"font-size: 14px; color: #333333; padding-bottom: 12px;\">\n                                                    {{ $now.setZone('Africa/Lagos').toFormat('EEEE, MMMM dd, yyyy') }}\n                                                </td>\n                                            </tr>\n                                            <tr>\n                                                <td style=\"font-size: 14px; color: #666666; padding-bottom: 12px;\">\n                                                    <strong style=\"color: #333333;\">🕐 Time:</strong>\n                                                </td>\n                                                <td style=\"font-size: 14px; color: #333333; padding-bottom: 12px;\">\n                                                   {{ $json['Time zone'] }} \n                                                </td>\n                                            </tr>\n                                          \n                                            <tr>\n                                                <td style=\"font-size: 14px; color: #666666; padding-bottom: 12px;\">\n                                                    <strong style=\"color: #333333;\">💻 Format:</strong>\n                                                </td>\n                                                <td style=\"font-size: 14px; color: #333333; padding-bottom: 12px;\">\n                                                    Virtual (Google Meet)\n                                                </td>\n                                            </tr>\n                                        </table>\n                                    </td>\n                                </tr>\n                            </table>\n                            \n                            <!-- Meeting Link Button -->\n                            <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom: 30px;\">\n                                <tr>\n                                    <td align=\"center\">\n                                        <a href=\"{{ $('Edit Fields1').item.json['Meeting link'] }}\" style=\"display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; border-radius: 6px; font-size: 16px; font-weight: 600; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);\">\n                                            🎥 Join Interview\n                                        </a>\n                                    </td>\n                                </tr>\n                            </table>\n                            \n                            <!-- Preparation Tips -->\n                            <div style=\"background-color: #fff9e6; border-left: 4px solid #ffc107; border-radius: 4px; padding: 20px; margin-bottom: 30px;\">\n                                <h3 style=\"margin: 0 0 15px; color: #f57c00; font-size: 16px; font-weight: 600;\">💡 Preparation Tips</h3>\n                                <ul style=\"margin: 0; padding-left: 20px; color: #666666; font-size: 14px; line-height: 1.8;\">\n                                    <li>Test your camera and microphone beforehand</li>\n                                    <li>Ensure you have a stable internet connection</li>\n                                    <li>Find a quiet, well-lit space for the interview</li>\n                                    <li>Have a copy of your resume handy for reference</li>\n                                    <li>Prepare questions about the role and our company</li>\n                                </ul>\n                            </div>\n                            \n                            <!-- Additional Info -->\n                            <p style=\"margin: 0 0 15px; font-size: 14px; line-height: 1.6; color: #666666;\">\n                                <strong style=\"color: #333333;\">Meeting ID:</strong> {{ $('Edit Fields1').item.json['Meeting ID'] }}\n                            </p>\n                            \n                            <p style=\"margin: 0 0 30px; font-size: 14px; line-height: 1.6; color: #666666;\">\n                                If you need to reschedule or have any questions, please don't hesitate to reach out to us at least 24 hours before the scheduled time.\n                            </p>\n                            \n                            <p style=\"margin: 0 0 10px; font-size: 16px; line-height: 1.6; color: #333333;\">\n                                We're looking forward to speaking with you!\n                            </p>\n                            \n                            <p style=\"margin: 0; font-size: 16px; line-height: 1.6; color: #333333;\">\n                                Best regards,<br>\n                                <strong>The Recruitment Team</strong>\n                            </p>\n                        </td>\n                    </tr>\n                    \n                    <!-- Footer -->\n                    <tr>\n                        <td style=\"background-color: #f8f9fa; padding: 30px; text-align: center; border-top: 1px solid #e9ecef;\">\n                            <p style=\"margin: 0 0 10px; font-size: 12px; color: #999999; line-height: 1.6;\">\n                                This is an automated message. Please do not reply to this email.\n                            </p>\n                            <p style=\"margin: 0; font-size: 12px; color: #999999; line-height: 1.6;\">\n                                © 2026 Your Company Name. All rights reserved.\n                            </p>\n                        </td>\n                    </tr>\n                    \n                </table>\n            </td>\n        </tr>\n    </table>\n</body>\n</html>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -544,
+        -240
+      ],
+      "id": "c31ed79c-8112-4fc2-b3ba-3467458901ab",
+      "name": "Notify applicant",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID_1",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "app7QktZguHXRKISz",
+          "mode": "list",
+          "cachedResultName": "Candidates",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblRiCTtVK5tAeeft",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/YOUR_APP_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Interview Scheduled": true,
+            "id": "={{ $('Routes rejected/interview candidates').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Full Name",
+              "displayName": "Full Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Phone Number",
+              "displayName": "Phone Number",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Role Applied for",
+              "displayName": "Role Applied for",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Resume URL",
+              "displayName": "Resume URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Application Status",
+              "displayName": "Application Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "pending",
+                  "value": "pending"
+                },
+                {
+                  "name": "completed",
+                  "value": "completed"
+                },
+                {
+                  "name": "",
+                  "value": ""
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Stage",
+              "displayName": "Stage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Screen",
+                  "value": "Screen"
+                },
+                {
+                  "name": "Interview",
+                  "value": "Interview"
+                },
+                {
+                  "name": "Offer",
+                  "value": "Offer"
+                },
+                {
+                  "name": "Hired",
+                  "value": "Hired"
+                },
+                {
+                  "name": "Rejected",
+                  "value": "Rejected"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interview start",
+              "displayName": "Interview start",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interview end",
+              "displayName": "Interview end",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Recruiter Name",
+              "displayName": "Recruiter Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Recruiter Email",
+              "displayName": "Recruiter Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Interview Scheduled",
+              "displayName": "Interview Scheduled",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Rejection reason",
+              "displayName": "Rejection reason",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "Not enough experience",
+                  "value": "Not enough experience"
+                },
+                {
+                  "name": "Skills mismatch",
+                  "value": "Skills mismatch"
+                },
+                {
+                  "name": "Role filled",
+                  "value": "Role filled"
+                },
+                {
+                  "name": "Location/timezone mismatch",
+                  "value": "Location/timezone mismatch"
+                },
+                {
+                  "name": "Compensation mismatch",
+                  "value": "Compensation mismatch"
+                },
+                {
+                  "name": "Other",
+                  "value": "Other"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Rejection note (optional)",
+              "displayName": "Rejection note (optional)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -256,
+        -240
+      ],
+      "id": "5f630820-e2ea-4246-ae50-ea074280f39b",
+      "name": "Update record",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID_2",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "authentication": "airtableTokenApi",
+        "baseId": {
+          "__rl": true,
+          "value": "app7QktZguHXRKISz",
+          "mode": "id"
+        },
+        "tableId": {
+          "__rl": true,
+          "value": "tblRiCTtVK5tAeeft",
+          "mode": "id"
+        },
+        "triggerField": "Stage",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.airtableTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1520,
+        112
+      ],
+      "id": "c08e71b4-edb8-403c-9f65-08a8d9820947",
+      "name": "Listens for when status changes",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "YOUR_CREDENTIAL_ID_2",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "# Schedule invite for interview",
+        "height": 288,
+        "width": 1520,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1104,
+        -336
+      ],
+      "typeVersion": 1,
+      "id": "cc1e0d00-0c09-4d78-86c6-d6a8944b38b2",
+      "name": "Sticky Note9"
+    },
+    {
+      "parameters": {
+        "content": "# Workflow 1\n",
+        "height": 576,
+        "width": 512,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2160,
+        -928
+      ],
+      "typeVersion": 1,
+      "id": "4fc0e9da-f8ea-4dde-82c2-b42a86476016",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "# Qualifies applicants\n",
+        "height": 368,
+        "width": 512,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1584,
+        -32
+      ],
+      "typeVersion": 1,
+      "id": "b469553a-ff22-4134-9eea-a21d88556e5e",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "content": "# Workflow 2\n",
+        "height": 592,
+        "width": 512,
+        "color": 7
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2160,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "7d876325-6093-4ea9-831b-ab68b2390d29",
+      "name": "Sticky Note8"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "id",
+          "value": "applicant@example.com",
+          "__regex": "(^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*)"
+        },
+        "start": "={{ $json.fields['Interview start'] }}",
+        "end": "={{ $json.fields['Interview end'] }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $json.fields.Email }}",
+            "={{ $json.fields['Recruiter Email'] }}"
+          ],
+          "conferenceDataUi": {
+            "conferenceDataValues": {
+              "conferenceSolution": "hangoutsMeet"
+            }
+          },
+          "summary": "=Interview: {{ $json.fields['Full Name'] }} | {{ $json.fields['Role Applied for'] }} role"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1.3,
+      "position": [
+        -1024,
+        -240
+      ],
+      "id": "4c0fc8d6-5fa4-45bb-a42d-5b3f232e3823",
+      "name": "Create an event",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID_4",
+          "name": "Google Calendar account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "687d7dff-21bb-4e1c-aeb9-77f8e07eb50e",
+              "name": "Meeting ID",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "35d32735-cdbd-472e-a1b0-7725e1a6b8fb",
+              "name": "Candidate email",
+              "value": "={{ $json.attendees[0].email }}",
+              "type": "string"
+            },
+            {
+              "id": "4c235fc2-4ba4-452c-8626-5ebfd826ec8e",
+              "name": "start.dateTime",
+              "value": "={{ $json.start.dateTime }}",
+              "type": "string"
+            },
+            {
+              "id": "0f858b17-dda6-4570-ab04-d627fcc1c0e0",
+              "name": "Time zone",
+              "value": "={{ $json.start.timeZone }}",
+              "type": "string"
+            },
+            {
+              "id": "f2115257-7836-4107-b796-f2884fc60ac7",
+              "name": "Meeting link",
+              "value": "={{ $json.hangoutLink }}",
+              "type": "string"
+            },
+            {
+              "id": "43afce41-5bc7-478c-9687-7793774a5486",
+              "name": "candidate name",
+              "value": "={{ $('Routes rejected/interview candidates').item.json.fields['Full Name'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -816,
+        -240
+      ],
+      "id": "a5b24250-bb2a-49e9-a552-37ec3409a9f5",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        224,
+        -256
+      ],
+      "id": "7ad4c1ea-d7bd-4a85-ab2f-d60d17450382",
+      "name": "No Operation, do nothing1"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const fields = $json.fields || {};\n\n// Match your exact Airtable field names (case + spacing matters)\nconst reason = (fields[\"Rejection reason\"] || \"\").toString().trim();\nconst firstName = (fields[\"First Name\"] || \"\").toString().trim();\nconst note = (fields[\"Rejection note\"] || \"\").toString().trim(); // only if you create this field\n\nconst reasonMap = {\n  \"Not enough experience\": \"We’re moving forward with candidates whose experience is a closer match for the role right now.\",\n  \"Skills mismatch\": \"We’re moving forward with candidates whose skill set matches the role more closely.\",\n  \"Role filled\": \"We’ve filled the position at this time.\",\n  \"Location/timezone mismatch\": \"We’re focusing on candidates in a different location or time zone for this role.\",\n  \"Compensation mismatch\": \"We’re moving forward with candidates whose compensation expectations align more closely with the role.\",\n  \"Incomplete application\": \"We weren’t able to review your application fully because some required information was missing.\",\n  \"Other\": \"We’ve decided to move forward with other candidates at this time.\",\n};\n\nconst rejectionSentence =\n  reasonMap[reason] || \"We’ve decided to move forward with other candidates at this time.\";\n\nconst noteLine = note ? `Additional context: ${note}` : \"\";\nconst greetingName = firstName || \"there\";\n\nreturn {\n  json: {\n    ...$json,\n    rejection_reason_raw: reason,\n    rejection_sentence: rejectionSentence,\n    rejection_note_line: noteLine,\n    rejection_greeting_name: greetingName,\n  },\n};\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1008,
+        416
+      ],
+      "id": "20ff9578-875b-4e7b-b32c-61ea8f38c656",
+      "name": "Map rejection reason to template"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.fields.Email }}",
+        "subject": "=Your pplicaton update for the {{ $json.fields['Role Applied for'] }} role",
+        "message": "=<!doctype html>\n<html lang=\"en\">\n\n  <body style=\"margin:0;padding:0;background:#f6f7f9;\">\n    <table role=\"presentation\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#f6f7f9;padding:24px 0;\">\n      <tr>\n        <td align=\"center\">\n          <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:600px;max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e6e8ee;\">\n            \n            <!-- Header -->\n            <tr>\n              <td style=\"padding:24px 28px;background:#ffffff;\">\n               \n              </td>\n            </tr>\n\n            <!-- Body -->\n            <tr>\n              <td style=\"padding:0 28px 8px;\">\n                <div style=\"font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#111827;\">\n                  <p style=\"margin:0 0 14px;\">Hi {{ $json.fields['Full Name'] }},</p>\n\n                  <p style=\"margin:0 0 14px;\">\n                    Thanks for taking the time to apply. We’ve reviewed your application, and we won’t be moving forward at this time.\n                  </p>\n\n                  <p style=\"margin:0 0 14px;\">\n                    {{ $json.rejection_sentence }}\n                  </p>\n\n                  <!-- Optional note (only shows text if note exists; otherwise it will be blank) -->\n                  <p style=\"margin:0 0 14px;color:#374151;\">\n                    {{ $json.rejection_note_line }}\n                  </p>\n\n                  <p style=\"margin:0 0 14px;\">\n                    We appreciate your interest, and we wish you the best with your next steps.\n                  </p>\n\n                  <p style=\"margin:0 0 2px;\">Regards,</p>\n                  <p style=\"margin:0;color:#111827;font-weight:600;\">\n                   The Recruiting Team\n                  </p>\n                </div>\n              </td>\n            </tr>\n\n            <!-- Footer -->\n            <tr>\n              <td style=\"padding:18px 28px 24px;background:#ffffff;border-top:1px solid #e6e8ee;\">\n                <div style=\"font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.5;color:#6b7280;\">\n                  <div style=\"margin:0;\">\n                    This email relates to your application for <strong style=\"color:#111827;\">{{ $json.fields[\"Role Applied for\"] }}</strong>.\n                  </div>\n                </div>\n              </td>\n            </tr>\n\n          </table>\n\n          <!-- Spacer -->\n          <table role=\"presentation\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:600px;max-width:600px;\">\n            <tr><td style=\"height:14px;\"></td></tr>\n          </table>\n\n        </td>\n      </tr>\n    </table>\n  </body>\n</html>\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -800,
+        416
+      ],
+      "id": "6064aff7-8ea5-44c9-98b1-fcccb3e8d6de",
+      "name": "Send a message",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID_1",
+          "name": "Gmail account 5"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b2dc9973-4cdd-4e48-a974-91f9ff1aa0ab",
+              "leftValue": "={{ $json.fields['Interview Scheduled'] }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -48,
+        -240
+      ],
+      "id": "10f0216a-72f0-454f-b099-61b9b5c68dbc",
+      "name": "If email has been scheduled"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Interview",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "79b060c3-a97a-40b2-90c7-279cc1d6db71"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Interview"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "8a27a697-ed38-479a-ab24-0b8438579708",
+                    "leftValue": "={{ $json.fields.Stage }}",
+                    "rightValue": "Rejected",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Rejected"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -1328,
+        112
+      ],
+      "id": "50914210-b693-4942-a229-35bc76baca1c",
+      "name": "Routes rejected/interview candidates"
+    },
+    {
+      "parameters": {
+        "content": "# Send rejection mail\n",
+        "height": 256,
+        "width": 720,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1056,
+        336
+      ],
+      "typeVersion": 1,
+      "id": "4276576e-5dcd-4d1a-b6df-6936135d1880",
+      "name": "Sticky Note10"
+    }
+  ],
+  "pinData": {
+    "Typeform Trigger": [
+      {
+        "json": {
+          "First Name": "Bubu",
+          "Last Name": "Applicant",
+          "Email": "applicant@example.com",
+          "Phone": "+23400000000000",
+          "Position Applied For": "automation",
+          "How did you hear about us?": "Online search",
+          "Drop a link to your resume": "https://docs.google.com/document/d/YOUR_RESUME_ID"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Edit Fields": [
+      {
+        "json": {
+          "First Name": "Bubu",
+          "Last Name": "Applicant",
+          "Email": "applicant@example.com",
+          "Phone": "+23400000000000",
+          "Position Applied For": "automation",
+          "Drop a link to your resume": "https://docs.google.com/document/d/YOUR_RESUME_ID"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Email deliverability/quality enrichment": [
+      {
+        "json": {
+          "data": {
+            "status": "valid",
+            "score": 89,
+            "email": "applicant@example.com",
+            "regexp": true,
+            "gibberish": false,
+            "disposable": false,
+            "webmail": false,
+            "mx_records": true,
+            "smtp_server": true,
+            "smtp_check": true,
+            "accept_all": false,
+            "block": false,
+            "sources": [],
+            "result": "deliverable",
+            "_deprecation_notice": "Using result is deprecated, use status instead"
+          },
+          "meta": {
+            "params": {
+              "email": "applicant@example.com"
+            }
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Create an event": [
+      {
+        "json": {
+          "id": "YOUR_CALENDAR_RESOURCE_ID",
+          "summary": "Interview: Bubu Applicant | automation role",
+          "start": {
+            "dateTime": "2026-01-28T12:00:00+01:00",
+            "timeZone": "Africa/Lagos"
+          },
+          "end": {
+            "dateTime": "2026-01-28T12:30:00+01:00",
+            "timeZone": "Africa/Lagos"
+          },
+          "attendees": [
+            {
+              "email": "applicant@example.com",
+              "organizer": true,
+              "self": true,
+              "responseStatus": "needsAction"
+            },
+            {
+              "email": "your-email@example.com",
+              "responseStatus": "needsAction"
+            }
+          ],
+          "creator": {
+            "email": "applicant@example.com",
+            "self": true
+          },
+          "organizer": {
+            "email": "applicant@example.com",
+            "self": true
+          },
+          "created": "2026-01-28T14:07:16.000Z",
+          "updated": "2026-01-28T14:07:17.569Z",
+          "conferenceData": {
+            "createRequest": {
+              "requestId": "2f5edfd8-dc4e-4eb3-9385-77ad428fb6f6",
+              "conferenceSolutionKey": {
+                "type": "hangoutsMeet"
+              },
+              "status": {
+                "statusCode": "success"
+              }
+            },
+            "entryPoints": [
+              {
+                "entryPointType": "video",
+                "uri": "https://meet.google.com/YOUR_MEETING_ID",
+                "label": "meet.google.com/YOUR_MEETING_ID"
+              },
+              {
+                "entryPointType": "more",
+                "uri": "https://tel.meet/YOUR_MEETING_ID",
+                "pin": "2124449345055"
+              },
+              {
+                "regionCode": "ZA",
+                "entryPointType": "phone",
+                "uri": "tel:+27-10-823-0884",
+                "label": "+27 10 823 0884",
+                "pin": "597827189"
+              }
+            ],
+            "conferenceSolution": {
+              "key": {
+                "type": "hangoutsMeet"
+              },
+              "name": "Google Meet",
+              "iconUri": "https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v6/web-512dp/logo_meet_2020q4_color_2x_web_512dp.png"
+            },
+            "conferenceId": "YOUR_MEETING_ID"
+          },
+          "etag": "\"3539218475139742\"",
+          "eventType": "default",
+          "hangoutLink": "https://meet.google.com/YOUR_MEETING_ID",
+          "htmlLink": "https://www.google.com/calendar/event?YOUR_MEETING_ID",
+          "iCalUID": "calendar-resource@example.com",
+          "kind": "calendar#event",
+          "reminders": {
+            "useDefault": true
+          },
+          "sequence": 0,
+          "status": "confirmed"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Edit Fields1": [
+      {
+        "json": {
+          "Meeting ID": "YOUR_CALENDAR_RESOURCE_ID",
+          "Candidate email": "applicant@example.com",
+          "start": {
+            "dateTime": "2026-01-28T12:00:00+01:00"
+          },
+          "Time zone": "Africa/Lagos",
+          "Meeting link": "https://meet.google.com/YOUR_MEETING_ID",
+          "candidate name": "Bubu Applicant"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Notify applicant": [
+      {
+        "json": {
+          "id": "YOUR_MESSAGE_ID",
+          "threadId": "YOUR_MESSAGE_ID",
+          "labelIds": [
+            "UNREAD",
+            "SENT",
+            "INBOX"
+          ]
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Update record": [
+      {
+        "json": {
+          "id": "YOUR_AIRTABLE_RECORD_ID",
+          "createdTime": "2026-01-28T10:26:33.000Z",
+          "fields": {
+            "First Name": "Bubu",
+            "Last Name": "Applicant",
+            "Full Name": "Bubu Applicant",
+            "Phone Number": "+23400000000000",
+            "Email": "applicant@example.com",
+            "Role Applied for": "automation",
+            "Resume URL": "https://drive.google.com/file/d/YOUR_DRIVE_ID/view?usp=drivesdk",
+            "Application Status": "completed",
+            "Stage": "Interview",
+            "Recruiter Name": "Favour",
+            "Recruiter Email": "your-email@example.com",
+            "Interview start": "2026-01-28T11:00:00.000Z",
+            "Rejection reason": "Skills mismatch",
+            "Interview end": "2026-01-28T11:30:00.000Z",
+            "Interview Scheduled": true
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Typeform Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "Does candidate already exists? (by email)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does candidate already exists? (by email)": {
+      "main": [
+        [
+          {
+            "node": "Standardize candidate record id",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Email deliverability/quality enrichment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a record": {
+      "main": [
+        [
+          {
+            "node": "Standardize candidate record id1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download resume": {
+      "main": [
+        [
+          {
+            "node": "Upload resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Standardize candidate record id": {
+      "main": [
+        [
+          {
+            "node": "Download resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Standardize candidate record id1": {
+      "main": [
+        [
+          {
+            "node": "Download resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload resume": {
+      "main": [
+        [
+          {
+            "node": "Update record status and resume",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email deliverability/quality enrichment": {
+      "main": [
+        [
+          {
+            "node": "Is email valid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is email valid?": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record status and resume": {
+      "main": [
+        [
+          {
+            "node": "Notify recruiter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Inform applicant about their application status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Notify applicant": {
+      "main": [
+        [
+          {
+            "node": "Update record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listens for when status changes": {
+      "main": [
+        [
+          {
+            "node": "Routes rejected/interview candidates",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create an event": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Notify applicant",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update record": {
+      "main": [
+        [
+          {
+            "node": "If email has been scheduled",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Map rejection reason to template": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If email has been scheduled": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Routes rejected/interview candidates": {
+      "main": [
+        [
+          {
+            "node": "Create an event",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Map rejection reason to template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "YOUR_VERSION_ID",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR_INSTANCE_ID"
+  },
+  "id": "YOUR_AIRTABLE_RECORD_ID",
+  "tags": []
+}
