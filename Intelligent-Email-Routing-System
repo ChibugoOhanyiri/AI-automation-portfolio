@@ -1,0 +1,423 @@
+{
+  "name": "Intelligent Email Routing System",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "q": "in:inbox -label:Processed "
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [-560, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [-40, 272],
+      "id": "YOUR_ID_HERE",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "OpenAI account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.Email_snippet }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=## ROLE\n\nYou're an intelligent email classifier for KOKA Retail Store that classifies emails based on contexts, not just keyowrds.\n\n## TASK\nClassify the incoming email into exactly ONE of these:\n- Sales\n- Logistics\n- Billing\n- Customer Support\n- Office/Admin\n\n### KEYWORDS\n- Sales: Product inquiries, bulk orders, pricing discussions, partnerships, purchase requests.\n- Logistics: Delivery issues, shipment tracking, inventory movement, dispatch coordination.\n- Billing: Invoices, payments, receipts, refunds, financial questions.\n- Customer Support: Complaints, product issues, returns, general assistance.\n- Office/Admin: Internal communication, vendor messages, unclear or uncategorized emails.\n\n### CONFIDENCE SCORING\nAssign a confidence score between 0.00 and 1.00 based on how certain you are on your classification:\n- 0.75 – 1.00 → High Confidence: clear intent, route directly\n- 0.00 – 0.74 → Risky: unclear intent, default label must be Office/Admin\n\n## RULES\n- If confidence is below 0.75 you MUST set label to \"Office/Admin\"\n- Never guess — when in doubt, use Office/Admin\n- Ignore email signatures, greetings, and formatting\n- Focus only on the core intent of the message\n- Do not rely on KEYWORDS alone, analyze email context as well\n\n## OUTPUT\nReturn this JSON:\n{\"label\": \"Department Name\", \"confidence\": 0.00}\nFrom: {{ $json.From }}\nSubject: {{ $json.Subject }}\nBody: {{ $json.Email_snippet }}\nReceived: {{ $json.Received_at }}\nMessage_id: {{ $json.Message_id }}"
+            }
+          ]
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [-112, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Handle routing logic and confidence score"
+    },
+    {
+      "parameters": {
+        "jsCode": "const llmOutput = $input.first().json;\nconst emailData = $('Get email info').first().json;\n\nconst raw = llmOutput.text || llmOutput.message?.content || llmOutput.content || \"\";\nconst clean = raw.replace(/```json|```/g, \"\").trim();\nconst parsed = JSON.parse(clean);\n\nconst confidence = parsed.confidence;\nconst label = confidence >= 0.75 ? parsed.label : \"Office/Admin\";\nconst confidence_level = confidence >= 0.75 ? \"High Confidence\" : \"Risky\";\n\nreturn [{ json: {\n  message_id       : emailData.Message_id,\n  from             : emailData.From,\n  subject          : emailData.Subject,\n  body             : emailData.Email_snippet,\n  received_at      : emailData.Received_at,\n  finalLabel       : label,\n  confidence       : confidence,\n  confidence_level : confidence_level\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [240, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Split logic reasoning"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "YOUR_ID_HERE",
+              "name": "Message_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR_ID_HERE",
+              "name": "From",
+              "value": "={{ $json.From }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR_ID_HERE",
+              "name": "Subject",
+              "value": "={{ $json.Subject }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR_ID_HERE",
+              "name": "Email_snippet",
+              "value": "={{ $json.snippet }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR_ID_HERE",
+              "name": "Received_at",
+              "value": "={{ new Date(parseInt($json.internalDate)).toLocaleString('en-GB') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-336, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Get email info"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "={{ $json.target_slack }}",
+          "mode": "id"
+        },
+        "text": "=📧 *New Email Routed to the {{ $json.target_dept }} Team\n\n*From:* {{ $json.from.match(/<([^>]+)>/)?.[1] || $json.from }}\n*Subject:* {{ $json.subject }}\n*Received:* {{ $json.received_at }}\n*Email ID:* {{ $json.message_id }}",
+        "otherOptions": {
+          "includeLinkToWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [912, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Send notification",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID_HERE",
+          "mode": "list",
+          "cachedResultName": "Routing Config Sheet",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE/edit"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_TAB_ID",
+          "mode": "list",
+          "cachedResultName": "AI routing system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID_HERE"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Department",
+              "lookupValue": "={{ $json.finalLabel }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [464, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Get dept. email and slack channel",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const item = $input.first().json;\nconst emailData = $('Get email info').first().json;\n\nconsole.log(JSON.stringify(Object.keys(item)));\n\nreturn [{ json: {\n  message_id       : emailData.Message_id,\n  from             : emailData.From,\n  subject          : emailData.Subject,\n  body             : emailData.Email_snippet,\n  received_at      : emailData.Received_at,\n  finalLabel       : item.finalLabel,\n  confidence       : item.confidence,\n  confidence_level : item.confidence_level,\n  target_dept      : item['Department'],\n  target_slack     : item['Slack Channel'],\n  target_email     : item['Email'],\n  email_label      : item['Label ID'],\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [688, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Preserve email"
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Preserve email').item.json.message_id }}",
+        "labelIds": "={{ $('Preserve email').item.json.email_label }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [1136, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Attach email label to dept",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Preserve email').item.json.message_id }}",
+        "labelIds": "=YOUR_PROCESSED_LABEL_ID"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [1360, 48],
+      "id": "YOUR_ID_HERE",
+      "name": "Attach processed/routed label to email",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Email intake\n",
+        "height": 320,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-592, -80],
+      "typeVersion": 1,
+      "id": "YOUR_ID_HERE",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## AI Classification and confidence scoring\n",
+        "height": 320,
+        "width": 528,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-128, -80],
+      "typeVersion": 1,
+      "id": "YOUR_ID_HERE",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Routing & Delivery\n",
+        "height": 320,
+        "width": 592,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [432, -80],
+      "typeVersion": 1,
+      "id": "YOUR_ID_HERE",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Label & Close\n",
+        "height": 320,
+        "width": 544,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [1040, -80],
+      "typeVersion": 1,
+      "id": "YOUR_ID_HERE",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {
+    "Gmail Trigger": [
+      {
+        "json": {
+          "id": "YOUR_MESSAGE_ID",
+          "threadId": "YOUR_THREAD_ID",
+          "snippet": "Hi, I'm interested in placing a bulk order for your products. Could you please send me your current pricing list and any available discounts for large quantities? Looking forward to hearing from",
+          "payload": {
+            "mimeType": "multipart/alternative"
+          },
+          "sizeEstimate": 7345,
+          "historyId": "YOUR_HISTORY_ID",
+          "internalDate": "1771784532000",
+          "labels": [
+            {"id": "INBOX", "name": "INBOX"},
+            {"id": "IMPORTANT", "name": "IMPORTANT"},
+            {"id": "CATEGORY_PERSONAL", "name": "CATEGORY_PERSONAL"},
+            {"id": "UNREAD", "name": "UNREAD"}
+          ],
+          "From": "Test Sender <sender@example.com>",
+          "Subject": "I want to make inquiries on pricing for bulk order",
+          "To": "your-inbox@example.com"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ],
+    "Get email info": [
+      {
+        "json": {
+          "Message_id": "YOUR_MESSAGE_ID",
+          "From": "Test Sender <sender@example.com>",
+          "Subject": "I want to make inquiries on pricing for bulk order",
+          "Email_snippet": "Hi, I'm interested in placing a bulk order for your products. Could you please send me your current pricing list and any available discounts for large quantities? Looking forward to hearing from",
+          "Received_at": "22/02/2026, 18:22:12"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ],
+    "Handle routing logic and confidence score": [
+      {
+        "json": {
+          "text": "{\"label\": \"Sales\", \"confidence\": 0.95}"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ],
+    "Split logic reasoning": [
+      {
+        "json": {
+          "message_id": "YOUR_MESSAGE_ID",
+          "from": "Test Sender <sender@example.com>",
+          "subject": "I want to make inquiries on pricing for bulk order",
+          "body": "Hi, I'm interested in placing a bulk order for your products. Could you please send me your current pricing list and any available discounts for large quantities? Looking forward to hearing from",
+          "received_at": "22/02/2026, 18:22:12",
+          "finalLabel": "Sales",
+          "confidence": 0.95,
+          "confidence_level": "High Confidence"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ],
+    "Get dept. email and slack channel": [
+      {
+        "json": {
+          "row_number": 2,
+          "Department": "Sales",
+          "Email": "sales-team@example.com",
+          "Slack Channel": "#sales-team",
+          "Label ID": "YOUR_LABEL_ID"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ],
+    "Preserve email": [
+      {
+        "json": {
+          "message_id": "YOUR_MESSAGE_ID",
+          "from": "Test Sender <sender@example.com>",
+          "subject": "I want to make inquiries on pricing for bulk order",
+          "body": "Hi, I'm interested in placing a bulk order for your products. Could you please send me your current pricing list and any available discounts for large quantities? Looking forward to hearing from",
+          "received_at": "22/02/2026, 18:22:12",
+          "target_dept": "Sales",
+          "target_slack": "#sales-team",
+          "target_email": "sales-team@example.com",
+          "email_label": "YOUR_LABEL_ID"
+        },
+        "pairedItem": {"item": 0}
+      }
+    ]
+  },
+  "connections": {
+    "Gmail Trigger": {
+      "main": [[{"node": "Get email info", "type": "main", "index": 0}]]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [[{"node": "Handle routing logic and confidence score", "type": "ai_languageModel", "index": 0}]]
+    },
+    "Handle routing logic and confidence score": {
+      "main": [[{"node": "Split logic reasoning", "type": "main", "index": 0}]]
+    },
+    "Split logic reasoning": {
+      "main": [[{"node": "Get dept. email and slack channel", "type": "main", "index": 0}]]
+    },
+    "Get email info": {
+      "main": [[{"node": "Handle routing logic and confidence score", "type": "main", "index": 0}]]
+    },
+    "Send notification": {
+      "main": [[{"node": "Attach email label to dept", "type": "main", "index": 0}]]
+    },
+    "Get dept. email and slack channel": {
+      "main": [[{"node": "Preserve email", "type": "main", "index": 0}]]
+    },
+    "Preserve email": {
+      "main": [[{"node": "Send notification", "type": "main", "index": 0}]]
+    },
+    "Attach email label to dept": {
+      "main": [[{"node": "Attach processed/routed label to email", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "YOUR_VERSION_ID",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR_INSTANCE_ID"
+  },
+  "id": "YOUR_WORKFLOW_ID",
+  "tags": []
+}
