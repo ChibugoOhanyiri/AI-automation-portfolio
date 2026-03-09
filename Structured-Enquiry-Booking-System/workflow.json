@@ -1,0 +1,1567 @@
+{
+  "name": "Instant enquiry/booking system",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -528,
+        432
+      ],
+      "id": "3c01d443-35a5-41e1-b7b9-7fccb7ad8617",
+      "name": "Telegram Trigger",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Chat ID",
+              "lookupValue": "={{ $json.message.chat.id }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -304,
+        432
+      ],
+      "id": "6e0d94b1-ac2e-45a4-90a2-595e2dc7d1f2",
+      "name": "Check database",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6bd6bb98-6af0-4364-9178-b1d59d8bdf9a",
+              "leftValue": "={{ $('Check database').item.json['Chat ID'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -80,
+        432
+      ],
+      "id": "d725152c-a440-46a0-bf25-bf21d49a2575",
+      "name": "Does chat ID already exist? "
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Hello 😊, \nI'm Bubu, your assisstant from Glow Beauty Salon\nHow can I help you today?  \n\n1. Book an appointment \n2. Ask a question \n3. Send a request",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -512,
+        720
+      ],
+      "id": "dcb6f48f-4cc7-497d-9de4-ce2cacb1e4e5",
+      "name": "Send message options",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $json.result.chat.id }}",
+            "Conversation Status": "Options sent",
+            "Lead Status": "New"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -288,
+        720
+      ],
+      "id": "a88376f6-8130-4296-ae46-764baa1b3cea",
+      "name": "Update message status (options sent)",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=What would you like to know?\n\n1. Where are you located?\n2. What are your opening hours?\n3. What services do you offer?\n4. How much do your services cost?\n\nPlease reply with a number between 1 and 4 to choose your question. 😊",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        832,
+        144
+      ],
+      "id": "dfdd1894-c297-4fdd-a55d-d2081a90046d",
+      "name": "Taking questions",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $json.result.chat.id }}",
+            "Conversation Status": "Done",
+            "Lead Status": "Pending Booking"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1072,
+        -64
+      ],
+      "id": "af1ba0fd-9dd1-450d-8477-6c105d288b57",
+      "name": "Update convo and lead status ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const MessageText = $input.first().json['Message text'].trim();\n\nconst responses = {\n  '1': \"📍 We're located at 14 Palm Street, Lagos.\",\n  '2': \"🕐 We're open Monday to Saturday, 9am - 7pm.\",\n  '3': \"✂️ We offer: Haircut, Hair colouring, Braiding, Manicure and Pedicure.\",\n  '4': \"💰 Haircut - ₦3,000 | Braiding from ₦5,000 | Manicure - ₦2,500\"\n};\n\nconst reply = responses[MessageText] || \"Please choose a number from 1 to 4, or type \\\"menu\\\" to go back to the main options. 😊\";\n\nreturn [{ json: { reply } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        832,
+        672
+      ],
+      "id": "538e838f-80a4-4195-97b7-ac084d054958",
+      "name": "check what option was selected"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Oh great! Kindly book an appointment using this link: https://calendly.com/glowbeauty-test",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        832,
+        -64
+      ],
+      "id": "6d6a69b1-fe76-4aab-afc9-4df04fc4b65d",
+      "name": "Send messsage based on option",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "={{ $json.reply }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1056,
+        672
+      ],
+      "id": "a8463072-22e7-4ff5-b811-f475886bea35",
+      "name": "Send response based on option",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA/edit#gid=1539842858"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $json.result.chat.id }}",
+            "Lead Status": "Qualified"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1280,
+        672
+      ],
+      "id": "54b59590-64bb-47c1-a15d-0846ef7b4075",
+      "name": "Update convo status ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "your-email@example.com",
+        "subject": "You've recieved  a new request!",
+        "message": "=<div style=\"font-family:Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #e0e0e0;border-radius:8px;overflow:hidden\">\n  <div style=\"background:#2C2C54;padding:20px;text-align:center\">\n    <h2 style=\"color:#ffffff;margin:0\">New Client Request</h2>\n    <p style=\"color:#a29bfe;margin:4px 0\">Glow Beauty Salon</p>\n  </div>\n  <div style=\"padding:24px;background:#ffffff\">\n    <table style=\"width:100%;border-collapse:collapse\">\n      <tr style=\"border-bottom:1px solid #f0f0f0\">\n        <td style=\"padding:12px;color:#888;width:140px\">Client Name</td>\n        <td style=\"padding:12px;color:#2C2C54;font-weight:bold\">{{ $json['Client Name'] }}</td>\n      </tr>\n      <tr style=\"border-bottom:1px solid #f0f0f0\">\n        <td style=\"padding:12px;color:#888\">Contact</td>\n        <td style=\"padding:12px;color:#2C2C54;font-weight:bold\">{{ $json['Client Email'] }}</td>\n      </tr>\n      <tr>\n        <td style=\"padding:12px;color:#888\">Request</td>\n        <td style=\"padding:12px;color:#2C2C54;font-weight:bold\">{{ $json['Client Message'] }}</td>\n      </tr>\n    </table>\n  </div>\n  <div style=\"background:#f9f9f9;padding:16px;text-align:center\">\n    <p style=\"color:#888;font-size:12px;margin:0\">Sent automatically by your Enquiry System</p>\n  </div>\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1408,
+        880
+      ],
+      "id": "1a14bcbf-9dc3-4982-94c9-02ac450e64b6",
+      "name": "Send a message to owner",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_GMAIL_CREDENTIAL_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['Message text'] }}",
+                    "rightValue": "1",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "966147d0-1f98-4e9b-afe5-d2f2c9d32c98"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Booking link"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "498a1562-c17f-49ef-a0ed-97942bce4943",
+                    "leftValue": "={{ $json['Message text'] }}",
+                    "rightValue": "2",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Ask a question"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "c391d535-735d-4b96-8b51-4b38d130e24f",
+                    "leftValue": "={{ $json['Message text'] }}",
+                    "rightValue": "3",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Send a request"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        576,
+        128
+      ],
+      "id": "e1c718f4-3f11-42e6-a993-ff31003b5487",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $json.result.chat.id }}",
+            "Conversation Status": "Asking Question"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1072,
+        144
+      ],
+      "id": "5be0f6e3-8780-4f21-a894-4982af50591f",
+      "name": "Update convo  status ",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Thanks! Kindly share:\n- Your full name:  \n- Your email address: \n- A brief description of your request: ",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        832,
+        384
+      ],
+      "id": "34fd00ea-b4d9-4624-bbc3-d77b3e97b8ab",
+      "name": "send request details",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $json.result.chat.id }}",
+            "Conversation Status": "Collecting Details"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1088,
+        384
+      ],
+      "id": "6bdd009b-cfbc-472f-acfb-b7b64bcde7c9",
+      "name": "Update status",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "08ec1ea1-ccaf-4c00-a675-ab4b937eb84b",
+              "name": "Message text",
+              "value": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        144
+      ],
+      "id": "fcd14a48-10f6-4685-b81b-702aca9578a3",
+      "name": "Preserve message text"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "40bb99a7-064f-40c3-9a42-3d6754beb189",
+              "leftValue": "={{ $('Check database').item.json['Conversation Status'] }}",
+              "rightValue": "Options sent",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        176,
+        416
+      ],
+      "id": "c12a6042-ebde-4efd-8b6b-88e9c021391f",
+      "name": "Is convo stats is \"option sent\"?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9f9be3fc-b127-47c6-a28e-c6c6e8c3fd51",
+              "leftValue": "={{ $('Check database').item.json['Conversation Status'] }}",
+              "rightValue": "Asking Question",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        384,
+        688
+      ],
+      "id": "5b226020-b8e8-4d63-9f63-d8e96e2f2d8a",
+      "name": "Is convo stats is \"Asking Question\"?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "367a91e9-95c0-4553-a6a3-741ba2b1a47f",
+              "leftValue": "={{ $('Check database').item.json['Conversation Status'] }}",
+              "rightValue": "Collecting Details",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        512,
+        896
+      ],
+      "id": "9ff18355-d1c0-4fb9-8c0c-4f46e28004ca",
+      "name": "Is convo stats is \"Collecting Details\"?"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        624,
+        1136
+      ],
+      "id": "0630eeff-1ff7-49d1-a933-142e03dfba49",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n_practice",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1539842858,
+          "mode": "list",
+          "cachedResultName": "Enquiry delivery system",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Chat ID": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+            "Lead Status": "Qualified",
+            "Conversation Status": "Done",
+            "Client Name": "={{ $json.clientName }}",
+            "Client Email": "={{ $json.clientContact }}",
+            "Client Message": "={{ $json.clientRequest }}"
+          },
+          "matchingColumns": [
+            "Chat ID"
+          ],
+          "schema": [
+            {
+              "id": "Chat ID",
+              "displayName": "Chat ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Conversation Status",
+              "displayName": "Conversation Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "follow_up_count",
+              "displayName": "follow_up_count",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Client Name",
+              "displayName": "Client Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Client Email",
+              "displayName": "Client Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Client Message",
+              "displayName": "Client Message",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Lead Status",
+              "displayName": "Lead Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1200,
+        880
+      ],
+      "id": "e770ce3a-e787-47e4-8617-dfdaebc3a3bc",
+      "name": "Update Client details",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR_GSHEETS_CREDENTIAL_ID",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "08ec1ea1-ccaf-4c00-a675-ab4b937eb84b",
+              "name": "Message text",
+              "value": "={{ $('Telegram Trigger').item.json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        608,
+        672
+      ],
+      "id": "c7770a5e-ad8b-449c-b38b-623e1cc5292f",
+      "name": "Preserve message response number"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
+        "text": "=Thanks for your response!\nOur lead Stylist would revert back to you via email with response to your request in an hour.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        880
+      ],
+      "id": "281c5258-df32-4886-8a40-63610d77a7be",
+      "name": "Send a thank you response",
+      "webhookId": "YOUR_WEBHOOK_ID",
+      "credentials": {
+        "telegramApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "bubu1345_bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $('Telegram Trigger').item.json.message.text;\nconst lines = text.split('\\n').map(l => l.trim()).filter(l => l);\n\nreturn [{\n  json: {\n    clientName: lines[0] || 'Not provided',\n    clientContact: lines[1] || 'Not provided',\n    clientRequest: lines[2] || 'Not provided'\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        976,
+        880
+      ],
+      "id": "519da507-bfc1-4b34-a128-c8d640e43e8d",
+      "name": "Split out customer's details"
+    },
+    {
+      "parameters": {
+        "content": "# Enquiry intake",
+        "height": 576,
+        "width": 928
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -640,
+        336
+      ],
+      "typeVersion": 1,
+      "id": "cf2d0f77-6daf-4a7b-9cb2-20e1a9a9c69b",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Routes based on chosen option and provides response",
+        "height": 688,
+        "width": 1120,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        400,
+        -144
+      ],
+      "typeVersion": 1,
+      "id": "82bbb9a1-900a-4ad4-81d2-631dd9f31cb9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Provides response based on conversation stage",
+        "height": 704,
+        "width": 1232,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        384,
+        576
+      ],
+      "typeVersion": 1,
+      "id": "e809a2ae-f7cc-46ca-a137-7e4447fde0e8",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check database": {
+      "main": [
+        [
+          {
+            "node": "Does chat ID already exist? ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does chat ID already exist? ": {
+      "main": [
+        [
+          {
+            "node": "Is convo stats is \"option sent\"?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send message options",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send message options": {
+      "main": [
+        [
+          {
+            "node": "Update message status (options sent)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update message status (options sent)": {
+      "main": [
+        []
+      ]
+    },
+    "Taking questions": {
+      "main": [
+        [
+          {
+            "node": "Update convo  status ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check what option was selected": {
+      "main": [
+        [
+          {
+            "node": "Send response based on option",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send messsage based on option": {
+      "main": [
+        [
+          {
+            "node": "Update convo and lead status ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send response based on option": {
+      "main": [
+        [
+          {
+            "node": "Update convo status ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send messsage based on option",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Taking questions",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "send request details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send request details": {
+      "main": [
+        [
+          {
+            "node": "Update status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preserve message text": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is convo stats is \"option sent\"?": {
+      "main": [
+        [
+          {
+            "node": "Preserve message text",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is convo stats is \"Asking Question\"?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is convo stats is \"Asking Question\"?": {
+      "main": [
+        [
+          {
+            "node": "Preserve message response number",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Is convo stats is \"Collecting Details\"?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is convo stats is \"Collecting Details\"?": {
+      "main": [
+        [
+          {
+            "node": "Send a thank you response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Client details": {
+      "main": [
+        [
+          {
+            "node": "Send a message to owner",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preserve message response number": {
+      "main": [
+        [
+          {
+            "node": "check what option was selected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a thank you response": {
+      "main": [
+        [
+          {
+            "node": "Split out customer's details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split out customer's details": {
+      "main": [
+        [
+          {
+            "node": "Update Client details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "YOUR_VERSION_ID",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR_INSTANCE_ID"
+  },
+  "id": "YOUR_WORKFLOW_ID",
+  "tags": []
+}
