@@ -1,7 +1,8 @@
 
 # Loan Eligibility & Offer Management System (n8n)
 
-<img width="1568" height="612" alt="image" src="https://github.com/user-attachments/assets/2fb6025f-e713-49d2-beaf-0966974296e7" />
+<img width="1699" height="702" alt="Screenshot 2026-02-22 145750" src="https://github.com/user-attachments/assets/c0aeab3b-a19a-4183-b279-13d9d60b952a" />
+
 
 
 A fully automated loan processing workflow built in n8n. From application intake to offer response handling and follow-up sequences.
