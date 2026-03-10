@@ -1,6 +1,6 @@
 # Instant Enquiry & Booking System — Telegram Bot (n8n)
 
-<img width="1568" height="577" alt="image" src="https://github.com/user-attachments/assets/f0087367-dc13-4605-9987-1313b9286137" />
+<img width="1237" height="648" alt="Screenshot 2026-02-19 162403" src="https://github.com/user-attachments/assets/d5b4638a-12b9-4558-b8c9-467bd4a57057" />
 
 
 An automated enquiry and booking bot built for a salon business on Telegram. Handles the most common daily customer enquiries through structured conversation menus, routes responses based on conversation stage, captures lead details, and notifies the salon owner.
