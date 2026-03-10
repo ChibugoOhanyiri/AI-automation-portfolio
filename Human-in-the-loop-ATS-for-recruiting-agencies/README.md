@@ -1,6 +1,7 @@
 # Human-in-the-Loop ATS for Recruiting Agencies (n8n)
 
-<img width="1568" height="674" alt="image" src="https://github.com/user-attachments/assets/1dcfdf2d-e7e6-4f17-87cd-c7d3800d882f" />
+<img width="1698" height="730" alt="Screenshot 2026-01-28 163601" src="https://github.com/user-attachments/assets/024650cd-1e7b-4f9e-9604-a1feb7ea0fac" />
+
 
 
 A mini Applicant Tracking System (ATS) built in n8n for a recruiting agency. Two coordinated workflows handle everything from application intake to interview scheduling with humans staying in control of every hiring decision.
