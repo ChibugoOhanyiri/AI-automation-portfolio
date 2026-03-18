@@ -1,0 +1,943 @@
+{
+  "name": "Ice Risk Monitor (with optional NWS)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 6,22 * * *"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1200,
+        1024
+      ],
+      "name": "Schedule Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1200,
+        832
+      ],
+      "name": "When clicking \u2018Execute workflow\u2019"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Content ideas tracker"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Property data"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -896,
+        928
+      ],
+      "name": "Get property details",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "09a12ce0-69a2-40a6-ae2a-eb957cca4f3e",
+              "leftValue": "={{ $json.Latitude }}\n\n\n",
+              "rightValue": "{}",
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "b3a66546-0bf5-480d-8a1a-a91bbfce4ea3",
+              "leftValue": "={{ $json.Longitude }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -640,
+        928
+      ],
+      "name": "Does LatLong exists?"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Content ideas tracker"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "Property data"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Latitude": "={{ $json.Latitude }}",
+            "Longitude": "={{ $json.Longitude }}",
+            "Property_Name": "={{ $json.Property_Name }}",
+            "row_number": "={{ $('Get property details').item.json.row_number }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "Property_ID",
+              "displayName": "Property_ID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Property_Name",
+              "displayName": "Property_Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Street_Address",
+              "displayName": "Street_Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "City",
+              "displayName": "City",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "State",
+              "displayName": "State",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "ZIP_Code",
+              "displayName": "ZIP_Code",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Latitude",
+              "displayName": "Latitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Longitude",
+              "displayName": "Longitude",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        80,
+        1088
+      ],
+      "name": "Update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://nominatim.openstreetmap.org/search\n?q={{$json[\"Street_Address\"]}},{{$json[\"City\"]}},{{$json[\"State\"]}},{{$json[\"Country\"]}}\n&format=json&limit=1\n",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "IceRiskMonitor/1.0 (your-email@example.com)"
+            },
+            {
+              "name": "Referrer",
+              "value": "https://www.google.com/"
+            }
+          ]
+        },
+        "options": {
+          "allowUnauthorizedCerts": false,
+          "timeout": 30000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -304,
+        1088
+      ],
+      "name": "Get LatLong from OSM",
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## Checks if LatLong exists\n",
+        "height": 448,
+        "width": 832
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1264,
+        736
+      ],
+      "typeVersion": 1,
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n## LatLong doesn't exist, get it !!\n",
+        "height": 368,
+        "width": 672,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        976
+      ],
+      "typeVersion": 1,
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.open-meteo.com/v1/forecast?latitude={{$json.Latitude}}&longitude={{$json.Longitude}}&current=temperature_2m,precipitation,weather_code&hourly=temperature_2m,precipitation,snowfall&temperature_unit=fahrenheit&timezone=America/Chicago&prop_id={{$json.Property_ID}}&prop_name={{encodeURIComponent($json.Property_Name)}}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -96,
+        768
+      ],
+      "name": "Get weather forecast using Open Mateo APi",
+      "alwaysOutputData": false,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.weather.gov/alerts/active?point={{ $('Was ice risk detected?').item.json.Latitude }},{{ $('Was ice risk detected?').item.json.Longitude }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "IceRiskMonitor/1.0 (your-email@example.com)"
+            },
+            {
+              "name": "Accept",
+              "value": "application/geo+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          },
+          "timeout": 50000
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        1344,
+        640
+      ],
+      "name": "Get NWS Alerts"
+    },
+    {
+      "parameters": {
+        "content": "## Get weather forecast\n",
+        "height": 304,
+        "width": 672,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -384,
+        640
+      ],
+      "typeVersion": 1,
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -304,
+        768
+      ],
+      "name": "Merge2"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f50b32a6-76f0-40bf-a068-5aa21d5cf889",
+              "name": "Property_ID",
+              "value": "={{ $('Get property details').item.json.Property_ID }}",
+              "type": "string"
+            },
+            {
+              "id": "c1d4c19d-1fb5-4065-8ff8-dcb965e7e232",
+              "name": "Property_Name",
+              "value": "={{ $('Get property details').item.json.Property_Name }}",
+              "type": "string"
+            },
+            {
+              "id": "4639664f-8424-4a2f-82a5-b93eefbc3167",
+              "name": "Latitude",
+              "value": "={{ $json.latitude }}",
+              "type": "number"
+            },
+            {
+              "id": "90f5f46d-7c7a-4ec5-bd27-5b1e062a7b9d",
+              "name": "Longitude",
+              "value": "={{ $json.longitude }}",
+              "type": "number"
+            },
+            {
+              "id": "39af24a4-5920-4d26-8ac5-4fe537098608",
+              "name": "generationtime_ms",
+              "value": "={{ $json.generationtime_ms }}",
+              "type": "number"
+            },
+            {
+              "id": "9e695925-67fb-45f3-b412-ea56e8b6abcb",
+              "name": "utc_offset_seconds",
+              "value": "={{ $json.utc_offset_seconds }}",
+              "type": "number"
+            },
+            {
+              "id": "ba1ac861-9efc-442c-9f83-2fc2fd4710a3",
+              "name": "timezone",
+              "value": "={{ $json.timezone }}",
+              "type": "string"
+            },
+            {
+              "id": "5d484c31-36bf-4f09-b30c-c17448770fcd",
+              "name": "timezone_abbreviation",
+              "value": "={{ $json.timezone_abbreviation }}",
+              "type": "string"
+            },
+            {
+              "id": "0b6f9abd-5535-4c8f-b4f1-13e0186759a3",
+              "name": "elevation",
+              "value": "={{ $json.elevation }}",
+              "type": "number"
+            },
+            {
+              "id": "b04c34c2-0c8d-4738-ba21-98f1908b08a9",
+              "name": "current_units",
+              "value": "={{ $json.current_units }}",
+              "type": "object"
+            },
+            {
+              "id": "16d2de70-ded6-4eab-8a00-912052b55511",
+              "name": "current",
+              "value": "={{ $json.current }}",
+              "type": "object"
+            },
+            {
+              "id": "e4d54b77-cef8-46e4-b133-8dc5092ba98e",
+              "name": "hourly_units",
+              "value": "={{ $json.hourly_units }}",
+              "type": "object"
+            },
+            {
+              "id": "6bcb3e2e-ada6-42ef-b141-25d8752d3a27",
+              "name": "hourly",
+              "value": "={{ $json.hourly }}",
+              "type": "object"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        128,
+        768
+      ],
+      "name": "Preserve Property Data "
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ed6eee2a-dce8-4078-b0ed-e6db2673052c",
+              "name": "Street_Address",
+              "value": "={{ $json.display_name }}",
+              "type": "string"
+            },
+            {
+              "id": "04ee3a7c-6460-44b2-a330-f036b7084fbc",
+              "name": "Property_Name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "6d82d1a8-d88b-415f-8e33-ea021bc481ec",
+              "name": "Latitude",
+              "value": "={{ parseFloat($json.lat).toFixed(4) }}\n\n",
+              "type": "string"
+            },
+            {
+              "id": "a7466440-10aa-4940-a575-368c1162a406",
+              "name": "Longitude",
+              "value": "={{ parseFloat($json.lon).toFixed(4) }}\n\n",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -112,
+        1088
+      ],
+      "name": "Normalize data"
+    },
+    {
+      "parameters": {
+        "jsCode": "const PRECIP_WINDOW_HOURS = 6;\nconst FREEZE_F = 32;\nconst MAX_SNOW_CM = 0.5;\n\nconst inputs = $input.all();\n\nreturn inputs.map(({ json: j }) => {\n  const propertyId = j.Property_ID;\n  const propertyName = j.Property_Name;\n\n  const lat = j.Latitude ?? j.latitude ?? j.lat;\n  const lon = j.Longitude ?? j.longitude ?? j.lon;\n\n  const currentTempF = j.current?.temperature_2m;\n\n  const hourly = j.hourly || {};\n  const times = hourly.time || [];\n  const temps = hourly.temperature_2m || [];\n  const precip = hourly.precipitation || [];\n  const snowfall = hourly.snowfall || [];\n\n  const nowUtc = new Date();\n\n  let precipInWindow = false;\n  let maxSnowInWindow = 0;\n  let overnightLowF = null;\n\n  for (let i = 0; i < times.length; i++) {\n    const tUtc = new Date(times[i]);\n    const hoursAgo = (nowUtc - tUtc) / (1000 * 60 * 60);\n\n    if (hoursAgo >= 0 && hoursAgo <= PRECIP_WINDOW_HOURS) {\n      const p = Number(precip[i] ?? 0);\n      const s = Number(snowfall[i] ?? 0);\n\n      if (p > 0 || s > 0) precipInWindow = true;\n      if (s > maxSnowInWindow) maxSnowInWindow = s;\n    }\n\n    const tf = temps[i];\n    if (typeof tf === \"number\") {\n      overnightLowF = (overnightLowF === null) ? tf : Math.min(overnightLowF, tf);\n    }\n  }\n\n  const freezeByCurrent = typeof currentTempF === \"number\" && currentTempF <= FREEZE_F;\n  const freezeByOvernightLow = typeof overnightLowF === \"number\" && overnightLowF <= FREEZE_F;\n\n  const freezeCondition = freezeByCurrent || freezeByOvernightLow;\n  const iceOnlyCondition = maxSnowInWindow <= MAX_SNOW_CM;\n\n  const iceRisk = precipInWindow && freezeCondition && iceOnlyCondition;\n\n  return {\n    json: {\n      Property_ID: propertyId,\n      Property_Name: propertyName,\n      Latitude: lat,\n      Longitude: lon,\n      evaluation: {\n        iceRisk,\n        precipInWindow,\n        freezeByCurrent,\n        freezeByOvernightLow,\n        iceOnlyCondition,\n      },\n      weather_summary: {\n        current_temp_f: currentTempF,\n        overnight_low_f: overnightLowF,\n        precip_window_hours: PRECIP_WINDOW_HOURS,\n        precip_in_window: precipInWindow,\n        max_snow_in_window_cm: maxSnowInWindow,\n        snowfall_threshold_cm: MAX_SNOW_CM,\n      },\n    },\n  };\n});\n\n\n\n\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        384,
+        768
+      ],
+      "name": "Ice risk evaluation"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "2c0ee521-1bde-4a0b-886b-51ed49ed6980",
+              "name": "=use_nws",
+              "value": "={{ !!(\n  Number($json.Latitude) >= 24.396308 && Number($json.Latitude) <= 49.384358 &&\n  Number($json.Longitude) >= -124.848974 && Number($json.Longitude) <= -66.885444\n) }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        880,
+        656
+      ],
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "28392835-8fe7-4483-80a3-56c3a3a744a0",
+              "leftValue": "={{ $json.evaluation.iceRisk }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        608,
+        768
+      ],
+      "name": "Was ice risk detected?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "95a67b0f-57e9-46b4-9c27-bcec0fe3ffcb",
+              "leftValue": "={{ $json.use_nws }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1088,
+        656
+      ],
+      "name": "Check if NWS is available for property"
+    },
+    {
+      "parameters": {
+        "content": "## Ice risk evaluation and detection\n",
+        "height": 288,
+        "width": 480,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        336,
+        656
+      ],
+      "typeVersion": 1,
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "51168eea-ff8f-4f0e-95a5-7483e12cae53",
+              "name": "Property_ID",
+              "value": "={{ $('Edit Fields').item.json.Property_ID }}",
+              "type": "string"
+            },
+            {
+              "id": "0be23a43-b3e5-417c-a9be-2e2ced70dd0e",
+              "name": "Property_Name",
+              "value": "={{ $('Edit Fields').item.json.Property_Name }}",
+              "type": "string"
+            },
+            {
+              "id": "86a86fd9-7d79-4f5c-94c9-6d3a1383e3da",
+              "name": "Latitude",
+              "value": "={{ $('Edit Fields').item.json.Latitude }}",
+              "type": "number"
+            },
+            {
+              "id": "68cf6ffb-8f2f-4a9d-b153-83fcfd02374c",
+              "name": "Longitude",
+              "value": "={{ $('Edit Fields').item.json.Longitude }}",
+              "type": "number"
+            },
+            {
+              "id": "00212fc5-cd31-4a4a-a355-97328c3f8f54",
+              "name": "Evaluation",
+              "value": "={{ $('Edit Fields').item.json.evaluation }}",
+              "type": "object"
+            },
+            {
+              "id": "f0769faf-7ac9-4d6c-ae65-a9612af95167",
+              "name": "Weather_summary",
+              "value": "={{ $('Edit Fields').item.json.weather_summary }}",
+              "type": "object"
+            },
+            {
+              "id": "829ec77d-2143-464e-837a-eae70cfc6994",
+              "name": "Headline",
+              "value": "={{ $json.features[0].properties.headline }}",
+              "type": "string"
+            },
+            {
+              "id": "8d1a4de5-fe4c-4445-958c-30a625a02d86",
+              "name": "Description",
+              "value": "={{ $json.features[0].properties.description }}",
+              "type": "string"
+            },
+            {
+              "id": "28fe41e6-25bc-416f-a76f-6aadf6ec9bf0",
+              "name": "Event",
+              "value": "={{ $json.features[0].properties.event }}",
+              "type": "string"
+            },
+            {
+              "id": "386a395d-6022-4eeb-b4dc-a8b9c4534bdb",
+              "name": "Severity",
+              "value": "={{ $json.features[0].properties.severity }}",
+              "type": "string"
+            },
+            {
+              "id": "5f7ca02b-fbd4-4e60-9d5d-74c797bdcd9a",
+              "name": "Urgency",
+              "value": "={{ $json.features[0].properties.urgency }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1552,
+        640
+      ],
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "sendTo": "your-alert-email@example.com",
+        "subject": "\u26a0\ufe0f Ice Risk Detected",
+        "message": "=<h2>Property: {{$json.Property_Name}} ({{$json.Property_ID}})</h2>\n\n<ul>\n  <li><strong>Recent precipitation (last {{ $json.Weather_summary.precip_window_hours }}h):</strong> {{ $json.Weather_summary.precip_in_window }}</li>\n  <li><strong>Current temp (\u00b0F):</strong> {{ $json.Weather_summary.current_temp_f }}</li>\n  <li><strong>Overnight low (\u00b0F):</strong> {{ $json.Weather_summary.overnight_low_f }}</li>\n  <li><strong>Max snowfall in window (cm):</strong> {{ $json.Weather_summary.max_snow_in_window_cm }} </li>\n</ul>\n\n<p><strong>Action:</strong> Recommend salt-only application</p>\n<p><strong>Next step:</strong> Notify snow service provider</p>\n\n{{ $json.nws && $json.nws.alert_count > 0 ? `\n<hr/>\n<h3>National Weather Service Alerts (${ $json.nws.alert_count })</h3>\n<ul>\n  ${($json.nws.headlines || []).map(h => `<li>${h}</li>`).join(\"\")}\n</ul>\n` : \"\" }}\n",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1664,
+        928
+      ],
+      "name": "Send alert",
+      "webhookId": "5af33803-07aa-4275-8b00-d2febd8a8336",
+      "credentials": {
+        "gmailOAuth2": {
+          "name": "Gmail account 5"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get property details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking \u2018Execute workflow\u2019": {
+      "main": [
+        [
+          {
+            "node": "Get property details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get property details": {
+      "main": [
+        [
+          {
+            "node": "Does LatLong exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does LatLong exists?": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get LatLong from OSM",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get LatLong from OSM": {
+      "main": [
+        [
+          {
+            "node": "Normalize data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Merge2",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get weather forecast using Open Mateo APi": {
+      "main": [
+        [
+          {
+            "node": "Preserve Property Data ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get NWS Alerts": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge2": {
+      "main": [
+        [
+          {
+            "node": "Get weather forecast using Open Mateo APi",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preserve Property Data ": {
+      "main": [
+        [
+          {
+            "node": "Ice risk evaluation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize data": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ice risk evaluation": {
+      "main": [
+        [
+          {
+            "node": "Was ice risk detected?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Check if NWS is available for property",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Was ice risk detected?": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if NWS is available for property": {
+      "main": [
+        [
+          {
+            "node": "Get NWS Alerts",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Send alert",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
