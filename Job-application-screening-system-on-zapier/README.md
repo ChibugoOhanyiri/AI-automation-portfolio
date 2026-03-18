@@ -181,14 +181,14 @@ Senior apps already pinged tech lead. Junior apps are in the Google Sheet for ba
 
 | Screenshot | Description |
 |---|---|
-| `<img width="1002" height="1484" alt="Screenshot 2026-03-15 154146" src="https://github.com/user-attachments/assets/317728a7-ca0c-4052-aaa6-7b9fbce7bfce" />
-` | Full Zap 1 canvas — 14-step screening pipeline |
-| `<img width="1919" height="824" alt="Screenshot 2026-03-15 155401" src="https://github.com/user-attachments/assets/9a1ae4e9-5551-4cc0-8e0c-28db037b27c3" />
-` | Live Slack notification in #hiring-senior channel |
-| `<img width="799" height="720" alt="Screenshot 2026-03-15 155933" src="https://github.com/user-attachments/assets/5e268816-d960-4589-ae4e-220984a49d21" />
-` | Zap 2 canvas — daily digest summary |
-| `<img width="799" height="720" alt="Screenshot 2026-03-15 155933" src="https://github.com/user-attachments/assets/19138104-f121-43fd-9e5a-68628d929672" />
-` | HTML email sent to hiring manager |
+|<img width="1002" height="1484" alt="Screenshot 2026-03-15 154146" src="https://github.com/user-attachments/assets/317728a7-ca0c-4052-aaa6-7b9fbce7bfce" />
+| Full Zap 1 canvas — 14-step screening pipeline |
+|<img width="1919" height="824" alt="Screenshot 2026-03-15 155401" src="https://github.com/user-attachments/assets/9a1ae4e9-5551-4cc0-8e0c-28db037b27c3" />
+| Live Slack notification in #hiring-senior channel |
+|<img width="799" height="720" alt="Screenshot 2026-03-15 155933" src="https://github.com/user-attachments/assets/5e268816-d960-4589-ae4e-220984a49d21" />
+| Zap 2 canvas — daily digest summary |
+| <img width="639" height="657" alt="Screenshot 2026-03-15 161555" src="https://github.com/user-attachments/assets/87763873-6f53-44f7-a92f-1ef16abf31f5" />
+| HTML email sent to hiring manager |
 
 ---
 
