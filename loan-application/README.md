@@ -1,5 +1,8 @@
 # Loan Application Email Notification System
 
+<img width="1790" height="579" alt="image" src="https://github.com/user-attachments/assets/579b2161-b461-45ca-900a-bfb28974d393" />
+
+
 An automated email workflow that handles the full communication cycle when a borrower applies for a loan through a lending directory. The system notifies the matched lender, acknowledges the borrower, and follows up automatically after a set waiting period.
 
 ---
