@@ -1,0 +1,329 @@
+{
+  "name": "Loan Application Email Notification System",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "=POST",
+        "path": "5c7a866f-a811-442d-9cfb-dc5c1d348afe",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -384,
+        -384
+      ],
+      "name": "Loan application trigger",
+      "webhookId": "5c7a866f-a811-442d-9cfb-dc5c1d348afe"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={\n  \"borrower_name\": \"{{ $json.body.full_name }}\",\n  \"borrower_email\": \"{{ $json.body.email }}\",\n  \"borrower_phone\": \"{{ $json.body.phone_number }}\",\n  \"loan_amount\": \"{{ $json.body.amount }}\",\n  \"loan_purpose\": \"{{ $json.body.reason }}\",\n  \"org_name\": \"{{ $json.body.org_name }}\",\n  \"org_id\": \"{{ $json.body.org_id }}\", \n  \"country\": \"{{ $json.body.country }}\",\n  \"country_code\": \"{{ $json.body.country_code }}\",\n  \"city\": \"{{ $json.body.city }}\",\n  \"page_url\": \"{{ $json.body.page_url }}\",\n  \"street\": \"{{ $json.body.street }}\",\n  \"tenor\": \"{{ $json.body.tenor }}\",\n  \"tenor_period\": \"{{ $json.body.tenor_period }}\"\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -160,
+        -384
+      ],
+      "name": "Pulls borrower's data"
+    },
+    {
+      "parameters": {
+        "mode": "combineBySql",
+        "query": "SELECT\n  input1.primary_email,\n  input2.borrower_name,\n  input2.borrower_email,\n  input2.borrower_phone,\n  input2.loan_amount,\n  input2.loan_purpose,\n  input2.org_name,\n  input2.org_id,\n  input2.country,\n  input2.country_code,\n  input2.city,\n  input2.page_url,\n  input2.street,\n  input2.tenor,\n  input2.tenor_period\nFROM input1\nJOIN input2\nON input1.org_id = input2.org_id;\n"
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.1,
+      "position": [
+        288,
+        -384
+      ],
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id AS org_id, primary_email\nFROM pecunia.organizations\nWHERE id = '{{ $json.org_id }}';\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.mySql",
+      "typeVersion": 2.4,
+      "position": [
+        64,
+        -464
+      ],
+      "name": "Get lenders email from DB",
+      "credentials": {
+        "mySql": {
+          "name": "DB"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "1ab26bab-27c9-47bb-85b7-dd9834e660c3",
+              "name": "Borrower name",
+              "value": "={{ $json.borrower_name }}",
+              "type": "string"
+            },
+            {
+              "id": "c73719e5-eb98-4aad-b004-2d65dd474678",
+              "name": "Loan amount",
+              "value": "={{ $json.currency }} {{ $json.loan_amount }}",
+              "type": "string"
+            },
+            {
+              "id": "7668049a-cc3c-4013-bc18-533be7bd2527",
+              "name": "Purpose",
+              "value": "={{ $json.loan_purpose }}",
+              "type": "string"
+            },
+            {
+              "id": "d209825c-83a5-4710-b863-b700fcbc17d5",
+              "name": "Tenor",
+              "value": "={{ $json.tenor }} {{ $json.tenor_period }}",
+              "type": "string"
+            },
+            {
+              "id": "b616f652-41e1-4deb-b5a1-9510bf8ef9a7",
+              "name": "=Email type",
+              "value": "lender_notification",
+              "type": "string"
+            },
+            {
+              "id": "f12865e3-f191-430f-acb4-324d8dfbd636",
+              "name": "=Email type",
+              "value": "borrower_confirmation",
+              "type": "string"
+            },
+            {
+              "id": "ed00ce19-0ae9-4a7d-9dec-667e13e084f2",
+              "name": "Email type",
+              "value": "borrower_follow-up",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        736,
+        -384
+      ],
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "jsCode": "const countryCurrencyMap = {\n  \"Rwanda\": \"FRw\",\n  \"South Africa\": \"R\",\n  \"Ethiopia\": \"Br\",\n  \"Tanzania\": \"TSh\",\n  \"Ghana\": \"GH\u20b5\",\n  \"Uganda\": \"UGX\",\n  \"Zambia\": \"ZK\",\n  \"Zimbabwe\": \"Z$\",\n  \"Malawi\": \"MK\",\n  \"Sierra Leone\": \"Le\",\n  \"Namibia\": \"N$\",\n  \"Botswana\": \"P\",\n  \"Liberia\": \"L$\",\n  \"Benin\": \"FCFA\",\n  \"Gambia\": \"D\",\n  \"Lesotho\": \"L\",\n  \"Canada\": \"$\",\n  \"Caribbean\": \"$\",\n  \"United States\": \"$\",\n  \"United Kingdom\": \"\u00a3\",\n  \"Nigeria\": \"\u20a6\",\n  \"Kenya\": \"KSh\",\n  \"France\": \"\u20ac\",\n  \"Morocco\": \"MAD\",\n  \"Default\": \"\u20a6\"\n};\n\n// If your input uses country codes (like NGA for Nigeria), map them first\nconst countryCodeMap = {\n  \"RWA\": \"Rwanda\",\n  \"ZAF\": \"South Africa\",\n  \"ETH\": \"Ethiopia\",\n  \"TZA\": \"Tanzania\",\n  \"GHA\": \"Ghana\",\n  \"UGA\": \"Uganda\",\n  \"ZMB\": \"Zambia\",\n  \"ZWE\": \"Zimbabwe\",\n  \"MWI\": \"Malawi\",\n  \"SLE\": \"Sierra Leone\",\n  \"NAM\": \"Namibia\",\n  \"BWA\": \"Botswana\",\n  \"LBR\": \"Liberia\",\n  \"BEN\": \"Benin\",\n  \"GMB\": \"Gambia\",\n  \"LSO\": \"Lesotho\",\n  \"CAN\": \"Canada\",\n  \"CAR\": \"Caribbean\",\n  \"USA\": \"United States\",\n  \"GBR\": \"United Kingdom\",\n  \"NGA\": \"Nigeria\",\n  \"KEN\": \"Kenya\",\n  \"FRA\": \"France\",\n  \"MAR\": \"Morocco\",\n  \"DEF\": \"Default\"\n};\n\nreturn items.map(item => {\n  const countryCode = item.json.country_code || item.json.country;\n  const countryName = countryCodeMap[countryCode] || item.json.country;\n  const currency = countryCurrencyMap[countryName] || countryCurrencyMap[\"Default\"];\n\n  return {\n    json: {\n      ...item.json,\n      currency: currency\n    }\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        512,
+        -384
+      ],
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "resource": "mail",
+        "fromEmail": "noreply@yourdomain.com",
+        "fromName": "=company",
+        "toEmail": "={{ $json.primary_email }}",
+        "subject": "You've received a loan request from user who saw you on our website!",
+        "contentType": "text/html",
+        "contentValue": "=<html>  <head>   <meta charset=\"UTF-8\" />   <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />   <title>Document</title>   <link href=\"https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800,900&display=swap\"     rel=\"stylesheet\" />   <style>     html,     body {       margin: 0;       padding: 0;     }      table {       border: 0;       border-spacing: 0;       border-collapse: collapse;     }      @media screen and (max-width: 520px) {       h1.header {         font-size: 24px !important;         line-height: 24px !important;       }     }   </style> </head>  <body width=\"100%\" style=\"width: 100%; background: #eaeaea\" bgcolor=\"#F1F3F5\">   <center>     <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"       style=\"width: 95%; max-width: 600px\">       <tr>         <td class=\"email-container\">           <table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width: 100%; margin: 50px auto\">             <!--- Logo: START -->             <tr>               <td style=\"padding: 20px\">                 <a href=\"#\">                   <img                       src=\"https://lsq.li/lendsqr-long-logo\"                       border=\"0\"                       height=\"30\"                       style=\"display: block\"                     />                 </a>               </td>             </tr>             <!--- Logo: END -->             <!--- Header: START -->             <tr>               <td>                </td>             </tr>             <!--- Header: END -->              <!--- Body: START -->             <tr>               <td style=\"                     font-family: Inter, Arial, sans-serif;                     font-size: 16px;                     line-height: 150%;                     color: rgb(45, 46, 46);                     background-color: #fff;                     border-radius: 10px 10px 0 0;                     padding: 50px 50px;                   \">                   <h2 style=\"                       font-size: 35px;                       font-family: Degular Display, Arial, sans-serif;                       line-height: 110%;                     \">                   {{ $json.borrower_name }} has requested for a {{ $json['Loan amount'] }} loan                 </h2>                  <p><b>\ud83d\udc4b\ud83c\udfff Hi {{ $json.org_name }} Team,</b></p>                  <p>                   You've got a new borrower from Project X \u2013 our lender directory where thousands of borrowers come                   looking for loans. {{ $json.borrower_name }} just applied and specifically chose your organization.                 </p>                  <!-- REQUEST DETAILS TABLE -->                 <p>                 <table cellpadding=\"0\" cellspacing=\"0\"                   style=\"width: 100%; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 30px;\">                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Name                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                       {{ $json.borrower_name }}                    </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Email                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                      {{ $json.borrower_email }}                   </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Phone                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                      {{ $json.borrower_phone }}                     </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Loan amount                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                         {{ $json['Loan amount'] }}                </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Purpose                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                       {{ $json.loan_purpose }}                </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Tenor                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                       {{ $json.Tenor }}             </td>                   </tr>                   <tr>                     <td                       style=\"padding: 12px; border-bottom: 1px solid #e0e0e0; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       City                     </td>                     <td style=\"padding: 12px; border-bottom: 1px solid #e0e0e0;\">                       {{ $json.city }}                  </td>                   </tr>                   <tr>                     <td style=\"padding: 12px; background-color: #f9f9f9; font-weight: 600; width: 35%;\">                       Country                     </td>                     <td style=\"padding: 12px;\">                        {{ $json.country }}                    </td>                   </tr>                 </table>                 </p>               </td>             </tr>             <!--- Body: END -->              <!--- Footer: START -->             <tr>               <td style=\"                     font-family: 'Inter', sans-serif;                     font-size: 12px;                     line-height: 22px;                     color: #334a6a;                     opacity: 0.6;                     padding: 50px;                     padding-top: 20px;                     /* border-top: 1px solid rgba(17, 41, 69, 0.1); */                     border-radius: 0 0 10px 10px;                     background-color: #fff;                   \">                 <p style=\"margin: 0; width: 100%\">                   <strong>Disclaimer:</strong> This request was submitted through our lender directory. We have not verified the borrower's information or creditworthiness. Please conduct your own due diligence before proceeding with any loan application. If you need more details, you can reach out to us via email at          <a href=\"mailto:support@lendsqr.com\">support@lendsqr.com</a>.                 </p>                  <a href=\"{{unsubscribe_link}}\">Click here to unsubscribe</a>               </td>             </tr>             <!--- Footer: END -->           </table>         </td>       </tr>     </table>   </center> </body>  </html>",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.sendGrid",
+      "typeVersion": 1,
+      "position": [
+        960,
+        -288
+      ],
+      "name": "Lender notification",
+      "credentials": {
+        "sendGridApi": {
+          "name": "NAME"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "mail",
+        "fromEmail": "noreply@yourdomain.com",
+        "fromName": "=company",
+        "toEmail": "={{ $json.borrower_email }}",
+        "subject": "We got your loan request!",
+        "contentType": "text/html",
+        "contentValue": "=<html>\n\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>Document</title>\n  <link href=\"https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800,900&display=swap\"\n    rel=\"stylesheet\" />\n  <style>\n    html,\n    body {\n      margin: 0;\n      padding: 0;\n    }\n\n    table {\n      border: 0;\n      border-spacing: 0;\n      border-collapse: collapse;\n    }\n\n    @media screen and (max-width: 520px) {\n      h1.header {\n        font-size: 24px !important;\n        line-height: 24px !important;\n      }\n    }\n  </style>\n</head>\n\n<body width=\"100%\" style=\"width: 100%; background: #eaeaea\" bgcolor=\"#F1F3F5\">\n  <center>\n    <table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\n      style=\"width: 95%; max-width: 600px\">\n      <tr>\n        <td class=\"email-container\">\n          <table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width: 100%; margin: 50px auto\">\n            <!--- Logo: START -->\n            <tr>\n              <td style=\"padding: 20px\">\n                <a href=\"#\">\n                  <img\n                      src=\"https://lsq.li/lendsqr-long-logo\"\n                      border=\"0\"\n                      height=\"30\"\n                      style=\"display: block\"\n                    />\n                </a>\n              </td>\n            </tr>\n            <!--- Logo: END -->\n            <!--- Header: START -->\n            <tr>\n              <td>\n\n              </td>\n            </tr>\n            <!--- Header: END -->\n\n            <!--- Body: START -->\n            <tr>\n              <td style=\"\n                    font-family: Inter, Arial, sans-serif;\n                    font-size: 16px;\n                    line-height: 150%;\n                    color: rgb(45, 46, 46);\n                    background-color: #fff;\n                    border-radius: 10px 10px 0 0;\n                    padding: 50px 50px;\n                  \">\n\n\n                <h2 style=\"\n                      font-size: 35px;\n                      font-family: Degular Display, Arial, sans-serif;\n                      line-height: 110%;\n                    \">\n                  We got your loan request!\n                </h2>\n\n                <p><b>Hi {{ $json.borrower_name }}, </b></p>\n\n                <p>\n                  Thanks for using our lender directory to apply for a loan!\n                  We've received your loan request and sent it to {{ $json.org_name }}. They'll review your application and\n                  reach out to you directly.\n                </p>\n\n                <h3>\n                  Here's what you applied for:\n                </h3>\n\n                <p>\n                <ul>\n                  <li>Amount: {{ $json['Loan amount'] }}</li>\n                  <li>Purpose: {{ $json.Purpose }}</li>\n                  <li>Tenor: {{ $json.Tenor }}</li>\n                </ul>\n                </p>\n\n                <h3>What happens next?</h3>\n\n                <p> {{ $json.org_name }} will contact you via phone or email. Response times vary by lender, but most get back\n                  quickly.</p>\n                <h3>Other lenders you can try:</h3>\n                <p>While you wait, you can also reach out to these verified lenders:<br />\n                <ul>\n                  <li><a href='https://lendsqr.com/lenders'>Irorun</a><br /></li>\n                  <li><a href='https://lendsqr.com/lenders'>BlockaCash</a><br /></li>\n                  <li><a href='https://lendsqr.com/lenders'>Urgent10k</a><br /></li>\n                  <li><a href='https://lendsqr.com/lenders'>SnapCash</a><br /></li>\n                  <li><a href='https://lendsqr.com/lenders'>OgaCash</a></li>\n                </ul>\n                </p>\n                <h3>Some helpful reads while you wait:</h3>\n                <p>\n                <ul>\n                  <li><a href='https://blog.lendsqr.com/7-top-loan-apps-for-iphone-users-in-nigeria/'>7 top loan apps\n                      for iPhone users in Nigeria</a><br /></li>\n                  <li><a href='https://blog.lendsqr.com/where-to-get-loans-with-low-interest-rates-in-nigeria/'>Where to\n                      get loans with low interest rates in Nigeria</a><br /></li>\n                  <li><a href='5 best loan apps in Nigeria with low interest '>5 best loan apps in Nigeria with low\n                      interest</a><br /></li>\n                  <li><a\n                      href='https://blog.lendsqr.com/why-gig-workers-are-denied-loans-and-how-better-credit-scoring-helps/'>Why\n                      gig workers are denied loans, and how better credit scoring helps</a><br /></li>\n                </ul>\n                If you submitted this by mistake or changed your mind, just reply and let us know.\n                </p>\n                <p>Thanks for trusting us!</p>\n              </td>\n            </tr>\n            <!--- Body: END -->\n\n            <!--- Footer: START -->\n            <tr>\n              <td style=\"\n                    font-family: 'Inter', sans-serif;\n                    font-size: 12px;\n                    line-height: 22px;\n                    color: #334a6a;\n                    opacity: 0.6;\n                    padding: 50px;\n                    padding-top: 20px;\n                    /* border-top: 1px solid rgba(17, 41, 69, 0.1); */\n                    border-radius: 0 0 10px 10px;\n                    background-color: #fff;\n                  \">\n                <p style=\"margin: 0; width: 100%\">\n                  We genuinely care about you, so if there's\n                  anything at all we can do to help, please reach out to us\n                  via email at\n                  <a href=\"mailto:support@lendsqr.com\">support@lendsqr.com</a>.\n                </p>\n\n              </td>\n            </tr>\n            <!--- Footer: END -->\n          </table>\n        </td>\n      </tr>\n    </table>\n  </center>\n</body>\n\n</html>",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.sendGrid",
+      "typeVersion": 1,
+      "position": [
+        960,
+        -480
+      ],
+      "name": "Borrower confirmation",
+      "credentials": {
+        "sendGridApi": {
+          "name": "NAME"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        1184,
+        -480
+      ],
+      "name": "Wait",
+      "webhookId": "YOUR_WEBHOOK_ID"
+    },
+    {
+      "parameters": {
+        "resource": "mail",
+        "fromEmail": "noreply@yourdomain.com",
+        "fromName": "=Company",
+        "toEmail": "={{ $('Edit Fields').item.json.borrower_email }}",
+        "subject": "Checking in on your loan application",
+        "contentType": "text/html",
+        "contentValue": "=<html>\n\n<head>\n\t<meta charset=\"UTF-8\" />\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n\t<title>Document</title>\n\t<link href=\"https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800,900&display=swap\"\n\t\trel=\"stylesheet\" />\n\t<style>\n\t\thtml,\n\t\tbody {\n\t\t\tmargin: 0;\n\t\t\tpadding: 0;\n\t\t}\n\n\t\ttable {\n\t\t\tborder: 0;\n\t\t\tborder-spacing: 0;\n\t\t\tborder-collapse: collapse;\n\t\t}\n\n\t\t@media screen and (max-width: 520px) {\n\t\t\th1.header {\n\t\t\t\tfont-size: 24px !important;\n\t\t\t\tline-height: 24px !important;\n\t\t\t}\n\t\t}\n\t</style>\n</head>\n\n<body width=\"100%\" style=\"width: 100%; background: #eaeaea\" bgcolor=\"#F1F3F5\">\n\t<center>\n\t\t<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"\n\t\t\tstyle=\"width: 95%; max-width: 600px\">\n\t\t\t<tr>\n\t\t\t\t<td class=\"email-container\">\n\t\t\t\t\t<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"width: 100%; margin: 50px auto\">\n\t\t\t\t\t\t<!--- Logo: START -->\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td style=\"padding: 20px\">\n\t\t\t\t\t\t\t\t<a href=\"#\">\n\t\t\t\t\t\t\t\t\t<img\n\t\t\t\t\t\t\t\t\t\t\tsrc=\"https://lsq.li/lendsqr-long-logo\"\n\t\t\t\t\t\t\t\t\t\t\tborder=\"0\"\n\t\t\t\t\t\t\t\t\t\t\theight=\"30\"\n\t\t\t\t\t\t\t\t\t\t\tstyle=\"display: block\"\n\t\t\t\t\t\t\t\t\t\t/>\n\t\t\t\t\t\t\t\t</a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<!--- Logo: END -->\n\t\t\t\t\t\t<!--- Header: START -->\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td></td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<!--- Header: END -->\n\n\t\t\t\t\t\t<!--- Body: START -->\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td style=\"\n\t\t\t\t\t\t\t\t\t\tfont-family: Inter, Arial, sans-serif;\n\t\t\t\t\t\t\t\t\t\tfont-size: 16px;\n\t\t\t\t\t\t\t\t\t\tline-height: 150%;\n\t\t\t\t\t\t\t\t\t\tcolor: rgb(45, 46, 46);\n\t\t\t\t\t\t\t\t\t\tbackground-color: #fff;\n\t\t\t\t\t\t\t\t\t\tborder-radius: 10px 10px 0 0;\n\t\t\t\t\t\t\t\t\t\tpadding: 50px 50px;\n\t\t\t\t\t\t\t\t\t\">\n\t\t\t\t\t\t\t\t<p><b>\ud83d\udc4bHi {{ $('Edit Fields').item.json.borrower_name }},</b></p>\n\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\tLast week, you applied for a loan through {{ $('Edit Fields').item.json.org_name }} in\n\t\t\t\t\t\t\t\t\tour directory. We're checking in because we care about how\n\t\t\t\t\t\t\t\t\tthis turned out for you.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<p><b>Did {{ $('Edit Fields').item.json.org_name }} reach out to you?</b></p>\n\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\u2705 If yes \u2013 That's great! We hope the process is going\n\t\t\t\t\t\t\t\t\tsmoothly.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\t\u274c If not \u2013 Please let us know. We can follow up on your\n\t\t\t\t\t\t\t\t\tbehalf or connect you with an alternative lender if needed.\n\t\t\t\t\t\t\t\t</p>\n\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\tEither way, we'd love to know so we can keep improving the\n\t\t\t\t\t\t\t\t\texperience.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\tSimply reply to this email with an update so we can assist\n\t\t\t\t\t\t\t\t\tyou better.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<!--- Body: END -->\n\n\t\t\t\t\t\t<!--- Footer: START -->\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td style=\"\n\t\t\t\t\t\t\t\t\t\tfont-family: 'Inter', sans-serif;\n\t\t\t\t\t\t\t\t\t\tfont-size: 12px;\n\t\t\t\t\t\t\t\t\t\tline-height: 22px;\n\t\t\t\t\t\t\t\t\t\tcolor: #334a6a;\n\t\t\t\t\t\t\t\t\t\topacity: 0.6;\n\t\t\t\t\t\t\t\t\t\tpadding: 50px;\n\t\t\t\t\t\t\t\t\t\tpadding-top: 20px;\n\t\t\t\t\t\t\t\t\t\t/* border-top: 1px solid rgba(17, 41, 69, 0.1); */\n\t\t\t\t\t\t\t\t\t\tborder-radius: 0 0 10px 10px;\n\t\t\t\t\t\t\t\t\t\tbackground-color: #fff;\n\t\t\t\t\t\t\t\t\t\">\n\t\t\t\t\t\t\t\t<p style=\"margin: 0; width: 100%\">\n\t\t\t\t\t\t\t\t\t<b>Please note:</b> We connected you with this lender\n\t\t\t\t\t\t\t\t\tthrough our directory, but we are not involved in the loan\n\t\t\t\t\t\t\t\t\tapproval or disbursement process. For updates on your\n\t\t\t\t\t\t\t\t\tapplication status, please contact the lender directly.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<p>\n\t\t\t\t\t\t\t\t\tIf you have questions about our directory service or need\n\t\t\t\t\t\t\t\t\tassistance, please reach out to us at\n\t\t\t\t\t\t\t\t\t<a href=\"mailto:support@lendsqr.com\">support@lendsqr.com</a>.\n\t\t\t\t\t\t\t\t</p>\n\t\t\t\t\t\t\t\t<a href=\"{{unsubscribe_link}}\">Click here to unsubscribe</a>\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t<!--- Footer: END -->\n\t\t\t\t\t</table>\n\t\t\t\t</td>\n\t\t\t</tr>\n\t\t</table>\n\t</center>\n</body>\n\n</html>",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.sendGrid",
+      "typeVersion": 1,
+      "position": [
+        1408,
+        -480
+      ],
+      "name": "Borrower follow-up",
+      "credentials": {
+        "sendGridApi": {
+          "name": "NAME"
+        }
+      }
+    },
+  ],
+  "pinData": {},
+  "connections": {
+    "Loan application trigger": {
+      "main": [
+        [
+          {
+            "node": "Pulls borrower's data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pulls borrower's data": {
+      "main": [
+        [
+          {
+            "node": "Get lenders email from DB",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get lenders email from DB": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Borrower confirmation",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Lender notification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Borrower confirmation": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Borrower follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
