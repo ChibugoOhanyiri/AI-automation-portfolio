@@ -1,12 +1,12 @@
 # Automated Job Application Screening System — Zapier
 
-A two-Zap automated hiring pipeline that screens, routes, and summarises job applications in real time. Built for a technical hiring team receiving 20–50 applications weekly. HR no longer reads applications that don't qualify — the system handles it automatically.
+A two-Zap automated hiring pipeline that screens, routes, and summarises job applications in real time. Built for a technical hiring team receiving 20–50 applications weekly. HR no longer reads applications that don't qualify; the system handles it automatically.
 
 ---
 
 ## The Problem
 
-HR teams at growing companies spend hours every week manually reviewing applications from candidates who don't meet basic requirements — wrong skills, insufficient experience, or unsupported locations. Every unqualified application read is time stolen from the ones that actually matter.
+HR teams at growing companies spend hours every week manually reviewing applications from candidates who don't meet basic requirements,  wrong skills, insufficient experience, or unsupported locations. Every unqualified application read is time stolen from the ones that actually matter.
 
 ---
 
@@ -181,10 +181,14 @@ Senior apps already pinged tech lead. Junior apps are in the Google Sheet for ba
 
 | Screenshot | Description |
 |---|---|
-| `zap1_canvas.png` | Full Zap 1 canvas — 14-step screening pipeline |
-| `slack_hiring_senior.png` | Live Slack notification in #hiring-senior channel |
-| `zap2_canvas.png` | Zap 2 canvas — daily digest summary |
-| `email_output.png` | HTML email sent to hiring manager |
+| `<img width="1002" height="1484" alt="Screenshot 2026-03-15 154146" src="https://github.com/user-attachments/assets/317728a7-ca0c-4052-aaa6-7b9fbce7bfce" />
+` | Full Zap 1 canvas — 14-step screening pipeline |
+| `<img width="1919" height="824" alt="Screenshot 2026-03-15 155401" src="https://github.com/user-attachments/assets/9a1ae4e9-5551-4cc0-8e0c-28db037b27c3" />
+` | Live Slack notification in #hiring-senior channel |
+| `<img width="799" height="720" alt="Screenshot 2026-03-15 155933" src="https://github.com/user-attachments/assets/5e268816-d960-4589-ae4e-220984a49d21" />
+` | Zap 2 canvas — daily digest summary |
+| `<img width="799" height="720" alt="Screenshot 2026-03-15 155933" src="https://github.com/user-attachments/assets/19138104-f121-43fd-9e5a-68628d929672" />
+` | HTML email sent to hiring manager |
 
 ---
 
