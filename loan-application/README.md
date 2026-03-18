@@ -163,5 +163,3 @@ The trigger expects a JSON payload with at minimum:
 Built for a lending directory platform where borrowers browse and apply to lenders listed on the platform. When a borrower applies, the matched lender needs to be notified immediately, the borrower needs acknowledgement, and if no contact is made within a few days, the borrower needs a follow-up to confirm the process is working.
 
 ---
-
-*Built by Chibugo Ohanyiri — [Arcflow Labs](https://github.com/ChibugoOhanyiri/AI-automation-portfolio)*
