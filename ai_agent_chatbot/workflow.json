@@ -1,1 +1,904 @@
+{
+  "name": "Chatbot",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1232,
+        416
+      ],
+      "name": "Download file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        1456,
+        416
+      ],
+      "name": "Supabase Vector Store",
+      "credentials": {
+        "supabaseApi": {
+          "name": "chatbot credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_DRIVE_FOLDER_ID",
+          "mode": "list",
+          "cachedResultName": "RAG_project",
+          "cachedResultUrl": "https://drive.google.com/drive/folders/YOUR_FOLDER_ID"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        416
+      ],
+      "name": "When new company file is uploaded",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        1664,
+        688
+      ],
+      "name": "Chunk file"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -272,
+        592
+      ],
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Use this tool to retrieve information about Mainland houses",
+        "tableName": {
+          "__rl": true,
+          "value": "documents",
+          "mode": "list",
+          "cachedResultName": "documents"
+        },
+        "topK": 6,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreSupabase",
+      "typeVersion": 1.3,
+      "position": [
+        640,
+        256
+      ],
+      "name": "knowledge_base",
+      "credentials": {
+        "supabaseApi": {
+          "name": "chatbot credential"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "chatbot_leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_GID",
+          "mode": "list",
+          "cachedResultName": "chatbot_leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Name', ``, 'string') }}",
+            "Email": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Email', ``, 'string') }}",
+            "Contact number": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Contact_number', ``, 'string') }}",
+            "Number of bedrooms": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Number_of_bedrooms', ``, 'string') }}",
+            "Preferred location": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Preferred_location', ``, 'string') }}",
+            "Budget range": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Budget_range', ``, 'string') }}",
+            "Property type": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Property_type', ``, 'string') }}",
+            "Special preferences": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Special_preferences', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Contact number",
+              "displayName": "Contact number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Number of bedrooms",
+              "displayName": "Number of bedrooms",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Preferred location",
+              "displayName": "Preferred location",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Budget range",
+              "displayName": "Budget range",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Property type",
+              "displayName": "Property type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Special preferences",
+              "displayName": "Special preferences",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -112,
+        576
+      ],
+      "name": "crm",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "your-calendar@gmail.com",
+          "mode": "list",
+          "cachedResultName": "your-calendar@gmail.com"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        32,
+        576
+      ],
+      "name": "check_availability",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "your-calendar@gmail.com",
+          "mode": "list",
+          "cachedResultName": "your-calendar@gmail.com"
+        },
+        "start": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Start', `The start date and time of the requested inspection in ISO 8601 format e.g. 2026-03-07T11:00:00`, 'string') }}",
+        "end": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('End', `The end date and time of the inspection slot, typically 1 hour after the start time, in ISO 8601 format e.g. 2026-03-07T12:00:00`, 'string') }}",
+        "additionalFields": {
+          "description": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Description', `The details of the event, which include:\n- name of prospect\n- email of prospect\n- property details (e.g 3 bedroom apartment Wuse)\n- location of property`, 'string') }}",
+          "summary": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Summary', `the calendar event title, e.g 3 bedroom apartment viewing for Mr. Emeka`, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        576
+      ],
+      "name": "schedule_inspection",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1344,
+        688
+      ],
+      "name": "Embeddings OpenAI",
+      "credentials": {
+        "openAiApi": {
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -432,
+        576
+      ],
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -1120,
+        64
+      ],
+      "name": "Telegram Trigger",
+      "webhookId": "8808f9f4-3520-4c1a-9ec0-ab6cd4de32f6",
+      "credentials": {
+        "telegramApi": {
+          "name": "Real estate chatbot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "560e2db1-a6c4-4360-95e4-4ad80b920c13",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -880,
+        64
+      ],
+      "name": "Does text message exist?"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.message.voice.file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -560,
+        224
+      ],
+      "name": "Download voice note",
+      "webhookId": "8edb6a4b-e276-44e2-ac4d-d49f50a1b2df",
+      "credentials": {
+        "telegramApi": {
+          "name": "Real estate chatbot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const binaryData = items[0].binary.data;\nbinaryData.fileName = 'voice.ogg';\nbinaryData.mimeType = 'audio/ogg';\nreturn items;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -368,
+        224
+      ],
+      "name": "convert audio file from .oga to ogg"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.groq.com/openai/v1/audio/transcriptions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "YOUR_BEARER_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            },
+            {
+              "name": "model",
+              "value": "whisper-large-v3-turbo"
+            },
+            {
+              "name": "response_format",
+              "value": "json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -176,
+        224
+      ],
+      "name": "transcribe audio"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "396cefd3-0e5e-46e2-9229-b19be8939689",
+              "name": "text",
+              "value": "={{ $json.message.text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -368,
+        48
+      ],
+      "name": "standardize text to match audio file json"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "## ROLE\nYou are Erica, a friendly and professional customer support assistant at Mainland Houses, a real estate company. Your responsibility is to guide potential buyers, understand their needs, recommend suitable properties step-by-step, like a real human property advisor, and assist with scheduling viewings for interested properties.\n\n---\n\n\n---\n\n## CONVERSATIONAL FLOW (MANDATORY ORDER)\n\n### STEP 1 - Lead Capture (First Interaction Only)\n\nAt the start of the conversation, politely collect\n- Name\n- Email\n- Contact number\n\nRules: \n- Ask only for missing information\n- Once all three are collected, immediately save them in the crm tool\n- After saving, confirm politely isng send_message and continue\n\nDo not proceed to property discussions until lead information has been saved\n\n---\n\n### STEP 2 - Need Qualification (Before Property Search)\n\nWhen a user asks about available houses or listings:\n\nDo NOT search immediately\n\nAsk clarifying questions using send_message, such as:\n\n- Preferred location\n- Budget range\n- Property type\n- Number of bedrooms\n- Special preferences\n\nContinue asking naturally until enough information is provided\n\nOnce enough information is gathered, update the crm with property requirements before searching\n\n---\n\n### STEP 3 - Property Search \n\nOnly after qualification is complete:\n\n- Use property_listings to retrieve matching properties.\n- NEVER guess property information. Always retrieve it using property_listings\n\n---\n\n### STEP 4- Summary Before Sharing\n\nAfter receiving results from property_listings\n\nDo NOT immediately send images or full details\n\nSend a short summary using send_message\n\nExample:\n\"We currently have 2 properties within your location and budget. Would you like me to share more details and photos?\"\n\nWait for user confirmation\n\n---\n\n### STEP 5- Sending Property Details and Images\n\nWhen the user asks for details or images:\n\n1. FIRST use property_listings again if needed to retrieve full property details and image URLS\n2. Send property explanations using send_message\n3. Send images using send_property_images\n\n---\n\n### STEP 6-Scheduling Property Viewings\n\n1. Use check_availability to find available dates and times for the property\n2. Present available slots to the user politely using send_message\n3. Once the user selects a preferred slot, use schedule_inspection to book the viewing appointment\n4. Confirm the booked viewing details using send_message\n5. Immediately after confirming, use the property_listings to retrieve the full details of the booked property incduing the assigned agents' information\n6. Use email_lead to send a confirmatory HTML email to the user's email address (collected in Step 1) containing:\n    - The user's name\n    - Property name, address, type, and any other relevant details retrieved from property_listing\n    - The assigned agent's name and contact information\n    - The confirmed viewing date and time\n    - A professional, branded HTML email layout with a warm and friendly tone\n\nAlways follow up politely using send_message:\n\"Your viewing has been scheduled for [Date] at [Time]. We look forward to seeing you!\"\n\n---\n\n## IMPORTANT IMAGE SENDING RULES\n\nThe send_property_images tool contains TWO separate image fields.\n\nWhen sending images:\n\n- The first image URL MUST be entered in the first media field.\n- The second image URL MUST be entered in the second media field.\n- Only place ONE image URL per field.\n- NEVER send text inside the image field\n\nIf only one image exists:\n- Fill only the first image field\n\nImages MUST always come from data retrieved using property_listings\n\n---\n\n## Knowledge Questions\n\nIf a user asks about MAINLAND HOUSES:\n\n1. FIRST use knowledge_base.\n2. Then respond using send_message.\n\nIf information cannot be found:\nRespond politely using send_message and refer them to: concierge@mainlandhouses.com\n\n---\n\n## STYLE/TONE\n\n- Friendly\n- Professional\n- Conversational\n- Helpful and patient\n- Ask one step at a time\n- Never overwhelm the user\n\n---\n\n## TOOLS\n\n- knowledge_base: Retrieve company information.\n- crm: Save Name, Email, contact Number, and Property information the user needs (e.g., 3-bedroom apartment in Maryland).\n- property_listings: Retrieve property details and image URLs after qualification.\n- check_availability: Check available dates and times for property viewings.\n- schedule_inspection: Book a property viewing once the date and time are confirmed.\n- send_message: Use for EVERY message sent to the user.\n- send_property_images: Use only when sending property images after user confirmation.\n- email_lead: Use immediately after a viewing has been scheduled and confirmed. Retrieve all necessary property and agent details using property_listings before calling this tool. Use it to send a confirmatory email to the user's email address. The email body MUST be written in valid HTML and include: The user's name, full property details (name, address, type, etc.), the assigned agent's name and contact, the confirmed viewing date and time, the HTML should be professionally designed with a clean layout, branded with MAINLAND HOUSES, and written in a warm, friendly tone.\n\n## FINAL MANDATORY RULES\n\n- Every turn MUST call at least one tool.\n- Never produce normal text output.\n- Always use send_message for communication.\n- Always retrieve property data using property_listings before sending details or images.\n- Always check availability and schedule viewings using the new tools when appropriate.\n- Always send a confirmatory HTML email using email_lead immediately after a viewing is successfully booked via schedule_inspection.\n\nIf unsure what to do, ask a clarification question using send_message.\n\nCurrent date and time:  {{ $now }}\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        48
+      ],
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "chatbot_leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "YOUR_SHEET_GID",
+          "mode": "list",
+          "cachedResultName": "n8n chatbot",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID"
+        },
+        "options": {
+          "dataLocationOnSheet": {
+            "values": {
+              "rangeDefinition": "detectAutomatically"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        336,
+        576
+      ],
+      "name": "property_listings",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Text', ``, 'string') }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegramTool",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        576
+      ],
+      "name": "send_message",
+      "webhookId": "ae16cfaf-6cb7-423b-9460-a24203028e7b",
+      "credentials": {
+        "telegramApi": {
+          "name": "Real estate chatbot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "sendMediaGroup",
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "media": {
+          "media": [
+            {
+              "media": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('media0_Media_File', `The first image URL of the property requested for`, 'string') }}",
+              "additionalFields": {}
+            },
+            {
+              "media": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('media1_Media_File', `The second image URL of the property requested for`, 'string') }}",
+              "additionalFields": {}
+            }
+          ]
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTool",
+      "typeVersion": 1.2,
+      "position": [
+        608,
+        576
+      ],
+      "name": "send_property_image",
+      "webhookId": "ae16cfaf-6cb7-423b-9460-a24203028e7b",
+      "credentials": {
+        "telegramApi": {
+          "name": "Real estate chatbot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To', ``, 'string') }}",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', ``, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', ``, 'string') }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        768,
+        576
+      ],
+      "name": "email_lead",
+      "webhookId": "28ff8ba7-f06d-4db8-91b4-22b2c4d935b8",
+      "credentials": {
+        "gmailOAuth2": {
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        560,
+        48
+      ],
+      "name": "No Operation, do nothing"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When new company file is uploaded": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chunk file": {
+      "ai_document": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "knowledge_base": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "crm": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "schedule_inspection": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Supabase Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "knowledge_base",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Does text message exist?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Does text message exist?": {
+      "main": [
+        [
+          {
+            "node": "standardize text to match audio file json",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Download voice note",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download voice note": {
+      "main": [
+        [
+          {
+            "node": "convert audio file from .oga to ogg",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "convert audio file from .oga to ogg": {
+      "main": [
+        [
+          {
+            "node": "transcribe audio",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "standardize text to match audio file json": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "transcribe audio": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "property_listings": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_message": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_property_image": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "email_lead": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
 
