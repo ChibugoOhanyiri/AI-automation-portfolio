@@ -1,0 +1,48 @@
+# Credentials and sensitive data
+credentials.json
+.env
+.env.local
+.env.production
+config.json
+secrets.json
+*-original.json
+*-backup.json
+
+# API Keys and tokens
+api-keys.txt
+tokens.txt
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (if you have any n8n custom nodes)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*-BACKUP.json
