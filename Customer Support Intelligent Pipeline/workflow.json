@@ -1,0 +1,419 @@
+{
+  "name": "Customer Support Intelligence Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "your-webhook-path",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -496,
+        -112
+      ],
+      "id": "056282e7-1f56-415b-90e6-4167b354c748",
+      "name": "Webhook",
+      "webhookId": "your-webhook-id"
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\n\nreturn [\n  {\n    json: {\n      order_id: input.body.order_id,\n      message: input.body.message,\n      timestamp: new Date().toISOString()\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -272,
+        -112
+      ],
+      "id": "5b003078-ef44-40d5-b805-66fb58dcf02e",
+      "name": "Generate message data"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=# Overview\nYou are a customer support classifier for an ecommerce company. Your task is to analyze incoming messages and categorize them with sentiment, urgency, and confidence.\n\n## Context\n- Messages come from customer support channels (email, chat, forms).\n- Classify messages into clear categories for automated triage.\n- Output must be valid JSON only.\n\n## Instructions\n1. Analyze the incoming message content.\n2. Determine the category of the message:\n   - \"Order Status\"\n   - \"Product Question\"\n   - \"Complaint\"\n   - \"Return\"\n3. Determine the sentiment:\n   - \"angry\"\n   - \"neutral\"\n   - \"happy\"\n4. Determine the urgency:\n   - \"high\"\n   - \"medium\"\n   - \"low\"\n5. Assign a confidence score between 0.00 - 1.00.\n6. Apply these rules:\n   - If the message shows frustration \u2192 sentiment = angry, urgency = high\n   - If the message is asking about an order \u2192 category = Order Status\n   - If the message is unclear \u2192 confidence < 0.75\n7. Return ONLY valid JSON in this format:\n```json\n{\n  \"category\": \"Order Status | Product Question | Complaint | Return\",\n  \"sentiment\": \"angry | neutral | happy\",\n  \"urgency\": \"high | medium | low\",\n  \"confidence\": 0-1\n}\n\nMessage: {{ $json.message }}",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": []
+        },
+        "batching": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.9,
+      "position": [
+        -48,
+        -112
+      ],
+      "id": "18eb2fdf-111d-46be-b98b-b96147e120c7",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        112,
+        160
+      ],
+      "id": "9e9de8c9-a6ae-41da-ae97-af5051becc89",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "542ca0d0-76dc-4b1d-8e2b-e48388468858",
+              "name": "Order_id",
+              "value": "={{ $('Generate message data').item.json.order_id }}",
+              "type": "string"
+            },
+            {
+              "id": "8716da3f-7acc-46e6-88de-bae38f545bb3",
+              "name": "Category",
+              "value": "={{ $json.output.category }}",
+              "type": "string"
+            },
+            {
+              "id": "16b7b0b7-0255-49af-89ff-86b2a0203538",
+              "name": "Sentiment",
+              "value": "={{ $json.output.sentiment }}",
+              "type": "string"
+            },
+            {
+              "id": "905232ea-5f70-4926-86b4-ef39238352ae",
+              "name": "Urgency",
+              "value": "={{ $json.output.urgency }}",
+              "type": "string"
+            },
+            {
+              "id": "f8c16803-4ceb-4f07-96d9-f219cef1f52d",
+              "name": "Confidence",
+              "value": "={{ $json.output.confidence }}",
+              "type": "number"
+            },
+            {
+              "id": "ccae9818-aad0-4d60-b1cc-68914fba397c",
+              "name": "Timestamp",
+              "value": "={{ new Date($('Generate message data').item.json.timestamp).toLocaleDateString('en-GB').replace(/\\//g, '-') }}",
+              "type": "string"
+            },
+            {
+              "id": "842394ee-235e-46f0-a2bb-ae740cc643f3",
+              "name": "Escalated",
+              "value": "={{ $json.output.confidence < 0.75 ? 'Yes' : 'No' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        304,
+        -112
+      ],
+      "id": "35220e48-99f9-4be1-84ba-09236cbc3918",
+      "name": "Format data"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"category\": \"string\",\n  \"sentiment\": \"string\", \n  \"urgency\": \"string\",\n  \"confidence\": \"number\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        112
+      ],
+      "id": "581afe43-a9b8-400a-b483-53a41b864161",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "sendTo": "support@yourcompany.com",
+        "subject": "=Urgent Customer Complaint - {{ $json.Order_id }}",
+        "message": "=<!DOCTYPE html>\n<html>\n<body style=\"margin:0;padding:0;background-color:#f0f7f4;font-family:Arial,sans-serif;\">\n  <div style=\"max-width:600px;margin:0 auto;background:#ffffff;border-radius:12px;overflow:hidden;margin-top:20px;\">\n    \n    <!-- Header -->\n    <div style=\"background-color:#2d7a5f;padding:30px;text-align:center;\">\n      <h1 style=\"color:#ffffff;margin:0;font-size:22px;letter-spacing:1px;\">\ud83d\udea8 Urgent Support Alert</h1>\n      <p style=\"color:#a8d5c2;margin:6px 0 0;\">Tobio's Customer Support System</p>\n    </div>\n\n    <!-- Body -->\n    <div style=\"padding:30px;\">\n      <p style=\"color:#333;font-size:15px;\">A high-urgency customer complaint has been detected and requires <strong>immediate attention.</strong></p>\n\n      <!-- Details Card -->\n      <div style=\"background:#f0f7f4;border-left:4px solid #2d7a5f;border-radius:8px;padding:20px;margin:20px 0;\">\n        <table style=\"width:100%;border-collapse:collapse;\">\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;width:40%;\">Order ID</td>\n            <td style=\"padding:8px 0;color:#222;font-weight:bold;\">{{ $json.Order_id }}</td>\n          </tr>\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;\">Category</td>\n            <td style=\"padding:8px 0;color:#222;font-weight:bold;\">{{ $json.Category }}</td>\n          </tr>\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;\">Sentiment</td>\n            <td style=\"padding:8px 0;color:#c0392b;font-weight:bold;\">\ud83d\ude20 {{ $json.Sentiment }}</td>\n          </tr>\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;\">Urgency</td>\n            <td style=\"padding:8px 0;color:#e67e22;font-weight:bold;\">\u26a0\ufe0f {{ $json.Urgency }}</td>\n          </tr>\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;\">AI Confidence</td>\n            <td style=\"padding:8px 0;color:#222;font-weight:bold;\">{{ $json.Confidence }}</td>\n          </tr>\n          <tr>\n            <td style=\"padding:8px 0;color:#777;font-size:13px;\">Timestamp</td>\n            <td style=\"padding:8px 0;color:#222;\">{{ $json.Timestamp }}</td>\n          </tr>\n        </table>\n      </div>\n\n      <p style=\"color:#333;font-size:14px;\">Please follow up with this customer as soon as possible to resolve their issue.</p>\n\n    <!-- Footer -->\n    <div style=\"background:#f0f7f4;padding:20px;text-align:center;\">\n      <p style=\"color:#999;font-size:12px;margin:0;\">This is an automated alert from Tobio's AI Support Pipeline</p>\n      <p style=\"color:#999;font-size:12px;margin:4px 0 0;\">\u00a9 2026 Tobio's \u00b7 All rights reserved</p>\n    </div>\n\n  </div>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        752,
+        -208
+      ],
+      "id": "1d5ca3a7-dbf2-4062-9230-06f5c73fb79f",
+      "name": "Send a message",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "boardItem",
+        "boardId": "YOUR_BOARD_ID",
+        "groupId": "YOUR_GROUP_ID",
+        "name": "={{ $('Should we escalate?').item.json.Order_id }}",
+        "additionalFields": {
+          "columnValues": "={\n  \"color_mm1v1pb0\": {\"label\": \"{{ $('Should we escalate?').item.json.Category }}\"},\n  \"color_mm1vz814\": {\"label\": \"{{ $('Should we escalate?').item.json.Sentiment }}\"},\n  \"color_mm1v799m\": {\"label\": \"{{ $('Should we escalate?').item.json.Urgency }}\"},\n  \"numeric_mm1vdvwa\": \"{{ $('Should we escalate?').item.json.Confidence }}\",\n  \"dropdown_mm1v7syc\": {\"labels\": [\"Yes\"]},\n  \"date_mm1v5ye1\": {\"date\": \"{{ $('Should we escalate?').item.json.Timestamp.split('-').reverse().join('-') }}\"}\n}"
+        }
+      },
+      "type": "n8n-nodes-base.mondayCom",
+      "typeVersion": 1,
+      "position": [
+        976,
+        -208
+      ],
+      "id": "ca3d3db8-c662-42a8-8da2-615c2d44aca3",
+      "name": "Upload to escalated group",
+      "credentials": {
+        "mondayComApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Monday.com account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "efef0c90-889f-4616-a9df-b208d13f7eaa",
+              "leftValue": "={{ $json.Sentiment }}",
+              "rightValue": "angry",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "e524e2c2-72a0-4f52-bc13-77f424118cad",
+              "leftValue": "={{ $json.Confidence }}",
+              "rightValue": 0.75,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        528,
+        -112
+      ],
+      "id": "95dc8407-6349-4c1a-963e-34aef538d25d",
+      "name": "Should we escalate?"
+    },
+    {
+      "parameters": {
+        "content": "## GUARDRAIL & ROUTING",
+        "height": 400,
+        "width": 720
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        480,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "97f7a229-0517-487c-a4bf-dff7d3367545",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## AI CLASSIFICATION & FORMATTING",
+        "height": 224,
+        "width": 576,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -112,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "2b0a7e18-d5b3-43db-8309-5181e6ee38c6",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## INPUT LAYER",
+        "height": 224,
+        "width": 432
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -560,
+        -208
+      ],
+      "typeVersion": 1,
+      "id": "b7736af4-d0c3-4970-bdab-6c99468c355e",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "resource": "boardItem",
+        "boardId": "YOUR_BOARD_ID",
+        "groupId": "YOUR_GROUP_ID",
+        "name": "={{ $('Should we escalate?').item.json.Order_id }}",
+        "additionalFields": {
+          "columnValues": "={\n  \"color_mm1v1pb0\": {\"label\": \"{{ $('Should we escalate?').item.json.Category }}\"},\n  \"color_mm1vz814\": {\"label\": \"{{ $('Should we escalate?').item.json.Sentiment }}\"},\n  \"color_mm1v799m\": {\"label\": \"{{ $('Should we escalate?').item.json.Urgency }}\"},\n  \"numeric_mm1vdvwa\": \"{{ $('Should we escalate?').item.json.Confidence }}\",\n  \"dropdown_mm1v7syc\": {\"labels\": [\"No\"]},\n  \"date_mm1v5ye1\": {\"date\": \"{{ $('Should we escalate?').item.json.Timestamp.split('-').reverse().join('-') }}\"}\n}"
+        }
+      },
+      "type": "n8n-nodes-base.mondayCom",
+      "typeVersion": 1,
+      "position": [
+        752,
+        0
+      ],
+      "id": "a03c2f2d-3729-4325-bc6d-ffeaeb609857",
+      "name": "Upload to not escalated group",
+      "credentials": {
+        "mondayComApi": {
+          "id": "YOUR_CREDENTIAL_ID",
+          "name": "Monday.com account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Generate message data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate message data": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Format data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format data": {
+      "main": [
+        [
+          {
+            "node": "Should we escalate?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Upload to escalated group",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Should we escalate?": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Upload to not escalated group",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "tags": []
+}
