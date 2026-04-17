@@ -1,1 +1,1558 @@
-
+{
+  "name": "International Ops",
+  "nodes": [
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "YOUR-UUID",
+              "name": "Vendor / Company Legal Name",
+              "value": "={{ $json['Vendor / Company Legal Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Country of Registration ",
+              "value": "={{ $json['Country of Registration '] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Business Type",
+              "value": "={{ $json['Business Type'] }}",
+              "type": "string"
+            },
+            {
+              "id": "c0095cb4-4b6b-4cYOUR_PHONEcc79a602dc13",
+              "name": "Tax ID / VAT Number",
+              "value": "={{ $json['Tax ID / VAT Number'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Business Registration Number ",
+              "value": "={{ $json['Business Registration Number '] }}",
+              "type": "number"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Primary Contact Name",
+              "value": "={{ $json['Primary Contact Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Primary Contact Email ",
+              "value": "={{ $json['Primary Contact Email '] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Primary Contact Phone",
+              "value": "={{ $json['Primary Contact Phone'] }}",
+              "type": "number"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Business Website",
+              "value": "={{ $json['Business Website'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Bank Name",
+              "value": "={{ $json['Bank Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Account Name",
+              "value": "={{ $json['Account Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Account Number / IBAN",
+              "value": "={{ $json['Account Number / IBAN'] }}",
+              "type": "number"
+            },
+            {
+              "id": "646efab3-58eb-4dYOUR_PHONEe0d21471b",
+              "name": "SWIFT / BIC Code",
+              "value": "={{ $json['SWIFT / BIC Code'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Currency",
+              "value": "={{ $json.Currency }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Service / Product Description",
+              "value": "={{ $json['Service / Product Description'] }}",
+              "type": "string"
+            },
+            {
+              "id": "158e669a-8555-4e59-8aYOUR_PHONEc",
+              "name": "Estimated Monthly Invoice Amount ",
+              "value": "={{ $json['Estimated Monthly Invoice Amount '] }}",
+              "type": "number"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Preferred Payment Terms",
+              "value": "={{ $json['Preferred Payment Terms'] }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Do you have a signed NDA on file?",
+              "value": "={{ $json['Do you have a signed NDA on file?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "62a22a6d-950bYOUR_PHONEf6-dfafbb017ec5",
+              "name": "Date submitted",
+              "value": "={{ $json.submittedAt.split(\"T\")[0] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2592,
+        -384
+      ],
+      "id": "YOUR-UUID",
+      "name": "Standardize data"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "databaseId": {
+          "__rl": true,
+          "value": "34121d2a-e6beYOUR_PHONEc59dbff2c17d",
+          "mode": "list",
+          "cachedResultName": "Vendor Database",
+          "cachedResultUrl": "https://www.notion.so/YOUR-NOTION-PAGE"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Vendor Name|title",
+              "title": "={{ $json['Vendor / Company Legal Name'] }}"
+            },
+            {
+              "key": "Country|select",
+              "selectValue": "={{ $json['Country of Registration '] }}"
+            },
+            {
+              "key": "Business Type|select",
+              "selectValue": "={{ $json['Business Type'] }}"
+            },
+            {
+              "key": "Tax ID / VAT Number|rich_text",
+              "textContent": "={{ $json['Tax ID / VAT Number'] }}"
+            },
+            {
+              "key": "Contact Name|rich_text",
+              "textContent": "={{ $json['Primary Contact Name'] }}"
+            },
+            {
+              "key": "Contact Email|email",
+              "emailValue": "={{ $json['Primary Contact Email '] }}"
+            },
+            {
+              "key": "Business Website|url",
+              "urlValue": "={{ $json['Business Website'] }}"
+            },
+            {
+              "key": "Bank Name|rich_text",
+              "textContent": "={{ $json['Bank Name'] }}"
+            },
+            {
+              "key": "Account Name|rich_text",
+              "textContent": "={{ $json['Account Name'] }}"
+            },
+            {
+              "key": "SWIFT / BIC Code|rich_text",
+              "textContent": "={{ $json['SWIFT / BIC Code'] }}"
+            },
+            {
+              "key": "Currency|select",
+              "selectValue": "={{ $json.Currency }}"
+            },
+            {
+              "key": "Service Description|rich_text",
+              "textContent": "={{ $json['Service / Product Description'] }}"
+            },
+            {
+              "key": "Monthly Invoice Amount|number",
+              "numberValue": "={{ $json['Estimated Monthly Invoice Amount '] }}"
+            },
+            {
+              "key": "Payment Terms|select",
+              "selectValue": "={{ $json['Preferred Payment Terms'] }}"
+            },
+            {
+              "key": "NDA on File|checkbox",
+              "checkboxValue": "={{ $json['Do you have a signed NDA on file?'] === 'Yes' }}"
+            },
+            {
+              "key": "Date Submitted|date",
+              "includeTime": false,
+              "date": "={{ $json['Date submitted'] }}"
+            },
+            {
+              "key": "Business Registration Number|number",
+              "numberValue": "={{ $json['Business Registration Number '] }}"
+            },
+            {
+              "key": "Contact Phone|phone_number",
+              "phoneValue": "={{ String($json['Primary Contact Phone']) }}"
+            },
+            {
+              "key": "Account Number / IBAN|number",
+              "numberValue": "={{ $json['Account Number / IBAN'] }}"
+            },
+            {
+              "key": "Status|select",
+              "selectValue": "Pending Review"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -2368,
+        -384
+      ],
+      "id": "68c99deeYOUR_PHONEbaa7-c09f4e454422",
+      "name": "Update row in DB",
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Standardize data').item.json['Primary Contact Email '] }}",
+        "subject": "Your Vendor Submission Has Been Received !",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Vendor Onboarding \u2014 Submission Received</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#F0F4F8;padding:40px 0;\">\n    <tr>\n      <td align=\"center\">YOUR_PHONE<!-- Card -->YOUR_PHONE<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);\">YOUR_PHONE<!-- Header -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background-color:#0F1923;padding:36px 40px 28px;\">YOUR_PHONE<p style=\"margin:0 0 6px 0;font-size:11px;letter-spacing:3px;color:#00C2CB;font-weight:700;text-transform:uppercase;\">International Operations</p>YOUR_PHONE<h1 style=\"margin:0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.3;\">Your Vendor Submission Has Been Received!</h1>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Body -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:36px 40px 0;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEHi <strong>{{ $('Standardize data').item.json['Primary Contact Name'] }}</strong>,YOUR_PHONE</p>YOUR_PHONE<p style=\"margin:0 0 24px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEThank you for submitting your vendor onboarding details. We have received your application and it is currently under review by our International Operations team.YOUR_PHONE</p>YOUR_PHONE<!-- Submission Summary Box -->YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;margin-bottom:28px;\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:20px 24px 4px;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">Submission Summary</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:0 24px 20px;\">YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;width:45%;\">Company Name</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Vendor / Company Legal Name'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Country</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Country of Registration '] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Business Type</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Business Type'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Service / Product</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Service / Product Description'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#8899A6;\">Date Submitted</td>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Date submitted'] }}</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE<!-- Status Pill -->YOUR_PHONE<table cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:#FFF8E1;border:1px solid #FFB800;border-radius:20px;padding:8px 20px;\">YOUR_PHONE<span style=\"font-size:12px;font-weight:700;color:#B45309;letter-spacing:1px;text-transform:uppercase;\">\u23f3 Status: Pending Review</span>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE<p style=\"margin:0 0 16px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEOur team typically completes the review process within <strong>2\u20133 business days</strong>. You will receive a follow-up email once a decision has been made.YOUR_PHONE</p>YOUR_PHONE<p style=\"margin:0 0 32px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEIf you have any questions in the meantime reach out to <strong>your-email@domain.com</strong>, please reply directly to this email and we will get back to you promptly.YOUR_PHONE</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Divider -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:0 40px;\">YOUR_PHONE<hr style=\"border:none;border-top:1px solid #E2E8F0;margin:0;\">YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Footer -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:24px 40px 36px;\">YOUR_PHONE<p style=\"margin:0 0 4px;font-size:14px;color:#374151;font-weight:600;\">International Operations Team</p>YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#8899A6;\">Remote \u00b7 Global Employment Platform</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Bottom accent bar -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:linear-gradient(90deg,#0F1923 0%,#00C2CB 100%);height:4px;\"></td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE<!-- Sub-footer -->YOUR_PHONE<p style=\"margin:20px 0 0;font-size:11px;color:#8899A6;text-align:center;\">YOUR_PHONEThis is an automated message from Remote's vendor onboarding system. Please do not reply to this address.YOUR_PHONE</p>YOUR_PHONE</td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -1920,
+        -384
+      ],
+      "id": "YOUR-UUID",
+      "name": "Acknowledge vendors form",
+      "webhookId": "664d3e6f-dYOUR_PHONEbfYOUR_PHONEbbf9b8d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Configure reviewer\\'s details and get vendor row ID from DB').item.json['Reviewer Email'] }}",
+        "subject": "New Vendor Submission \u2014 Action Required",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>New Vendor Submission \u2014 Action Required</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#F0F4F8;padding:40px 0;\">\n    <tr>\n      <td align=\"center\">YOUR_PHONE<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);\">YOUR_PHONE<!-- Header -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background-color:#0F1923;padding:36px 40px 28px;\">YOUR_PHONE<p style=\"margin:0 0 6px 0;font-size:11px;letter-spacing:3px;color:#00C2CB;font-weight:700;text-transform:uppercase;\">Action Required \u00b7 Vendor Review</p>YOUR_PHONE<h1 style=\"margin:0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.3;\">New Vendor Submission<br>Awaiting Your Approval</h1>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Alert Banner -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:#E8F5FF;border-left:4px solid #5B8DEF;padding:16px 40px;\">YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#1E40AF;font-weight:600;\">YOUR_PHONE\ud83d\udccb A new vendor has submitted their onboarding form and requires your review. Please action this within 2 business days.YOUR_PHONE</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Body -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:36px 40px 0;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEHi <strong>{{ $('Configure reviewer\\'s details and get vendor row ID from DB').item.json['Reviewer Name'] }}</strong>,YOUR_PHONE</p>YOUR_PHONE<p style=\"margin:0 0 24px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEA new vendor onboarding submission has been received and automatically logged in the Vendor Database. Please review the details below and click <strong>Approve</strong> or <strong>Reject</strong> to action this submission.YOUR_PHONE</p>YOUR_PHONE<!-- Vendor Details Box -->YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;margin-bottom:20px;\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:20px 24px 4px;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">Vendor Details</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:0 24px 20px;\">YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;width:45%;\">Company Name</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Vendor / Company Legal Name'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Contact Person</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Primary Contact Name'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Contact Email</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Primary Contact Email '] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Country</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Country of Registration '] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Business Type</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Business Type'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Tax ID / VAT</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Tax ID / VAT Number'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Service Description</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Service / Product Description'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Monthly Invoice Amount</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Estimated Monthly Invoice Amount '] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Payment Terms</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Preferred Payment Terms'] }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#8899A6;\">NDA on File</td>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Standardize data').item.json['Do you have a signed NDA on file?'] }}</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE<!-- Action Buttons -->\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:28px;\">\n  <tr>\n    <td style=\"padding:24px;background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;text-align:center;\">\n      <p style=\"margin:0 0 20px;font-size:13px;color:#374151;font-weight:600;\">Click below to action this vendor submission:</p>\n      <table cellpadding=\"0\" cellspacing=\"0\" style=\"margin:0 auto;\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding-right:12px;\">YOUR_PHONE<a href=\"https://YOUR-N8N-INSTANCE.app.n8n.cloud/webhook/YOUR-WEBHOOK-ID&vendorId={{ $('Configure reviewer\\'s details and get vendor row ID from DB').item.json['Vendor row id'] }}&vendorName={{ $('Standardize data').item.json['Vendor / Company Legal Name'] }}&vendorEmail={{ $('Standardize data').item.json['Primary Contact Email '] }}&contactName={{ $('Standardize data').item.json['Primary Contact Name'] }}&currency={{ $('Standardize data').item.json['Currency'] }}&amount={{ $('Standardize data').item.json['Estimated Monthly Invoice Amount '] }}&country={{ $('Standardize data').item.json['Country of Registration '] }}&paymentTerms={{ $('Standardize data').item.json['Preferred Payment Terms'] }}&taxId={{ $('Standardize data').item.json['Tax ID / VAT Number'] }}&bankName={{ $('Standardize data').item.json['Bank Name'] }}&accountName={{ $('Standardize data').item.json['Account Name'] }}&iban={{ $('Standardize data').item.json['Account Number / IBAN'] }}&swift={{ $('Standardize data').item.json['SWIFT / BIC Code'] }}\"YOUR_PHONEstyle=\"display:inline-block;background:#00C48C;color:#ffffff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:13px;padding:12px 28px;border-radius:8px;text-decoration:none;white-space:nowrap;\">YOUR_PHONE\u2705 Approve VendorYOUR_PHONE</a>YOUR_PHONE</td>YOUR_PHONE<td>YOUR_PHONE<a href=\"https://tally.so/r/YOUR-FORM-ID?vendorId={{ $('Configure reviewer\\'s details and get vendor row ID from DB').item.json['Vendor row id'] }}&vendorName={{ $('Standardize data').item.json['Vendor / Company Legal Name'] }}&vendorEmail={{ $('Standardize data').item.json['Primary Contact Email '] }}&contactName={{ $('Standardize data').item.json['Primary Contact Name'] }}&status=Rejected\"YOUR_PHONEstyle=\"display:inline-block;background:#FF4D4D;color:#ffffff;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:700;font-size:13px;padding:12px 28px;border-radius:8px;text-decoration:none;white-space:nowrap;\">YOUR_PHONE\u274c Reject VendorYOUR_PHONE</a>YOUR_PHONE</td>YOUR_PHONE</tr>\n      </table>\n      <p style=\"margin:16px 0 0;font-size:11px;color:#8899A6;\">Clicking either button will instantly update the vendor's status and trigger the appropriate follow-up.</p>\n    </td>\n  </tr>\n</table>YOUR_PHONE</table>YOUR_PHONE<p style=\"margin:20px 0 0;font-size:11px;color:#8899A6;text-align:center;\">YOUR_PHONEThis notification was triggered automatically when a new vendor submission was received.YOUR_PHONE</p>YOUR_PHONE</td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -1696,
+        -384
+      ],
+      "id": "YOUR-UUID",
+      "name": "Send email to reviewer to review vendors details",
+      "webhookId": "664d3e6f-dYOUR_PHONEbfYOUR_PHONEbbf9b8d",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "formTitle": "Vendor Onboarding Form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Vendor / Company Legal Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Country of Registration ",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "USA"
+                  },
+                  {
+                    "option": "UK"
+                  },
+                  {
+                    "option": "Australia"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Business Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Individual"
+                  },
+                  {
+                    "option": "LLC"
+                  },
+                  {
+                    "option": "Corporation "
+                  },
+                  {
+                    "option": "NGO"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Tax ID / VAT Number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Business Registration Number ",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Primary Contact Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Primary Contact Email ",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Primary Contact Phone",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Business Website"
+            },
+            {
+              "fieldLabel": "Bank Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Account Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Account Number / IBAN",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "SWIFT / BIC Code",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Currency",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "USD"
+                  },
+                  {
+                    "option": "EUR"
+                  },
+                  {
+                    "option": "AUD"
+                  },
+                  {
+                    "option": "Other"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Service / Product Description",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Estimated Monthly Invoice Amount ",
+              "fieldType": "number",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Preferred Payment Terms",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Net 15"
+                  },
+                  {
+                    "option": "Net 30"
+                  },
+                  {
+                    "option": "Net 45"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Do you have a signed NDA on file?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes"
+                  },
+                  {
+                    "option": "No"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Additional Notes"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -2816,
+        -384
+      ],
+      "id": "YOUR-UUID",
+      "name": "Vendor onboarding form",
+      "webhookId": "YOUR-UUID"
+    },
+    {
+      "parameters": {
+        "formTitle": "Employee onboarding form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Country",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "United Kingdom"
+                  },
+                  {
+                    "option": "United States"
+                  },
+                  {
+                    "option": "Australia"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Employee Name"
+            },
+            {
+              "fieldLabel": "Start date",
+              "fieldType": "date"
+            },
+            {
+              "fieldLabel": "Role"
+            },
+            {
+              "fieldLabel": "Employment Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Full-Time"
+                  },
+                  {
+                    "option": "Contractor"
+                  },
+                  {
+                    "option": "Part Time"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -2832,
+        592
+      ],
+      "id": "d02834ca-20dbYOUR_PHONEac-cc273dc5e244",
+      "name": "Employee onboarding form",
+      "webhookId": "32afb914-d7bdYOUR_PHONEc3d1433a8c07"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9d9979fa-084a-4090-8dfYOUR_PHONEf8843f",
+              "name": "Employee Name",
+              "value": "={{ $json['Employee Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "bd6e2d0f-d2aYOUR_PHONEc86b7e4d954",
+              "name": "Country",
+              "value": "={{ $json.Country }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Start Date",
+              "value": "={{ $json['Start date'] }}",
+              "type": "string"
+            },
+            {
+              "id": "edd42ff5-eYOUR_PHONEa22a-5f0d2a14301c",
+              "name": "Role",
+              "value": "={{ $json.Role }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Employment Type",
+              "value": "={{ $json['Employment Type'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2608,
+        592
+      ],
+      "id": "YOUR-UUID",
+      "name": "Standardize Data"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1KT8UB2dY6DdMIBtiqdpjz282_Cy-4BV4VG0jTGuJQnE",
+          "mode": "list",
+          "cachedResultName": "Headcount Tracker",
+          "cachedResultUrl": "https://docs.google.com/YOUR-DOC-LINK"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 127282652,
+          "mode": "list",
+          "cachedResultName": "Headcount",
+          "cachedResultUrl": "https://docs.google.com/YOUR-DOC-LINK"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Country": "={{ $json.Country }}",
+            "Employee Name": "={{ $json['Employee Name'] }}",
+            "Headcount": "1",
+            "Status": "Active",
+            "MoM Change": "1",
+            "Start Date": "={{ $json['Start Date'] }}",
+            "Role": "={{ $json.Role }}",
+            "Employment Type": "={{ $json['Employment Type'] }}"
+          },
+          "matchingColumns": [
+            "HEADCOUNT DETAIL \u2014 APRIL 2026"
+          ],
+          "schema": [
+            {
+              "id": "Country",
+              "displayName": "Country",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Employee Name",
+              "displayName": "Employee Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Headcount",
+              "displayName": "Headcount",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "MoM Change",
+              "displayName": "MoM Change",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Start Date",
+              "displayName": "Start Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Role",
+              "displayName": "Role",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Employment Type",
+              "displayName": "Employment Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -2368,
+        592
+      ],
+      "id": "b48b6d1d-6dYOUR_PHONEa66b-820c8a300f53",
+      "name": "Update Headcount Tracker",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "9d9979fa-084a-4090-8dfYOUR_PHONEf8843f",
+              "name": "Reviewer Name",
+              "value": "Your Name",
+              "type": "string"
+            },
+            {
+              "id": "96cab5e7-cYOUR_PHONEb3ed-dbc14d17b498",
+              "name": "Reviewer Email",
+              "value": "your-email@domain.com",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "Vendor row id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2144,
+        -384
+      ],
+      "id": "9cYOUR_PHONEe6-b6ba-b0be7bcc1fb3",
+      "name": "Configure reviewer's details and get vendor row ID from DB"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "=Decision received. Processing now.",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -2592,
+        -64
+      ],
+      "id": "YOUR-UUID",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b7073a99-5cdd-48f3-9cdaYOUR_PHONEbb34",
+              "name": "status",
+              "value": "={{ $json.query.status }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "vendor notion ID",
+              "value": "={{ $json.query.vendorId }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "vendorName",
+              "value": "={{ $json.query.vendorName }}",
+              "type": "string"
+            },
+            {
+              "id": "cc3f5fYOUR_PHONEbb2d-5a0be8a5c113",
+              "name": "vendorEmail",
+              "value": "={{ $json.query.vendorEmail }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "contactName",
+              "value": "={{ $json.query.contactName }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "currency",
+              "value": "={{ $json.query.currency }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "amount",
+              "value": "={{ $json.query.amount }}",
+              "type": "string"
+            },
+            {
+              "id": "be70f150-f7bYOUR_PHONEb6-9ebff2105a0d",
+              "name": "country",
+              "value": "={{ $json.query.country }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "paymentTerms",
+              "value": "={{ $json.query.paymentTerms }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "taxId",
+              "value": "={{ $json.query.taxId }}",
+              "type": "string"
+            },
+            {
+              "id": "3aeb8314-ecaYOUR_PHONEe-c437e2f8721d",
+              "name": "bankName",
+              "value": "={{ $json.query.bankName }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "accountName",
+              "value": "={{ $json.query.accountName }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "accountNumber/iban",
+              "value": "={{ $json.query.iban }}",
+              "type": "string"
+            },
+            {
+              "id": "af5694eYOUR_PHONEb8e-8a9a-5b553d0daebb",
+              "name": "swift",
+              "value": "={{ $json.query.swift }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2368,
+        -64
+      ],
+      "id": "b26136dfYOUR_PHONEb2abYOUR_PHONEe7f84",
+      "name": "Get valid data"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "YOUR-UUID",
+              "leftValue": "={{ $('Get valid data').item.json.status }}",
+              "rightValue": "Approved",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -1920,
+        -64
+      ],
+      "id": "b4cd4944-5aYOUR_PHONEd74-ca3710ef495f",
+      "name": "Was vendor approved?"
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $input.item.json;\n\nconst invoiceNumber = 'INV-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 90000 + 10000);\nconst invoiceDate = new Date().toISOString().split('T')[0];\nconst dueDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];\n\n// Map from Notion property_ fields\nconst vendorName    = d.property_vendor_name || d.name;\nconst contactName   = d.property_contact_name;\nconst vendorEmail   = d.property_contact_email;\nconst country       = d.property_country;\nconst taxIdYOUR_PHONE= d.property_tax_id_vat_number;\nconst currency      = d.property_currency;\nconst amountYOUR_PHONE= d.property_monthly_invoice_amount;\nconst paymentTerms  = d.property_payment_terms;\nconst bankName      = d.property_bank_name;\nconst accountName   = d.property_account_name;\nconst ibanYOUR_PHONE= d.property_account_number_iban;\nconst swiftYOUR_PHONE= d.property_swift_bic_code;\n\nconst html = `\n<!DOCTYPE html>\n<html>\n<head><meta charset=\"UTF-8\"></head>\n<body style=\"margin:0;padding:0;background:#F0F4F8;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding:40px 0;\">\n<tr><td align=\"center\">\n<table width=\"620\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);\">\n\n  <!-- Header -->\n  <tr>\n    <td style=\"background:#0F1923;padding:32px 40px;\">\n      <p style=\"margin:0 0 4px;font-size:11px;letter-spacing:3px;color:#00C2CB;font-weight:700;text-transform:uppercase;\">Coupa-Ready Invoice</p>\n      <h1 style=\"margin:0;font-size:28px;font-weight:700;color:#fff;\">INVOICE</h1>\n    </td>\n    <td style=\"background:#0F1923;padding:32px 40px;text-align:right;vertical-align:bottom;\">\n      <p style=\"margin:0;font-size:12px;color:#8899A6;\">Invoice No.</p>\n      <p style=\"margin:4px 0 0;font-size:18px;font-weight:700;color:#00C2CB;\">${invoiceNumber}</p>\n    </td>\n  </tr>\n\n  <!-- Meta -->\n  <tr>\n    <td colspan=\"2\" style=\"background:#F8FAFC;padding:16px 40px;border-bottom:1px solid #E2E8F0;\">\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"font-size:11px;color:#8899A6;padding-bottom:4px;\">Issue Date</td>YOUR_PHONE<td style=\"font-size:11px;color:#8899A6;padding-bottom:4px;\">Due Date</td>YOUR_PHONE<td style=\"font-size:11px;color:#8899A6;padding-bottom:4px;\">Payment Terms</td>YOUR_PHONE<td style=\"font-size:11px;color:#8899A6;padding-bottom:4px;\">Status</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"font-size:14px;font-weight:600;color:#0F1923;\">${invoiceDate}</td>YOUR_PHONE<td style=\"font-size:14px;font-weight:600;color:#0F1923;\">${dueDate}</td>YOUR_PHONE<td style=\"font-size:14px;font-weight:600;color:#0F1923;\">${paymentTerms}</td>YOUR_PHONE<td><span style=\"background:#FFF8E1;border:1px solid #FFB800;border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;color:#B45309;\">AWAITING PAYMENT</span></td>YOUR_PHONE</tr>\n      </table>\n    </td>\n  </tr>\n\n  <!-- From / To -->\n  <tr>\n    <td colspan=\"2\" style=\"padding:28px 40px 0;\">\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td width=\"48%\" style=\"vertical-align:top;\">YOUR_PHONE<p style=\"margin:0 0 6px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">From</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:14px;font-weight:700;color:#0F1923;\">${vendorName}</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:13px;color:#374151;\">${contactName}</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:13px;color:#374151;\">${vendorEmail}</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:13px;color:#374151;\">${country}</p>YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#374151;\">Tax ID: ${taxId}</p>YOUR_PHONE</td>YOUR_PHONE<td width=\"4%\"></td>YOUR_PHONE<td width=\"48%\" style=\"vertical-align:top;\">YOUR_PHONE<p style=\"margin:0 0 6px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">Bill To</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:14px;font-weight:700;color:#0F1923;\">Remote Technology Inc.</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:13px;color:#374151;\">International Operations</p>YOUR_PHONE<p style=\"margin:0 0 3px;font-size:13px;color:#374151;\">your-email@domain.com</p>YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#374151;\">Global</p>YOUR_PHONE</td>YOUR_PHONE</tr>\n      </table>\n    </td>\n  </tr>\n\n  <!-- Line Items -->\n  <tr>\n    <td colspan=\"2\" style=\"padding:24px 40px 0;\">\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius:8px;overflow:hidden;border:1px solid #E2E8F0;\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:#0F1923;padding:12px 16px;font-size:11px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase;width:50%;\">Description</td>YOUR_PHONE<td style=\"background:#0F1923;padding:12px 16px;font-size:11px;font-weight:700;color:#fff;text-align:center;\">Qty</td>YOUR_PHONE<td style=\"background:#0F1923;padding:12px 16px;font-size:11px;font-weight:700;color:#fff;text-align:right;\">Unit Price</td>YOUR_PHONE<td style=\"background:#0F1923;padding:12px 16px;font-size:11px;font-weight:700;color:#fff;text-align:right;\">Total</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:14px 16px;font-size:13px;color:#374151;border-bottom:1px solid #E2E8F0;\">Professional Services \u2014 Monthly Retainer</td>YOUR_PHONE<td style=\"padding:14px 16px;font-size:13px;color:#374151;text-align:center;border-bottom:1px solid #E2E8F0;\">1</td>YOUR_PHONE<td style=\"padding:14px 16px;font-size:13px;color:#374151;text-align:right;border-bottom:1px solid #E2E8F0;\">${currency} ${Number(amount).toLocaleString()}</td>YOUR_PHONE<td style=\"padding:14px 16px;font-size:13px;font-weight:600;color:#0F1923;text-align:right;border-bottom:1px solid #E2E8F0;\">${currency} ${Number(amount).toLocaleString()}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td colspan=\"3\" style=\"padding:14px 16px;font-size:13px;font-weight:700;color:#0F1923;text-align:right;background:#F8FAFC;\">TOTAL DUE</td>YOUR_PHONE<td style=\"padding:14px 16px;font-size:16px;font-weight:700;color:#00C2CB;text-align:right;background:#F8FAFC;\">${currency} ${Number(amount).toLocaleString()}</td>YOUR_PHONE</tr>\n      </table>\n    </td>\n  </tr>\n\n  <!-- Banking -->\n  <tr>\n    <td colspan=\"2\" style=\"padding:24px 40px 0;\">\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;\">YOUR_PHONE<tr><td style=\"padding:16px 20px 4px;\"><p style=\"margin:0 0 12px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">Banking Details</p></td></tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:0 20px 16px;\">YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:5px 0;font-size:12px;color:#8899A6;width:35%;\">Bank Name</td>YOUR_PHONE<td style=\"padding:5px 0;font-size:13px;color:#0F1923;font-weight:600;\">${bankName}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:5px 0;font-size:12px;color:#8899A6;\">Account Name</td>YOUR_PHONE<td style=\"padding:5px 0;font-size:13px;color:#0F1923;font-weight:600;\">${accountName}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:5px 0;font-size:12px;color:#8899A6;\">IBAN</td>YOUR_PHONE<td style=\"padding:5px 0;font-size:13px;color:#0F1923;font-weight:600;\">${iban}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:5px 0;font-size:12px;color:#8899A6;\">SWIFT / BIC</td>YOUR_PHONE<td style=\"padding:5px 0;font-size:13px;color:#0F1923;font-weight:600;\">${swift}</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE</td>YOUR_PHONE</tr>\n      </table>\n    </td>\n  </tr>\n\n  <!-- Footer -->\n  <tr>\n    <td colspan=\"2\" style=\"padding:20px 40px 32px;\">\n      <p style=\"margin:0;font-size:12px;color:#8899A6;line-height:1.6;font-style:italic;\">YOUR_PHONEThis invoice was generated automatically via Remote's vendor onboarding system and is formatted to Coupa invoice standards. Please retain for your records. For queries contact <a href=\"mailto:your-email@domain.com\" style=\"color:#00C2CB;\">your-email@domain.com</a>.\n      </p>\n    </td>\n  </tr>\n\n  <tr><td colspan=\"2\" style=\"background:linear-gradient(90deg,#0F1923 0%,#00C2CB 100%);height:4px;\"></td></tr>\n\n</table>\n</td></tr>\n</table>\n</body>\n</html>`;\n\nreturn [{ json: {\n  invoiceHtml: html,\n  invoiceNumber,\n  invoiceDate,\n  dueDate,\n  vendorEmail,\n  vendorName,\n  contactName,\n  subject: `Invoice ${invoiceNumber} \u2014 ${vendorName} \u2014 Vendor Onboarding Approved`\n}}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -1696,
+        -80
+      ],
+      "id": "YOUR-UUID",
+      "name": "Build invoice HTML template"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.html2pdf.app/v1/generate",
+        "sendBody": true,
+        "specifyBody": "=keypair",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "html",
+              "value": "={{ $json.invoiceHtml }}"
+            },
+            {
+              "name": "apiKey",
+              "value": "Your_API_key"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -1472,
+        -80
+      ],
+      "id": "YOUR-UUID",
+      "name": "Convert html to pdf"
+    },
+    {
+      "parameters": {
+        "name": "={{ $('Convert html to pdf').item.json.invoiceNumber }}_{{ $('Was vendor approved?').item.json.name }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "1ucrJpuNT31JgZ6clIcbxLWgEDKILNBHz",
+          "mode": "list",
+          "cachedResultName": "Vector invoices | Project",
+          "cachedResultUrl": "https://drive.google.com/YOUR-DRIVE-LINK"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -1216,
+        48
+      ],
+      "id": "fb845b3e-24dYOUR_PHONEaYOUR_PHONEdb5f78",
+      "name": "Upload invoice in drive",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Google Drive OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Was vendor approved?').item.json.property_contact_email }}",
+        "subject": "=Your Vendor Application is Approved \u2014 Invoice Attached | {{ $('Build invoice HTML template').item.json.invoiceNumber }}",
+        "message": "=<!DOCTYPE html>\n<html>\n<head><meta charset=\"UTF-8\"></head>\n<body style=\"margin:0;padding:0;background:#F0F4F8;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\">\n<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"padding:40px 0;\">\n<tr><td align=\"center\">\n<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);\">\n\n  <!-- Header -->\n  <tr>\n    <td style=\"background:#0F1923;padding:36px 40px 28px;\">\n      <p style=\"margin:0 0 6px;font-size:11px;letter-spacing:3px;color:#00C2CB;font-weight:700;text-transform:uppercase;\">Vendor Onboarding</p>\n      <h1 style=\"margin:0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.3;\">Your Application Has<br>Been Approved \u2705</h1>\n    </td>\n  </tr>\n\n  <!-- Green banner -->\n  <tr>\n    <td style=\"background:#F0FDF4;border-left:4px solid #00C48C;padding:16px 40px;\">\n      <p style=\"margin:0;font-size:13px;color:#166534;font-weight:600;\">YOUR_PHONE\ud83c\udf89 Congratulations \u2014 your vendor onboarding application has been reviewed and approved by our International Operations team.\n      </p>\n    </td>\n  </tr>\n\n  <!-- Body -->\n  <tr>\n    <td style=\"padding:36px 40px 0;\">\n      <p style=\"margin:0 0 16px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEHi <strong>{{ $('Was vendor approved?').item.json.property_contact_name }}</strong>,\n      </p>\n      <p style=\"margin:0 0 24px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEWe are pleased to confirm that <strong>{{ $('Was vendor approved?').item.json.property_vendor_name }}</strong> has been successfully onboarded as an approved vendor with Remote's International Operations team.\n      </p>YOUR_PHONE<!-- Summary box -->\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#F8FAFC;border-radius:8px;border:1px solid #E2E8F0;margin-bottom:28px;\">YOUR_PHONE<tr><td style=\"padding:20px 24px 4px;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:11px;letter-spacing:2px;color:#8899A6;font-weight:700;text-transform:uppercase;\">Approval Summary</p>YOUR_PHONE</td></tr>YOUR_PHONE<tr><td style=\"padding:0 24px 20px;\">YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;width:45%;\">Company</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Was vendor approved?').item.json.property_vendor_name }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Country</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Was vendor approved?').item.json.property_country }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Invoice Number</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Build invoice HTML template').item.json.invoiceNumber }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#8899A6;\">Invoice Amount</td>YOUR_PHONE<td style=\"padding:8px 0;border-bottom:1px solid #E2E8F0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Was vendor approved?').item.json.property_currency }} {{ $('Was vendor approved?').item.json.property_monthly_invoice_amount }}</td>YOUR_PHONE</tr>YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#8899A6;\">Payment Terms</td>YOUR_PHONE<td style=\"padding:8px 0;font-size:13px;color:#0F1923;font-weight:600;\">{{ $('Was vendor approved?').item.json.property_payment_terms }}</td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE</td></tr>\n      </table>YOUR_PHONE<!-- Next steps -->\n      <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#EFF6FF;border-radius:8px;border:1px solid #BFDBFE;margin-bottom:28px;\">YOUR_PHONE<tr><td style=\"padding:20px 24px;\">YOUR_PHONE<p style=\"margin:0 0 10px;font-size:13px;font-weight:700;color:#1E40AF;\">Next Steps</p>YOUR_PHONE<p style=\"margin:0 0 6px;font-size:13px;color:#1D4ED8;line-height:1.6;\">1. Review the invoice attached to this email</p>YOUR_PHONE<p style=\"margin:0 0 6px;font-size:13px;color:#1D4ED8;line-height:1.6;\">2. Sign the invoice and return it to <strong>your-email@domain.com</strong></p>YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#1D4ED8;line-height:1.6;\">3. Payment will be processed according to your agreed terms ({{ $('Was vendor approved?').item.json.property_payment_terms }})</p>YOUR_PHONE</td></tr>\n      </table>YOUR_PHONE<p style=\"margin:0 0 32px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEIf you have any questions about the invoice or onboarding process, please reply directly to this email and our team will assist you promptly.\n      </p>\n    </td>\n  </tr>\n\n  <tr><td style=\"padding:0 40px;\"><hr style=\"border:none;border-top:1px solid #E2E8F0;margin:0;\"></td></tr>\n\n  <tr>\n    <td style=\"padding:24px 40px 36px;\">\n      <p style=\"margin:0 0 4px;font-size:14px;color:#374151;font-weight:600;\">International Operations Team</p>\n      <p style=\"margin:0;font-size:13px;color:#8899A6;\">Remote \u00b7 Global Employment Platform</p>\n    </td>\n  </tr>\n\n  <tr><td style=\"background:linear-gradient(90deg,#0F1923 0%,#00C2CB 100%);height:4px;\"></td></tr>\n\n</table>\n</td></tr>\n</table>\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {}
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -1232,
+        -176
+      ],
+      "id": "YOUR-UUID",
+      "name": "Send invoice to vendor",
+      "webhookId": "YOUR-UUID",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "YOUR-UUID",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2816,
+        -64
+      ],
+      "id": "YOUR-UUID",
+      "name": "Listen for vendor's approval",
+      "webhookId": "YOUR-UUID"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $json['vendor notion ID'] }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Status|select",
+              "selectValue": "={{ $json.status }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -2144,
+        -64
+      ],
+      "id": "YOUR-UUID",
+      "name": "Update vendor status in DB to Approve ",
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "YOUR-UUID",
+              "name": "vendor notion ID",
+              "value": "={{ $json.body.data.fields.find(f => f.label === 'vendorId').value }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "vendorName",
+              "value": "={{ $json.body.data.fields.find(f => f.label === 'vendorName').value }}",
+              "type": "string"
+            },
+            {
+              "id": "cc3f5fYOUR_PHONEbb2d-5a0be8a5c113",
+              "name": "vendorEmail",
+              "value": "={{ $json.body.data.fields[2].value }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "contactName",
+              "value": "={{ $json.body.data.fields[3].value }}",
+              "type": "string"
+            },
+            {
+              "id": "YOUR-UUID",
+              "name": "rejectionReason",
+              "value": "={{ $json.body.data.fields.find(f => f.label === 'Rejection Reason').options.find(o => o.id === $json.body.data.fields.find(f => f.label === 'Rejection Reason').value[0]).text }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -2368,
+        288
+      ],
+      "id": "YOUR-UUID",
+      "name": "Get data"
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "update",
+        "pageId": {
+          "__rl": true,
+          "value": "={{ $('Get data').item.json['vendor notion ID'] }}",
+          "mode": "id"
+        },
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "key": "Status|select",
+              "selectValue": "=Rejected"
+            },
+            {
+              "key": "Vendor rejection reason|select",
+              "selectValue": "={{ $('Get data').item.json.rejectionReason }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 2.2,
+      "position": [
+        -1920,
+        288
+      ],
+      "id": "YOUR-UUID",
+      "name": "Update vendor status in DB to Rejected",
+      "credentials": {
+        "notionApi": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Notion account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "YOUR-UUID",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -2816,
+        288
+      ],
+      "id": "YOUR-UUID",
+      "name": "Listen for rejection",
+      "webhookId": "YOUR-UUID"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -2592,
+        288
+      ],
+      "id": "72d68ed8-0c3dYOUR_PHONEbd2232adbb",
+      "name": "Respond"
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $input.first().json;\n\nconst messages = {\n  \"Incomplete documentation\": \"After reviewing your submission, we are unable to proceed at this time as your application was missing required documentation. This may include tax identification records, business registration certificates, or banking details. Please review your submission, ensure all required documents are complete and accurate, and resubmit your application.\",\n  \"Failed compliance check\": \"After a thorough review, your application did not meet our current compliance requirements. Remote maintains strict compliance standards across all international vendor engagements to ensure regulatory alignment. If you believe this decision was made in error or would like further clarification, our compliance team will be happy to discuss next steps.\",\n  \"Duplicate vendor record\": \"Our records indicate that a vendor profile already exists for your organisation in our system. Duplicate vendor records cannot be processed to maintain the integrity of our vendor database. If you believe this is an error or your previous record requires updating, please reply and we will assist you directly.\",\n  \"Outside service scope\": \"After reviewing your application, we have determined that the services described fall outside the current scope of what Remote's International Operations team is procuring at this time. This decision is not a reflection of your organisation's capabilities. We will retain your details and may reach out should our requirements change.\",\n  \"NDA not on file\": \"Your application cannot be processed at this time as we do not have a signed Non-Disclosure Agreement on file for your organisation. An NDA is required before vendor onboarding can be completed. Please reply to request an NDA or attach a signed copy if you already have one.\"\n};\n\nconst reason = d.rejectionReason;\n\nreturn [{ json: {\n  rejectionMessage: messages[reason],\n  rejectionReason: reason\n}}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -2144,
+        288
+      ],
+      "id": "YOUR-UUID",
+      "name": "Get rejection message",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get data').item.json.vendorEmail }}",
+        "subject": "Your application status update",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n<title>Vendor Application Update</title>\n</head>\n<body style=\"margin:0;padding:0;background-color:#F0F4F8;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#F0F4F8;padding:40px 0;\">\n    <tr>\n      <td align=\"center\">YOUR_PHONE<table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);\">YOUR_PHONE<!-- Header -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background-color:#0F1923;padding:36px 40px 28px;\">YOUR_PHONE<p style=\"margin:0 0 6px 0;font-size:11px;letter-spacing:3px;color:#00C2CB;font-weight:700;text-transform:uppercase;\">Vendor Onboarding</p>YOUR_PHONE<h1 style=\"margin:0;font-size:24px;font-weight:700;color:#ffffff;line-height:1.3;\">Application Status Update</h1>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Red banner -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:#FFF5F5;border-left:4px solid #FF4D4D;padding:16px 40px;\">YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#9B1C1C;font-weight:600;\">YOUR_PHONE\ud83d\udccb We have reviewed your vendor onboarding application and have an update regarding your submission.YOUR_PHONE</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Body -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:36px 40px 0;\">YOUR_PHONE<p style=\"margin:0 0 16px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEHi <strong>{{ $('Get data').item.json.contactName }}</strong>,YOUR_PHONE</p>YOUR_PHONE<p style=\"margin:0 0 24px;font-size:15px;color:#374151;line-height:1.7;\">YOUR_PHONEThank you for your interest in becoming a vendor with <strong>Remote's International Operations</strong> team. We appreciate the time you took to submit your onboarding application for <strong>{{ $('Get data').item.json.vendorName }}</strong>.YOUR_PHONE</p>YOUR_PHONE<!-- Rejection message -->YOUR_PHONE<p style=\"margin:0 0 24px;font-size:15px;color:#374151;line-height:1.8;\">YOUR_PHONE{{ $('Get rejection message').item.json.rejectionMessage }}YOUR_PHONE</p>YOUR_PHONE<!-- Divider -->YOUR_PHONE<table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:24px;\">YOUR_PHONE<tr><td style=\"border-top:1px solid #E2E8F0;\"></td></tr>YOUR_PHONE</table>YOUR_PHONE<p style=\"margin:0 0 32px;font-size:14px;color:#6B7280;line-height:1.7;\">YOUR_PHONEIf you have questions about this decision or would like to discuss your application further, please send a mail to your-email@domain.com and a member of our International Operations team will get back to you within 2 business days.YOUR_PHONE</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Divider -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:0 40px;\">YOUR_PHONE<hr style=\"border:none;border-top:1px solid #E2E8F0;margin:0;\">YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Footer -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"padding:24px 40px 36px;\">YOUR_PHONE<p style=\"margin:0 0 4px;font-size:14px;color:#374151;font-weight:600;\">International Operations Team</p>YOUR_PHONE<p style=\"margin:0;font-size:13px;color:#8899A6;\">Remote \u00b7 Global Employment Platform</p>YOUR_PHONE</td>YOUR_PHONE</tr>YOUR_PHONE<!-- Bottom accent bar -->YOUR_PHONE<tr>YOUR_PHONE<td style=\"background:linear-gradient(90deg,#0F1923 0%,#00C2CB 100%);height:4px;\"></td>YOUR_PHONE</tr>YOUR_PHONE</table>YOUR_PHONE<p style=\"margin:20px 0 0;font-size:11px;color:#8899A6;text-align:center;\">YOUR_PHONEThis is an automated message from Remote's vendor onboarding system.YOUR_PHONE</p>YOUR_PHONE</td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -1696,
+        288
+      ],
+      "id": "ee2e3451-fbYOUR_PHONEb242-120b8ac3c829",
+      "name": "Send a message",
+      "webhookId": "43d33298-fb61-4bdYOUR_PHONEb5d1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR-CREDENTIAL-ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Vendor onboarding and reviewer's flow",
+        "height": 288,
+        "width": 1440,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2896,
+        -496
+      ],
+      "typeVersion": 1,
+      "id": "f34321b5-eYOUR_PHONEafbb-c44e679ed020",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Reviewer's approval and invoice processing flow",
+        "height": 384,
+        "width": 1904
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2896,
+        -192
+      ],
+      "typeVersion": 1,
+      "id": "46fe30ef-209d-4aYOUR_PHONEd197472c300",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Vendor rejection flow",
+        "height": 272,
+        "width": 1456,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2896,
+        208
+      ],
+      "typeVersion": 1,
+      "id": "3a0adYOUR_PHONEa7e8-48e2f05fdf0c",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "## Employee onboarding and headcountflow ",
+        "height": 288,
+        "width": 832,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2896,
+        496
+      ],
+      "typeVersion": 1,
+      "id": "YOUR-UUID",
+      "name": "Sticky Note3"
+    }
+  ],
+  "pinData": {
+    "Vendor onboarding form": [
+      {
+        "json": {
+          "Vendor / Company Legal Name": "Sample Vendor Ltd",
+          "Country of Registration ": "UK",
+          "Business Type": "LLC",
+          "Tax ID / VAT Number": "GBYOUR_PHONE",
+          "Business Registration Number ": "12345",
+          "Primary Contact Name": "Your Name",
+          "Primary Contact Email ": "your-email@domain.com",
+          "Primary Contact Phone": 8142467784,
+          "Business Website": "https://www.sample-vendor-website.com",
+          "Bank Name": "Sample Bank",
+          "Account Name": "Sample Vendor Ltd",
+          "Account Number / IBAN": 2920201530093459,
+          "SWIFT / BIC Code": "XXXXXXXX",
+          "Currency": "EUR",
+          "Service / Product Description": "HR compliance advisory and contractor classification support for international operations across EMEA markets",
+          "Estimated Monthly Invoice Amount ": 4500,
+          "Preferred Payment Terms": "Net 30",
+          "Do you have a signed NDA on file?": "Yes",
+          "Additional Notes": "",
+          "submittedAt": "YOUR_PHONET15:01:08.037+01:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ],
+    "Employee onboarding form": [
+      {
+        "json": {
+          "Country": "United Kingdom",
+          "Employee Name": "Bubu John",
+          "Start date": "YOUR_PHONE",
+          "Role": "Automation Engineer",
+          "Employment Type": "Full-Time",
+          "submittedAt": "YOUR_PHONET20:46:15.422+01:00",
+          "formMode": "test"
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Standardize data": {
+      "main": [
+        [
+          {
+            "node": "Update row in DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update row in DB": {
+      "main": [
+        [
+          {
+            "node": "Configure reviewer's details and get vendor row ID from DB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Acknowledge vendors form": {
+      "main": [
+        [
+          {
+            "node": "Send email to reviewer to review vendors details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send email to reviewer to review vendors details": {
+      "main": [
+        []
+      ]
+    },
+    "Vendor onboarding form": {
+      "main": [
+        [
+          {
+            "node": "Standardize data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Employee onboarding form": {
+      "main": [
+        [
+          {
+            "node": "Standardize Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Standardize Data": {
+      "main": [
+        [
+          {
+            "node": "Update Headcount Tracker",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Configure reviewer's details and get vendor row ID from DB": {
+      "main": [
+        [
+          {
+            "node": "Acknowledge vendors form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get valid data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get valid data": {
+      "main": [
+        [
+          {
+            "node": "Update vendor status in DB to Approve ",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Was vendor approved?": {
+      "main": [
+        [
+          {
+            "node": "Build invoice HTML template",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build invoice HTML template": {
+      "main": [
+        [
+          {
+            "node": "Convert html to pdf",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert html to pdf": {
+      "main": [
+        [
+          {
+            "node": "Send invoice to vendor",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Upload invoice in drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload invoice in drive": {
+      "main": [
+        []
+      ]
+    },
+    "Send invoice to vendor": {
+      "main": [
+        []
+      ]
+    },
+    "Listen for vendor's approval": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update vendor status in DB to Approve ": {
+      "main": [
+        [
+          {
+            "node": "Was vendor approved?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get data": {
+      "main": [
+        [
+          {
+            "node": "Get rejection message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update vendor status in DB to Rejected": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listen for rejection": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond": {
+      "main": [
+        [
+          {
+            "node": "Get data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get rejection message": {
+      "main": [
+        [
+          {
+            "node": "Update vendor status in DB to Rejected",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "251a8070-e964-4c5c-a97aYOUR_PHONEc52e8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "YOUR-INSTANCE-ID"
+  },
+  "id": "k7ZJZPpcQuqdYLX9",
+  "tags": []
+}
