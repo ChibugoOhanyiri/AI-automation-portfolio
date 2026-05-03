@@ -8,7 +8,7 @@
 
 ## Preview
 
-### Email Brief — Desktop
+### Email Brief | Desktop
 
 
 <img width="1667" height="721" alt="Screenshot 2026-05-03 151347" src="https://github.com/user-attachments/assets/71f2c17c-3a0c-4c8d-911e-35d774d9b9e9" />
@@ -22,9 +22,15 @@
 <img width="1663" height="694" alt="image" src="https://github.com/user-attachments/assets/bc96b807-8d1a-47b6-8236-b4c302d89f4a" />
 
 
-### Email Brief — Mobile
+### Email Brief | Mobile
 
 <img width="512" height="754" alt="Screenshot 2026-05-03 133035" src="https://github.com/user-attachments/assets/957c4e92-0339-4d98-8651-66e45d5dd8bc" />
+
+
+### Google Meet Calendar (Scheduled Events)
+
+<img width="1427" height="563" alt="Screenshot 2026-05-03 164035" src="https://github.com/user-attachments/assets/ae6e7b77-411e-4fa0-b423-886ae7745326" />
+
 
 
 ## Table of Contents
@@ -119,7 +125,7 @@ Switch — Classify by meeting type
 
 ## Workflow Groups
 
-The canvas is organised into 7 labelled sticky note groups:
+The canvas is organized into 7 labeled sticky note groups:
 
 | Group | Nodes | Purpose |
 |---|---|---|
@@ -154,13 +160,13 @@ The canvas is organised into 7 labelled sticky note groups:
 | No meetings tomorrow | Sends a "no meetings today" notification email. No empty brief generated. |
 | All-day events | Filtered out by checking for the absence of `dateTime` on the start field. |
 | Non-meeting events | Filtered by keywords: focus, block, lunch, ooo, hold, reminder, break. |
-| Only the organiser on the invite | Filtered out after removing the organiser from the attendee list. |
-| Attendee not in HubSpot | Brief proceeds with available context. HubSpot section is omitted cleanly. |
+| Only the organizer on the invite | Filtered out after removing the organizer from the attendee list. |
+| Attendee not in HubSpot | Brief proceeds with available context. The HubSpot section is omitted. |
 | No deal associated with contact | Returns `{ note: 'No active deal found' }`. Claude omits the deal section. |
 | No Fyxer summary available | Returns `null`. Claude omits the last meeting section. |
 | No ClickUp tasks found | Returns `noTasksFound: true`. Claude omits the tasks section. |
-| Null or missing data in any field | Handled by `safe()` helper in prompt code. Returns empty string, never crashes. |
-| Recurring meeting | `isRecurring: true` is stamped and passed to Claude. System prompt instructs Claude to focus on what has changed, not background context. |
+| Null or missing data in any field | Handled by `safe()` helper in prompt code. Returns an empty string, never crashes. |
+| Recurring meeting | `isRecurring: true` is stamped and passed to Claude. System prompt instructs Claude to focus on what has changed, not the background context. |
 | Group meeting (2+ external attendees) | Each attendee is split into a separate item, enriched individually, then recombined into one group brief. |
 
 ---
@@ -226,11 +232,11 @@ subcontractor, before joint sign-off.
 - Apify account (for production LinkedIn enrichment)
 - Fyxer account (for production meeting summaries)
 
-### Step 1 — Import the workflow
+### Step 1: Import the workflow
 
 In n8n: **Settings → Import Workflow** → upload `Calendar_and_Meeting_Prep_Workflow_Main.json`
 
-### Step 2 — Configure credentials
+### Step 2: Configure credentials
 
 | Credential name in n8n | Type | Used by |
 |---|---|---|
@@ -240,7 +246,7 @@ In n8n: **Settings → Import Workflow** → upload `Calendar_and_Meeting_Prep_W
 | HubSpot Private App Token | HTTP Header Auth (Authorization: Bearer) | Get HubSpot Contact record, Get deal stage and info |
 | Anthropic API Key | HTTP Header Auth (x-api-key) | Claude generates brief |
 
-### Step 3 — Update configuration constants
+### Step 3: Update configuration constants
 
 In the **Filter Real Meeting** code node, update:
 
@@ -255,12 +261,12 @@ In the **Let founder know that there are no meetings** Gmail node:
 In the **Send a message** Gmail node:
 - Set `sendTo` to founder's email address
 
-### Step 4 — Configure ClickUp
+### Step 4: Configure ClickUp
 
 In **Get many tasks** and **Get all task on ClickUp** nodes:
 - Set team, space, folder, and list to match the team's ClickUp workspace
 
-### Step 5 — Replace simulations with live integrations
+### Step 5: Replace simulations with live integrations
 
 | Node to replace | Production implementation |
 |---|---|
@@ -268,7 +274,7 @@ In **Get many tasks** and **Get all task on ClickUp** nodes:
 | Get last 3 email threads simulation | Gmail Get Many Threads filtered by participant email |
 | LinkedIn lookup API simulation via Apify | HTTP POST to Apify actor with LinkedIn URL from HubSpot contact |
 
-### Step 6 — Activate the Schedule Trigger
+### Step 6: Activate the Schedule Trigger
 
 The Schedule Trigger is included but deactivated. Set the cron expression for your desired run time (e.g. 10 PM daily) and activate it.
 
@@ -276,13 +282,13 @@ The Schedule Trigger is included but deactivated. Set the cron expression for yo
 
 ## Mock vs Live Integrations
 
-This build was constructed without access to the live company's accounts. The architecture, routing, data matching, and AI generation are all production-ready. The following are simulated:
+This build was created without access to the company's live accounts. The architecture, routing, data matching, and AI generation are all production-ready. The following are simulated:
 
-**Gmail threads** — Simulated because Gmail thread search requires access to founder's mailbox. The mock data reflects realistic email history with the demo contacts.
+**Gmail threads**: Simulated because Gmail thread search requires access to the founder's mailbox. The mock data reflects a realistic email history with the demo contacts.
 
-**Fyxer summaries** — Simulated using real anonymised transcripts from Fyxer sessions provided in the task materials. The data was adapted to fit the mock contacts and reflects the expected Fyxer API response schema.
+**Fyxer summaries**: Simulated using real anonymized transcripts from Fyxer sessions provided in the task materials. The data was adapted to fit the mock contacts and reflects the expected Fyxer API response schema.
 
-**LinkedIn via Apify** — Simulated because there are no real LinkedIn profiles for the mock contacts. The Apify integration path is fully documented and production-ready.
+**LinkedIn via Apify**: Simulated because there are no real LinkedIn profiles for the mock contacts. The Apify integration path is fully documented and production-ready.
 
 ---
 
@@ -290,17 +296,17 @@ This build was constructed without access to the live company's accounts. The ar
 
 ### Why n8n over Make or Zapier
 
-n8n was selected because it provides native JavaScript Code nodes, which this workflow requires for complex data matching (HubSpot contact to deal by ID with name fallback), null safety, and structured prompt assembly. Make and Zapier do not provide this level of scripting capability without external dependencies.
+n8n was selected because it provides native JavaScript Code nodes, which this workflow requires for complex data matching (mapping a HubSpot contact to a deal by ID, with a name fallback), null safety, and structured prompt assembly. Make and Zapier do not provide this level of scripting capability without external dependencies.
 
 ### Why a deterministic pipeline, not an AI agent
 
 An agent-based approach would use an LLM to decide at runtime which APIs to call and in what order. This is the wrong choice for this workflow for three reasons:
 
-1. **The data sources are fixed.** Every meeting needs the same five context sources. There is no decision to make.
-2. **Cost.** Agents make multiple LLM calls per step. This workflow runs every day. The compounded cost is significantly higher than one structured Claude call.
+1. **The data sources are fixed.** Every meeting needs the same five sources of context. There is no decision to make.
+2. **Cost.** Agents make multiple LLM calls per step. This workflow runs every day. The compounded cost is significantly higher than a structured Claude call.
 3. **Reliability.** Agents introduce non-determinism. A daily briefing system must behave consistently on every run.
 
-The correct use of AI here is at the final step: synthesising pre-assembled, structured context into natural, readable language. Everything before that step is deterministic code.
+The correct use of AI here is at the final step: synthesizing pre-assembled, structured context into natural, readable language. Everything before that step is deterministic code.
 
 ### Why one Claude call for all meetings
 
@@ -308,13 +314,15 @@ Rather than one Claude call per meeting route, all context is assembled into a s
 
 ### How LinkedIn is solved
 
-LinkedIn does not offer a public API for profile or post data. The Apify LinkedIn Profile Scraper retrieves public profile data using a maintained cloud actor without requiring LinkedIn API access. In production, the attendee's LinkedIn URL (stored as a custom property in HubSpot) is passed to Apify, which returns headline and recent posts. This data is then included in the Claude prompt.
+LinkedIn does not offer a public API for profile or post data. The Apify LinkedIn Profile Scraper retrieves public profile data using a maintained cloud actor without requiring LinkedIn API access. In production, the attendee's LinkedIn URL (stored as a custom property in HubSpot) is passed to Apify, which returns the headline and recent posts. This data is then included in the Claude prompt.
 
 ---
 
 ## HubSpot Integration
 
 <img width="1919" height="807" alt="Screenshot 2026-05-03 153022" src="https://github.com/user-attachments/assets/83489649-be63-4a06-a376-59901c3d2619" />
+
+---
 
 
 <img width="1872" height="811" alt="Screenshot 2026-05-03 152959" src="https://github.com/user-attachments/assets/7e79b899-f491-4259-acdb-c4741e464257" />
@@ -329,6 +337,8 @@ LinkedIn does not offer a public API for profile or post data. The Apify LinkedI
 <img width="1912" height="776" alt="Screenshot 2026-05-03 153150" src="https://github.com/user-attachments/assets/63ace69c-ae3e-4cd5-aa9c-8334ddc02891" />
 
 
+---
+
 
 
 <img width="1901" height="755" alt="Screenshot 2026-05-03 153131" src="https://github.com/user-attachments/assets/cf6a6363-cbb6-4a89-b300-f6d284990362" />
@@ -338,25 +348,12 @@ LinkedIn does not offer a public API for profile or post data. The Apify LinkedI
 
 **Immediate (with account access)**
 - Replace Gmail simulation with live Gmail API thread search by participant email
-- Replace Fyxer simulation with live Fyxer API call
+- Replace Fyxer simulation with a live Fyxer API call
 - Replace LinkedIn simulation with live Apify calls using LinkedIn URLs from HubSpot
 - Activate Schedule Trigger and confirm delivery timing
 
 ---
 
-## Cost Estimate
-
-| Component | Monthly cost |
-|---|---|
-| n8n Cloud | Free tier or $20/month |
-| Claude API (claude-sonnet-4, ~10 meetings/day) | Under $5/month |
-| Apify LinkedIn scraping (production) | $15/month |
-| HubSpot, ClickUp, Google Workspace, Fyxer | Existing subscriptions |
-| **Total additional cost** | **$20–$40/month** |
-
-Time saved: 20–30 minutes of manual prep per day across 4–10 meetings.
-
----
 
 ## File Structure
 
