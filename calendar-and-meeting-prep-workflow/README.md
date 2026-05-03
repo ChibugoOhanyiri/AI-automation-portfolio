@@ -9,14 +9,23 @@
 ## Preview
 
 ### Email Brief — Desktop
-<img width="1747" height="628" alt="Screenshot 2026-05-03 093947" src="https://github.com/user-attachments/assets/ae20f531-2356-44f5-8b84-e6f2c6be5266" />
+
+
+<img width="1667" height="721" alt="Screenshot 2026-05-03 151347" src="https://github.com/user-attachments/assets/71f2c17c-3a0c-4c8d-911e-35d774d9b9e9" />
+
+
+
+
+
+
 
 <img width="1663" height="694" alt="image" src="https://github.com/user-attachments/assets/bc96b807-8d1a-47b6-8236-b4c302d89f4a" />
 
 
 ### Email Brief — Mobile
 
-<img width="1747" height="628" alt="Screenshot 2026-05-03 093947" src="https://github.com/user-attachments/assets/7206ed35-08da-40a5-8e17-c5d4455d4991" />
+<img width="512" height="754" alt="Screenshot 2026-05-03 133035" src="https://github.com/user-attachments/assets/957c4e92-0339-4d98-8651-66e45d5dd8bc" />
+
 
 ## Table of Contents
 
@@ -101,7 +110,7 @@ Switch — Classify by meeting type
       Parse + Format HTML email
             │
             ▼
-      Gmail → Landon's inbox
+      Gmail → founder's inbox
 ```
 
 **Architecture type:** Deterministic pipeline with a single AI inference step. Not agent-based — see [Key Architecture Decisions](#key-architecture-decisions) for the reasoning.
@@ -305,10 +314,11 @@ LinkedIn does not offer a public API for profile or post data. The Apify LinkedI
 
 ## HubSpot Integration
 
-<img width="1747" height="628" alt="Screenshot 2026-05-03 093947" src="https://github.com/user-attachments/assets/6e8d4aa7-7a39-4500-ba1b-2cbf7721f67b" />
+<img width="1919" height="807" alt="Screenshot 2026-05-03 153022" src="https://github.com/user-attachments/assets/83489649-be63-4a06-a376-59901c3d2619" />
 
 
-<img width="1747" height="628" alt="Screenshot 2026-05-03 093947" src="https://github.com/user-attachments/assets/acdabef4-f0d1-414d-82f0-dfb0095eb973" />
+<img width="1872" height="811" alt="Screenshot 2026-05-03 152959" src="https://github.com/user-attachments/assets/7e79b899-f491-4259-acdb-c4741e464257" />
+
 
 
 
@@ -317,6 +327,8 @@ LinkedIn does not offer a public API for profile or post data. The Apify LinkedI
 ## ClickUp Integration
 
 <img width="1912" height="776" alt="Screenshot 2026-05-03 153150" src="https://github.com/user-attachments/assets/63ace69c-ae3e-4cd5-aa9c-8334ddc02891" />
+
+
 
 
 <img width="1901" height="755" alt="Screenshot 2026-05-03 153131" src="https://github.com/user-attachments/assets/cf6a6363-cbb6-4a89-b300-f6d284990362" />
