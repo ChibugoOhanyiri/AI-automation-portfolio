@@ -1,0 +1,599 @@
+{
+  "name": "CRM intelligence system",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Data Form",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "First Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Last Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Job Title",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Company Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email ",
+              "fieldType": "email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "How did you hear about us?",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Cold Outreach"
+                  },
+                  {
+                    "option": "LinkedIn"
+                  },
+                  {
+                    "option": "Referral"
+                  },
+                  {
+                    "option": "Website"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "What challenge are you facing? ",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Operations Strategy"
+                  },
+                  {
+                    "option": "Growth Advisory"
+                  },
+                  {
+                    "option": "Process Automation"
+                  },
+                  {
+                    "option": "Team Structure"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.5,
+      "position": [
+        -528,
+        -144
+      ],
+      "id": "fcce08fa-0962-44b7-8eb7-d5dcdf5ebbcf",
+      "name": "On form submission",
+      "webhookId": "3daa6ef2-e412-4cc7-8175-fd7824a91f0f"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b8c65073-9a94-484b-a846-0713b0fbefe2",
+              "name": "First Name",
+              "value": "={{ $json['First Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "ce231d52-c873-4a86-989b-7e41825fa9b6",
+              "name": "Last Name",
+              "value": "={{ $json['Last Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f333c685-b12b-411f-8847-f85c8e33bf6f",
+              "name": "Job Title",
+              "value": "={{ $json['Job Title'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f12b5eff-006f-4dd5-bfc7-2e8063115ee2",
+              "name": "Company Name",
+              "value": "={{ $json['Company Name'] }}",
+              "type": "string"
+            },
+            {
+              "id": "a0e96c8d-8d84-401c-9c22-9a71cb7ab69e",
+              "name": "Email ",
+              "value": "={{ $json['Email '] }}",
+              "type": "string"
+            },
+            {
+              "id": "cbcef549-8b0e-4c5d-9a74-6ee917803f3d",
+              "name": "How did you hear about us?",
+              "value": "={{ $json['How did you hear about us?'] }}",
+              "type": "string"
+            },
+            {
+              "id": "6dfe635d-8881-4f5c-97fc-c80fd4c6068b",
+              "name": "What challenge are you facing? ",
+              "value": "={{ $json['What challenge are you facing? '] }}",
+              "type": "string"
+            },
+            {
+              "id": "f64abeb4-8a6f-4335-b784-f497a7a78c75",
+              "name": "submittedAt",
+              "value": "={{ new Date($json.submittedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -304,
+        -144
+      ],
+      "id": "b2b64466-e8cd-4e77-8018-7f80d2559052",
+      "name": "Standardize data"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/contacts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"properties\": {\n    \"firstname\": \"{{ $json['First Name'] }}\",\n    \"lastname\": \"{{ $json['Last Name'] }}\",\n    \"email\": \"{{ $json['Email '] }}\",\n    \"company\": \"{{ $json['Company Name'] }}\",\n    \"jobtitle\": \"{{ $json['Job Title'] }}\",\n    \"lead_source\": \"{{ $json['How did you hear about us?'] }}\",\n    \"service_interest\": \"{{ $json['What challenge are you facing? '] }}\",\n    \"deal_stage\": \"New Lead\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -80,
+        -144
+      ],
+      "id": "55a4a900-09b7-4235-837f-8996a0af6f4f",
+      "name": "Create new contact record in Hubspot",
+      "credentials": {
+        "hubspotOAuth2Api": {
+          "id": "YOUR_ID",
+          "name": "HubSpot OAuth2 API"
+        },
+        "httpHeaderAuth": {
+          "id": "YOUR_ID",
+          "name": "hubspot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.hubapi.com/crm/v3/objects/deals",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"properties\": {\n    \"dealname\": \"{{ $('Standardize data').item.json['First Name'] }} {{ $('Standardize data').item.json['Last Name'] }} - {{ $('Standardize data').item.json['What challenge are you facing? '] }}\",\n    \"dealstage\": \"decisionmakerboughtin\",\n    \"pipeline\": \"default\"\n  },\n  \"associations\": [\n    {\n      \"to\": {\n        \"id\": \"{{ $json.id }}\"\n      },\n      \"types\": [\n        {\n          \"associationCategory\": \"HUBSPOT_DEFINED\",\n          \"associationTypeId\": 3\n        }\n      ]\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        144,
+        -144
+      ],
+      "id": "224a3385-a36b-4fa1-9bad-0c19ee179e01",
+      "name": "Create deal pipeline to \"New Lead\"",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_ID",
+          "name": "hubspot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "subject": "=New Lead: {{ $('Standardize data').item.json['First Name'] }} {{ $('Standardize data').item.json['Last Name'] }} - {{ $('Standardize data').item.json['What challenge are you facing? '] }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;\">\n  \n  <div style=\"background-color: #1a1a2e; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 20px;\">🔔 New Lead Alert</h1>\n  </div>\n\n  <div style=\"padding: 24px; background-color: #ffffff;\">\n    <p style=\"color: #333333; font-size: 15px;\">Hi Landon,</p>\n    <p style=\"color: #333333; font-size: 15px;\">A new lead just came in through your enquiry form. Here are their details:</p>\n\n    <div style=\"background-color: #f9f9f9; border-left: 4px solid #1a1a2e; padding: 16px; margin: 20px 0; border-radius: 4px;\">\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Name:</strong> {{ $('Standardize data').item.json['First Name'] }} {{ $('Standardize data').item.json['Last Name'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Job Title:</strong> {{ $('Standardize data').item.json['Job Title'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Company:</strong> {{ $('Standardize data').item.json['Company Name'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Email:</strong> {{ $('Standardize data').item.json['Email '] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Service Interest:</strong> {{ $('Standardize data').item.json['What challenge are you facing? '] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Lead Source:</strong> {{ $('Standardize data').item.json['How did you hear about us?'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px;\"><strong>Date:</strong> {{ $('Standardize data').item.json.submittedAt }}</p>\n    </div>\n\n    <p style=\"color: #333333; font-size: 15px;\">Their deal has been automatically created in your HubSpot pipeline under <strong>New Lead</strong>. No manual entry needed.</p>\n\n    <div style=\"text-align: center; margin: 24px 0;\">\n      <a href=\"https://app.hubspot.com\" style=\"background-color: #1a1a2e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold;\">View in HubSpot →</a>\n    </div>\n\n    <p style=\"color: #333333; font-size: 15px;\">Recommended next step — reach out within 24 hours while the lead is warm.</p>\n  </div>\n\n  <div style=\"background-color: #f4f4f4; padding: 16px; border-radius: 0 0 6px 6px; text-align: center;\">\n    <p style=\"color: #999999; font-size: 12px; margin: 0;\">This notification was sent automatically by your CRM Intelligence System</p>\n  </div>\n\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        -144
+      ],
+      "id": "bd207ab7-00b4-417a-9756-9c442835ec94",
+      "name": "Send notification to founder",
+      "webhookId": "c15f21d6-4ff4-4bf9-9ce3-bd2c9c19398f"
+    },
+    {
+      "parameters": {
+        "content": "## New Lead Notification",
+        "height": 272,
+        "width": 1344
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "2f4314ca-1919-4d93-a5d1-479ae8a8d88a",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Standardize data').item.json['Email '] }}",
+        "subject": "=We've received your enquiry, {{ $('Standardize data').item.json['First Name'] }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;\">\n\n  <div style=\"background-color: #1a1a2e; padding: 24px; border-radius: 6px 6px 0 0; text-align: center;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 22px;\">Thank you for reaching out</h1>\n  </div>\n\n  <div style=\"padding: 28px; background-color: #ffffff;\">\n    <p style=\"color: #333333; font-size: 15px;\">Hi {{ $('Standardize data').item.json['First Name'] }},</p>\n\n    <p style=\"color: #333333; font-size: 15px;\">Thank you for getting in touch. We've received your enquiry and wanted to confirm that it's in the right hands.</p>\n\n    <div style=\"background-color: #f9f9f9; border-left: 4px solid #1a1a2e; padding: 16px; margin: 24px 0; border-radius: 4px;\">\n      <p style=\"margin: 0 0 8px 0; font-size: 14px; color: #555555;\"><strong>Your enquiry summary:</strong></p>\n      <p style=\"margin: 6px 0; font-size: 14px; color: #333333;\"><strong>Name:</strong> {{ $('Standardize data').item.json['First Name'] }} {{ $('Standardize data').item.json['Last Name'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px; color: #333333;\"><strong>Company:</strong> {{ $('Standardize data').item.json['Company Name'] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px; color: #333333;\"><strong>Area of interest:</strong> {{ $('Standardize data').item.json['What challenge are you facing? '] }}</p>\n      <p style=\"margin: 6px 0; font-size: 14px; color: #333333;\"><strong>Submitted:</strong> {{ $('Standardize data').item.json.submittedAt }}</p>\n    </div>\n\n    <p style=\"color: #333333; font-size: 15px;\">Here's what happens next:</p>\n\n    <div style=\"margin: 16px 0;\">\n      <div style=\"display: flex; align-items: flex-start; margin-bottom: 12px;\">\n        <div style=\"background-color: #1a1a2e; color: white; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0;\">1</div>\n        <p style=\"margin: 0; font-size: 14px; color: #333333; padding-top: 4px;\">Your enquiry has been logged and assigned for review</p>\n      </div>\n      <div style=\"display: flex; align-items: flex-start; margin-bottom: 12px;\">\n        <div style=\"background-color: #1a1a2e; color: white; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0;\">2</div>\n        <p style=\"margin: 0; font-size: 14px; color: #333333; padding-top: 4px;\">You'll hear back within <strong>24 hours</strong> to schedule a discovery call</p>\n      </div>\n      <div style=\"display: flex; align-items: flex-start;\">\n        <div style=\"background-color: #1a1a2e; color: white; border-radius: 50%; width: 24px; height: 24px; text-align: center; line-height: 24px; font-size: 12px; font-weight: bold; margin-right: 12px; flex-shrink: 0;\">3</div>\n        <p style=\"margin: 0; font-size: 14px; color: #333333; padding-top: 4px;\">On the call we'll explore your specific challenges and how we can help</p>\n      </div>\n    </div>\n\n    <p style=\"color: #333333; font-size: 15px;\">In the meantime if you have any urgent questions feel free to reply directly to this email.</p>\n\n    <p style=\"color: #333333; font-size: 15px;\">Looking forward to speaking with you.</p>\n\n    <p style=\"color: #333333; font-size: 15px;\">Warm regards,<br><strong>Landon</strong><br>Founder</p>\n  </div>\n\n  <div style=\"background-color: #f4f4f4; padding: 16px; border-radius: 0 0 6px 6px; text-align: center;\">\n    <p style=\"color: #999999; font-size: 12px; margin: 0;\">This is an automated confirmation. You'll receive a personal response within 24 hours.</p>\n  </div>\n\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        592,
+        -144
+      ],
+      "id": "6deafb26-be61-4aab-9473-aa962304ea84",
+      "name": "Send acknowledgement to lead",
+      "webhookId": "cc3c6248-9fc0-4b35-bd77-7d811a0e06ca",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 9
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -576,
+        224
+      ],
+      "id": "b90e785a-41f3-4542-9362-961535b9d9c7",
+      "name": "Schedule Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "url": "=https://api.hubapi.com/crm/v3/objects/deals?properties=dealname,dealstage,hs_lastmodifieddate&limit=100",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        -320,
+        224
+      ],
+      "id": "a9be16b6-07e7-4add-9f6a-80a8467af0c4",
+      "name": "Get all current deals in the pipeline",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_ID",
+          "name": "hubspot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "049c95c9-6033-4960-bf95-1ffa5155c181",
+              "leftValue": "={{ $json.daysInactive }}",
+              "rightValue": 7,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        128,
+        224
+      ],
+      "id": "8857b588-b3ae-4a66-8f70-b8489ff0a463",
+      "name": "If deals are inactive for <7days (stale deals)"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.noOp",
+      "typeVersion": 1,
+      "position": [
+        336,
+        432
+      ],
+      "id": "b9413bc3-1ea6-47ef-9bac-901587d1f98d",
+      "name": "No Operation, do nothing"
+    },
+    {
+      "parameters": {
+        "jsCode": "const stageMap = {\n  \"decisionmakerboughtin\": \"New Lead\",\n  \"appointmentscheduled\": \"Discovery Call Booked\",\n  \"qualifiedtobuy\": \"Proposal Sent\",\n  \"presentationscheduled\": \"Negotiation\",\n  \"contractsent\": \"Won\",\n  \"stage_0\": \"Lost\",\n  \"closedwon\": \"Closed Won\",\n  \"closedlost\": \"Closed Lost\"\n};\n\nconst STALE_DAYS = 0; // Keep 0 for testing, change to 7 before demo\nconst now = Date.now();\n\n// The data comes in as one item with a results array inside\nconst rawDeals = $input.first().json.results;\n\nconst staleDeals = rawDeals\n  .filter(deal => {\n    const name = deal.properties.dealname;\n    const stage = deal.properties.dealstage;\n    const lastModified = deal.properties.hs_lastmodifieddate;\n    if (!name || !stage) return false;\n    if (stage === \"closedwon\" || stage === \"closedlost\") return false;\n    const daysSince = Math.floor((now - new Date(lastModified).getTime()) / (1000 * 60 * 60 * 24));\n    return daysSince >= STALE_DAYS;\n  })\n  .map(deal => {\n    const lastModified = deal.properties.hs_lastmodifieddate;\n    const daysSince = Math.floor((now - new Date(lastModified).getTime()) / (1000 * 60 * 60 * 24));\n    return {\n      json: {\n        dealId: deal.id,\n        dealName: deal.properties.dealname,\n        stageName: stageMap[deal.properties.dealstage] || deal.properties.dealstage,\n        lastActivity: new Date(lastModified).toLocaleDateString('en-GB', {\n          day: 'numeric', month: 'long', year: 'numeric'\n        }),\n        daysInactive: daysSince,\n        hubspotUrl: `https://app.hubspot.com/contacts/146061385/record/0-3/${deal.id}`\n      }\n    };\n  });\n});\n\nif (staleDeals.length === 0) {\n  return [{ json: { noStaleDeals: true } }];\n}\n\nreturn staleDeals;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -96,
+        224
+      ],
+      "id": "fa57025e-03aa-4878-b659-3cedd7c7391c",
+      "name": "Filter Stale Deals"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 300,\n  \"messages\": [\n    {\n      \"role\": \"user\",\n      \"content\": \"You are an operations assistant for a founder-led consulting business. Write a short 2-3 sentence summary about the following stale deals that need follow-up. Be direct and action-oriented. Use plain text only — no bold, no asterisks, no markdown formatting. Deals: {{ $json.data.map(d => `${d.dealName} in ${d.stageName} stage, inactive for ${d.daysInactive} days`).join('; ') }}\"\n    }\n  ]\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        576,
+        208
+      ],
+      "id": "7d37bd01-f7cc-4d6b-8045-c8f6640db79a",
+      "name": "Generate summary using Claude API",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "YOUR_ID",
+          "name": "Claude"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        352,
+        208
+      ],
+      "id": "af986fff-a588-43f1-bbe0-e51cba167e22",
+      "name": "Aggregate stale deals"
+    },
+    {
+      "parameters": {
+        "subject": "=⚠️ Stale Deal Alert",
+        "message": "=<div style=\"font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;\">\n\n  <div style=\"background-color: #1a1a2e; padding: 20px; border-radius: 6px 6px 0 0; text-align: center;\">\n    <h1 style=\"color: #ffffff; margin: 0; font-size: 20px;\">⚠️ Daily Deal Digest</h1>\n    <p style=\"color: #cccccc; margin: 8px 0 0 0; font-size: 13px;\">{{ new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) }}</p>\n  </div>\n\n  <div style=\"padding: 24px; background-color: #ffffff;\">\n    <p style=\"color: #333333; font-size: 15px;\">Hi Landon,</p>\n\n    <div style=\"background-color: #f0f4ff; border-left: 4px solid #1a1a2e; padding: 16px; margin: 16px 0; border-radius: 4px;\">\n      <p style=\"margin: 0; font-size: 14px; color: #333333;\">{{ $('Generate summary using Claude API').item.json.content[0].text }}</p>\n    </div>\n\n\n    <div style=\"text-align: center; margin: 24px 0;\">\n      <a href=\"https://app.hubspot.com\" style=\"background-color: #1a1a2e; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 14px; font-weight: bold;\">Review All Deals →</a>\n    </div>\n  </div>\n\n  <div style=\"background-color: #f4f4f4; padding: 16px; border-radius: 0 0 6px 6px; text-align: center;\">\n    <p style=\"color: #999999; font-size: 12px; margin: 0;\">Sent automatically every morning at 9am · CRM Intelligence System</p>\n  </div>\n\n</div>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        800,
+        208
+      ],
+      "id": "bb26437c-8e4f-48a6-98a7-3cbee4cbbdae",
+      "name": "Send Stale deal alert to founder",
+      "webhookId": "667d853c-1a7f-41b3-bd43-475e46a3cb2b",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "YOUR_ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Stale deal alert",
+        "height": 432,
+        "width": 1568,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -592,
+        128
+      ],
+      "typeVersion": 1,
+      "id": "b0519cb1-1342-452d-8b41-bbdd375d9ec9",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Standardize data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Standardize data": {
+      "main": [
+        [
+          {
+            "node": "Create new contact record in Hubspot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create new contact record in Hubspot": {
+      "main": [
+        [
+          {
+            "node": "Create deal pipeline to \"New Lead\"",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create deal pipeline to \"New Lead\"": {
+      "main": [
+        [
+          {
+            "node": "Send notification to founder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send notification to founder": {
+      "main": [
+        [
+          {
+            "node": "Send acknowledgement to lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get all current deals in the pipeline",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all current deals in the pipeline": {
+      "main": [
+        [
+          {
+            "node": "Filter Stale Deals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If deals are inactive for <7days (stale deals)": {
+      "main": [
+        [
+          {
+            "node": "Aggregate stale deals",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Stale Deals": {
+      "main": [
+        [
+          {
+            "node": "If deals are inactive for <7days (stale deals)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate summary using Claude API": {
+      "main": [
+        [
+          {
+            "node": "Send Stale deal alert to founder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate stale deals": {
+      "main": [
+        [
+          {
+            "node": "Generate summary using Claude API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "0d89666f-6bab-4b9b-9a0b-156b9f054623",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "62eb242412e888f2b17f0027f99a001d009bf717ab5078cb28daad4339fd20f3"
+  },
+  "id": "Lyu51dqV3rKmQVqu",
+  "tags": []
+}
