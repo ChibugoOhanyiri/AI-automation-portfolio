@@ -1,0 +1,518 @@
+{
+  "name": "AI voice agent",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Reservations\n",
+        "height": 400,
+        "width": 800,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        -240
+      ],
+      "typeVersion": 1,
+      "id": "501fa5f8-8eb3-4f6b-bc1f-a61b3bb9f160",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=current date and time: {{ $now }}\nrequested_time: {{ $json.body.requested_time }}\nguest_name: {{ $json.body.guest_name }}\nemail: {{ $json.body.email }}\nnum_guests: {{ $json.body.num_guests }}\nbooking_type: {{ $json.body.booking_type }}",
+        "options": {
+          "systemMessage": "=## Role\nYou are the reservations agent for Tasty's Restaurant. Your job is to collect customer reservation details, check calendar availability, book the table, log it to the system, and send a confirmation email.\n\n**Current date and time**: {{ $now }}\n**Requested time from customer**: {{ $json.body.requested_time }}\n\n---\n\n## Restaurant Rules\n- Working hours: 8:00 AM – 9:00 PM\n- Each reservation slot: 1 hour\n- Booking types: VIP or Regular\n\n---\n\n## Step-by-Step Booking Process\n\n### Step 1 – Read Incoming Data\nAll customer details have already been collected by the voice agent. \nUse the values provided in the user message — do NOT ask the customer for any information. Proceed directly to Step 2.\n\n---\n\n### Step 2 – Check Availability\n- Use the `check_availability` tool to check if the requested time slot is free.\n- Always check availability in the FUTURE. Use {{ $now }} to validate the requested time is not in the past.\n- If available → proceed to Step 3.\n- If NOT available:\n  - Use `check_availability` again to find up to 2 alternative slots close to the requested time on the same day.\n  - If no slots exist that day, check the next weekday and suggest up to 3 available slots.\n  - Present alternatives to the customer and wait for them to confirm before proceeding.\n\n---\n\n### Step 3 – Book the Reservation\nOnce the customer confirms a time slot:\n- Call the `book_reservation` tool to create the calendar event.\n- Event title: \"Tasty's Reservation – [Name] ([Booking Type])\"\n- Start time: the customer's confirmed slot (NOT {{ $now }})\n- End time: Start + 1 hour\n- Add the customer's email as an attendee.\n\n---\n\n### Step 4 – Log the Reservation\n- Call the `log_reservation` tool to record in Google Sheets:\n  - Name, Email, Number of Guests, Date, Time, Booking Type\n\n---\n\n### Step 5 – Send Confirmation Email\n- Call the `send_confirmation` tool to send the customer a confirmation.\n- Pass the following to the tool: customer name, email, date, time, number of guests, booking type.\n- The tool will handle the email formatting.\n\n---\n\n## Critical Rules\n- NEVER book a slot in the past.\n- NEVER skip collecting all 5 details before booking.\n- NEVER use {{ $now }} as the booking start time — always use the customer's confirmed slot.\n- Always confirm the booking summary with the customer before executing Steps 3–5.\n- Steps 3, 4, and 5 must ALL run on every successful booking."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -224,
+        -176
+      ],
+      "id": "27780e16-c475-413f-b270-10db69273a95",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        -432,
+        16
+      ],
+      "id": "632bbc89-9907-4dcd-a108-5f038b360c8d",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "LFwV1r7tMFU2EQv7",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -272,
+        16
+      ],
+      "id": "Your_ID",
+      "name": "check_availability",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "Your_ID",
+          "name": "Google Calendar OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        112,
+        -176
+      ],
+      "id": "a4e52c24-8deb-4303-9c43-ead620d9e52a",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "start": "={{ $json.body.requested_time }}",
+        "end": "={{ DateTime.fromFormat($json.body.requested_time, 'yyyy-MM-dd HH:mm').plus({hours: 1}).toISO() }}",
+        "additionalFields": {
+          "attendees": [
+            "={{ $json.body.email }}"
+          ],
+          "summary": "=Tasty's Reservation – {{ $json.body.guest_name }} ({{ $json.body.booking_type }})"
+        }
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        -128,
+        32
+      ],
+      "id": "0481fd7e-25fe-4b39-a255-49cede700b96",
+      "name": "book_reservation"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.body.email }}",
+        "subject": "Your Reservation at Tasty's Restaurant is Confirmed! 🥳",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Reservation Confirmed – Tasty's Restaurant</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap\" rel=\"stylesheet\"/>\n</head>\n<body style=\"margin:0;padding:0;background-color:#f5f0eb;font-family:'DM Sans',sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#f5f0eb;padding:40px 0;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.10);\">\n\n          <!-- HEADER -->\n          <tr>\n            <td style=\"background-color:#C8102E;padding:48px 40px 36px;text-align:center;\">\n              <div style=\"margin-bottom:16px;font-size:36px;\">🍽️</div>\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:900;color:#ffffff;letter-spacing:-1px;line-height:1.1;\">\n                Tasty's Restaurant\n              </div>\n              <div style=\"margin-top:10px;font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.75);\">\n                Reservation Confirmed\n              </div>\n              <div style=\"margin:20px auto 0;width:48px;height:3px;background:rgba(255,255,255,0.4);border-radius:2px;\"></div>\n            </td>\n          </tr>\n\n          <!-- GREETING -->\n          <tr>\n            <td style=\"background:#fff7f7;padding:28px 40px;border-bottom:1px solid #f0e0e0;\">\n              <p style=\"margin:0;font-size:17px;color:#1a1a1a;line-height:1.6;\">\n                Hi <strong>{{ $json.body.guest_name }}</strong> 👋,<br/>\n                Your table has been successfully reserved. We are looking forward to having you at Tasty's. Here are your booking details below.\n              </p>\n            </td>\n          </tr>\n\n          <!-- RESERVATION DETAILS -->\n          <tr>\n            <td style=\"padding:36px 40px 0;\">\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:#C8102E;margin-bottom:20px;\">\n                Booking Details\n              </div>\n\n              <!-- Booking Type Badge -->\n              <table cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:24px;\">\n                <tr>\n                  <td style=\"background:#C8102E;color:#fff;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:20px;\">\n                    {{ $json.body.booking_type }} Booking\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Details rows -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;\">\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;width:42%;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Full Name</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.body.guest_name }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Date and Time</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.body.requested_time }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Number of Guests</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.body.num_guests }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Booking Type</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.body.booking_type }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Email</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.body.email }}</span>\n                  </td>\n                </tr>\n\n              </table>\n            </td>\n          </tr>\n\n          <!-- NOTICE BOX -->\n          <tr>\n            <td style=\"padding:24px 40px 36px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff7f7;border-radius:12px;border:1px solid #f0d8d8;\">\n                <tr>\n                  <td style=\"padding:20px 24px;\">\n                    <div style=\"font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C8102E;margin-bottom:8px;\">\n                      Good to Know\n                    </div>\n                    <div style=\"font-size:14px;color:#555;line-height:1.8;\">\n                      Please arrive 5 minutes before your reservation time.<br/>\n                      Tables are held for up to 15 minutes past the booking time.<br/>\n                      For VIP bookings, our team will reach out to confirm special arrangements.\n                    </div>\n                  </td>\n                </tr>\n              </table>\n            </td>\n          </tr>\n\n          <!-- MESSAGE -->\n          <tr>\n            <td style=\"padding:0 40px 36px;text-align:center;\">\n              <div style=\"height:1px;background:#f0e0e0;margin-bottom:32px;\"></div>\n              <p style=\"margin:0;font-size:15px;color:#555;line-height:1.7;\">\n                Need to modify or cancel your reservation?<br/>\n                Call us or email us and we will sort it out right away.<br/>\n                <strong style=\"color:#C8102E;\">We cannot wait to see you! 🍴</strong>\n              </p>\n            </td>\n          </tr>\n\n          <!-- FOOTER -->\n          <tr>\n            <td style=\"background:#1a1a1a;padding:36px 40px;text-align:center;\">\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#ffffff;margin-bottom:6px;\">\n                Tasty's Restaurant\n              </div>\n              <div style=\"font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#C8102E;margin-bottom:20px;\">\n                Good Food. Good Vibes.\n              </div>\n              <div style=\"width:40px;height:2px;background:#C8102E;margin:0 auto 20px;border-radius:2px;\"></div>\n              <div style=\"font-size:13px;color:#aaa;line-height:2;\">\n                📍 14 Admiralty Way, Lekki Phase 1, Lagos<br/>\n                📞 +234 (0) 812 345 6789<br/>\n                ✉️ reservations@tastyslagos.com\n              </div>\n              <div style=\"margin-top:20px;\">\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Instagram</a>\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Facebook</a>\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Twitter</a>\n              </div>\n              <div style=\"margin-top:24px;font-size:11px;color:#555;\">\n                2026 Tasty's Restaurant. All rights reserved.\n              </div>\n            </td>\n          </tr>\n\n        </table>\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmailTool",
+      "typeVersion": 2.2,
+      "position": [
+        208,
+        16
+      ],
+      "id": "33b0fac7-aa46-4b48-9e43-d6e29560727d",
+      "name": "send_confirmation",
+      "webhookId": "3e3d523c-f58a-4aa0-95d5-bb7cefbe71bd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "Your_ID",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        48,
+        16
+      ],
+      "id": "Your_ID",
+      "name": "log_reservation",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Your_ID",
+          "name": "Google Sheets OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "reservation",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -432,
+        -176
+      ],
+      "id": "75eac8b6-05dc-441e-b8ba-b6f16eb5df23",
+      "name": "reservations",
+      "webhookId": "7b51cca8-9ba6-4d83-a91f-44b063d8771d"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "order",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -464,
+        288
+      ],
+      "id": "926a3015-1b2a-4253-a0de-4af686837064",
+      "name": "order",
+      "webhookId": "72806d86-d07e-4cf2-b1a3-de1b2edbf654"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1V13G-5a10NBrORajYBRWxkG0AuMPECEg4U4NSuh17TA",
+          "mode": "list",
+          "cachedResultName": "n8n",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/Your_URL"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1801850678,
+          "mode": "list",
+          "cachedResultName": "Order",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/Your_URL"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json.body.guest_name }}",
+            "Phone": "={{ $json.body.phone }}",
+            "Email": "={{ $json.body.email }}",
+            "Order Items": "={{ $json.body.order_items }}",
+            "Order Type": "={{ $json.body.order_type }}",
+            "Address": "={{ $json.body.address }}",
+            "Total": "={{ $json.body.total }}",
+            "Status": "Pending delivery",
+            "Pickup/ Delivery Time": "={{ $json.body.delivery_pickup_time }}"
+          },
+          "matchingColumns": [
+            "Name"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Order Items",
+              "displayName": "Order Items",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Order Type",
+              "displayName": "Order Type",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Address",
+              "displayName": "Address",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Pickup/ Delivery Time",
+              "displayName": "Pickup/ Delivery Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total",
+              "displayName": "Total",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -256,
+        288
+      ],
+      "id": "a6383ef9-17c6-4ef9-a6a4-2227ee28bd2d",
+      "name": "Log order"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "Your Order is Confirmed – Tasty's Restaurant",
+        "message": "=<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>Order Confirmed – Tasty's Restaurant</title>\n  <link href=\"https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap\" rel=\"stylesheet\"/>\n</head>\n<body style=\"margin:0;padding:0;background-color:#f5f0eb;font-family:'DM Sans',sans-serif;\">\n\n  <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color:#f5f0eb;padding:40px 0;\">\n    <tr>\n      <td align=\"center\">\n        <table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:600px;width:100%;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.10);\">\n\n          <!-- HEADER -->\n          <tr>\n            <td style=\"background-color:#C8102E;padding:48px 40px 36px;text-align:center;\">\n              <div style=\"margin-bottom:16px;font-size:36px;\">🍽️</div>\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:900;color:#ffffff;letter-spacing:-1px;line-height:1.1;\">\n                Tasty's Restaurant\n              </div>\n              <div style=\"margin-top:10px;font-size:13px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:rgba(255,255,255,0.75);\">\n                Order Confirmed\n              </div>\n              <div style=\"margin:20px auto 0;width:48px;height:3px;background:rgba(255,255,255,0.4);border-radius:2px;\"></div>\n            </td>\n          </tr>\n\n          <!-- GREETING -->\n          <tr>\n            <td style=\"background:#fff7f7;padding:28px 40px;border-bottom:1px solid #f0e0e0;\">\n              <p style=\"margin:0;font-size:17px;color:#1a1a1a;line-height:1.6;\">\n                Hi <strong>{{ $json.Name }}</strong> 👋,<br/>\n                Your order has been received and is being prepared with love. Here is a summary below.\n              </p>\n            </td>\n          </tr>\n\n          <!-- ORDER DETAILS -->\n          <tr>\n            <td style=\"padding:36px 40px 0;\">\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:20px;font-weight:700;color:#C8102E;margin-bottom:20px;\">\n                Order Details\n              </div>\n\n              <!-- Order Type Badge -->\n              <table cellpadding=\"0\" cellspacing=\"0\" style=\"margin-bottom:24px;\">\n                <tr>\n                  <td style=\"background:#C8102E;color:#fff;font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:6px 18px;border-radius:20px;\">\n                    {{ $json['Order Type'] }}\n                  </td>\n                </tr>\n              </table>\n\n              <!-- Details rows -->\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-collapse:collapse;\">\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;width:42%;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Items Ordered</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json['Order Items'] }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Address / Pickup Point</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">  {{ $json.Address }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Date and Time</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json['Pickup/ Delivery Time'] }}</span>\n                  </td>\n                </tr>\n\n                <tr>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#999;\">Contact</span>\n                  </td>\n                  <td style=\"padding:14px 0;border-bottom:1px solid #f2e8e8;vertical-align:top;\">\n                    <span style=\"font-size:15px;color:#1a1a1a;font-weight:500;\">{{ $json.Phone }}</span>\n                  </td>\n                </tr>\n\n              </table>\n            </td>\n          </tr>\n\n          <!-- TOTAL -->\n          <tr>\n            <td style=\"padding:0 40px 36px;\">\n              <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#fff7f7;border-radius:12px;margin-top:24px;border:1px solid #f0d8d8;\">\n                <tr>\n                  <td style=\"padding:20px 24px;\">\n                    <span style=\"font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C8102E;\">Order Total</span>\n                  </td>\n                  <td style=\"padding:20px 24px;text-align:right;\">\n                    <span style=\"font-family:'Playfair Display',Georgia,serif;font-size:28px;font-weight:900;color:#C8102E;\">&#8358;{{ $json.Total }}</span>\n                  </td>\n                </tr>\n              </table>\n            </td>\n          </tr>\n\n          <!-- MESSAGE -->\n          <tr>\n            <td style=\"padding:0 40px 36px;text-align:center;\">\n              <div style=\"height:1px;background:#f0e0e0;margin-bottom:32px;\"></div>\n              <p style=\"margin:0;font-size:15px;color:#555;line-height:1.7;\">\n                Need to make a change? Give us a call and we will sort it out right away.<br/>\n                <strong style=\"color:#C8102E;\">We cannot wait to serve you! 🍴</strong>\n              </p>\n            </td>\n          </tr>\n\n          <!-- FOOTER -->\n          <tr>\n            <td style=\"background:#1a1a1a;padding:36px 40px;text-align:center;\">\n              <div style=\"font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:700;color:#ffffff;margin-bottom:6px;\">\n                Tasty's Restaurant\n              </div>\n              <div style=\"font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#C8102E;margin-bottom:20px;\">\n                Good Food. Good Vibes.\n              </div>\n              <div style=\"width:40px;height:2px;background:#C8102E;margin:0 auto 20px;border-radius:2px;\"></div>\n              <div style=\"font-size:13px;color:#aaa;line-height:2;\">\n                📍 14 Admiralty Way, Lekki Phase 1, Lagos<br/>\n                📞 +234 (0) 812 345 6789\n              </div>\n              <div style=\"margin-top:20px;\">\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Instagram</a>\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Facebook</a>\n                <a href=\"#\" style=\"display:inline-block;margin:0 6px;background:#C8102E;color:#fff;font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;text-decoration:none;padding:8px 16px;border-radius:20px;\">Twitter</a>\n              </div>\n              <div style=\"margin-top:24px;font-size:11px;color:#555;\">\n                2026 Tasty's Restaurant. All rights reserved.\n              </div>\n            </td>\n          </tr>\n\n        </table>\n      </td>\n    </tr>\n  </table>\n\n</body>\n</html>",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -48,
+        288
+      ],
+      "id": "4f9b0533-862a-4880-8d1b-602981fc632c",
+      "name": "Send confirmation mail",
+      "webhookId": "9f6f44cb-183a-449a-be97-82403e53ca1c"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        144,
+        288
+      ],
+      "id": "8efe9e66-6f88-47d5-a794-4f5ec7f93991",
+      "name": "Respond"
+    },
+    {
+      "parameters": {
+        "content": "## Order Confirmation and Logging",
+        "height": 240,
+        "width": 800
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -480,
+        192
+      ],
+      "typeVersion": 1,
+      "id": "9efcf64d-0e65-4bed-bbd5-1556529fc0ad",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "check_availability": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "book_reservation": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "send_confirmation": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "log_reservation": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "reservations": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "order": {
+      "main": [
+        [
+          {
+            "node": "Log order",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Log order": {
+      "main": [
+        [
+          {
+            "node": "Send confirmation mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send confirmation mail": {
+      "main": [
+        [
+          {
+            "node": "Respond",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "316fc5b2-b658-4b0f-8937-a687fac6c981",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "Your_ID"
+  },
+  "id": "Your_ID",
+  "tags": []
+}
