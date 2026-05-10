@@ -6,7 +6,7 @@
 
 A fully automated AI voice receptionist built for Tasty's Restaurant. Kylie handles inbound phone calls, books table reservations, processes food orders, logs everything to Google Sheets, creates Google Calendar events, and sends branded confirmation emails, all without any human involvement.
 
-Disclaimer: This is a passion project with mock data and not real client work
+**Disclaimer: This is a passion project with mock data and not real client work**
 
 ---
 
