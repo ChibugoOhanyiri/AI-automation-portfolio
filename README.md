@@ -36,13 +36,24 @@ the logic behind it, the edge cases, and the operational outcome.
 ## Tech Stack 🔨⛏️
 
 - **Automation:** n8n, Zapier, make.com
-- **AI/LLM:** OpenAI, Groq, Claude, Gemini, NotebookLM
+- **AI/LLM:** OpenAI, Groq, Claude (incl. Claude API), Gemini, NotebookLM
+- **Web apps:** React, TypeScript, Vite, Tailwind, Vercel, Playwright
 - **Vector Database:** Supabase (pgvector), MongoDB
 - **CRM/Data:** Google Sheets, Airtable, Hubspot
 - **Communication:** Telegram, Gmail, Slack, WhatsApp Business API
 - **Audio:** OpenAI and Groq Whisper (speech to text)
 - **Custom APIs:** Webhook design and REST API integration
 - **AI/ML:** OpenAI GPT-4, Whisper, Vision
+
+---
+
+## Featured: Permit Navigator ⭐
+
+**[→ Open the Permit Navigator repo](https://github.com/ChibugoOhanyiri/permit-navigator)**
+
+A Mobility automation concept. A hiring manager answers six questions; the app drafts a work-permit answer from published Mobility guides with a source on every line; a specialist edits and approves; every step goes to an append-only audit log. It includes a rule-change monitor that sends past answers back for review when a fact changes, and a gaps report for the guide owners.
+
+React + TypeScript, a deterministic rules engine, optional Claude rewrite with a grounding check, role-based permissions, Playwright tests and CI.
 
 ---
 
@@ -60,6 +71,7 @@ and setup instructions where applicable.
 | Structured Enquiry Booking Bot | n8n, Telegram | Service Business |
 | Human-in-the-Loop ATS | n8n, Google Sheets | Recruitment |
 | Smart Event Registration System | Zapier, Airtable, Slack | Events |
+| [Permit Navigator](https://github.com/ChibugoOhanyiri/permit-navigator) (own repo) | React, TypeScript, Claude API, Vercel | Global HR / Mobility |
 
 ---
 
